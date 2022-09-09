@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.color};
+    font-family: 'Noto Sans', sans-serif;
   }
 `;
 

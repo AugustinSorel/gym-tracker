@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.color};
     font-family: 'Noto Sans', sans-serif;
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+
+    @media ${({ theme }) => theme.breakpoints.tablet} {
+      font-size: ${({ theme }) => theme.fontSizes.small};
+    }
   }
 `;
 

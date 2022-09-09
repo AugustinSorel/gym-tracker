@@ -8,8 +8,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.color};
+    background-color: ${({ theme }) => theme.colors[900]};
+    color: ${({ theme }) => theme.colors[100]};
     font-family: 'Noto Sans', sans-serif;
     font-size: ${({ theme }) => theme.fontSizes.medium};
 

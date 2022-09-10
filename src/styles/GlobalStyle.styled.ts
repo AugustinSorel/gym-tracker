@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${({ theme }) => theme.colors[100]};
-    color: ${({ theme }) => theme.colors[500]};
+    color: ${({ theme }) => theme.colors[900]};
     font-family: 'Noto Sans', sans-serif;
     font-size: ${({ theme }) => theme.fontSizes[500]};
 

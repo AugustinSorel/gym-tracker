@@ -1,20 +1,25 @@
 import { DefaultTheme } from "styled-components";
 
-const fontBase = 1;
+const fontBase = 1.1;
 const gapBase = 1;
 const colorBase = 50;
+const borderRadiusBase = 0.3;
+const borderSizeBase = 0.15;
 
 const theme: DefaultTheme = {
   colors: {
-    "100": `hsl(0, 0%, ${colorBase * 0.2}%)`,
-    "200": `hsl(0, 0%, ${colorBase * 0.4}%)`,
-    "300": `hsl(0, 0%, ${colorBase * 0.6}%)`,
-    "400": `hsl(0, 0%, ${colorBase * 0.8}%)`,
+    "100": `hsl(0, 0%, ${colorBase * 0.1}%)`,
+    "200": `hsl(0, 0%, ${colorBase * 0.2}%)`,
+    "300": `hsl(0, 0%, ${colorBase * 0.3}%)`,
+    "400": `hsl(0, 0%, ${colorBase * 0.4}%)`,
     "500": `hsl(0, 0%, ${colorBase * 1}%)`,
     "600": `hsl(0, 0%, ${colorBase * 1.2}%)`,
     "700": `hsl(0, 0%, ${colorBase * 1.4}%)`,
     "800": `hsl(0, 0%, ${colorBase * 1.6}%)`,
     "900": `hsl(0, 0%, ${colorBase * 1.8}%)`,
+
+    action: "hsl(200, 100%, 50%)",
+    error: "hsl(10, 75%, 50%)",
   },
 
   gaps: {
@@ -39,6 +44,18 @@ const theme: DefaultTheme = {
     "700": `${fontBase * 1.4}rem`,
     "800": `${fontBase * 1.6}rem`,
     "900": `${fontBase * 1.8}rem`,
+  },
+
+  borderRadius: {
+    "300": `${borderRadiusBase * 0.6}rem`,
+    "500": `${borderRadiusBase * 1}rem`,
+    "700": `${borderRadiusBase * 1.4}rem`,
+  },
+
+  borderSizes: {
+    "300": `${borderSizeBase * 0.6}rem`,
+    "500": `${borderSizeBase * 1}rem`,
+    "700": `${borderSizeBase * 1.4}rem`,
   },
 
   breakpoints: {

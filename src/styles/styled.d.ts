@@ -12,11 +12,27 @@ type Palette = {
   "900": string;
 };
 
+type PaletteSmall = {
+  "300": string;
+  "500": string;
+  "700": string;
+};
+
 declare module "styled-components" {
   export interface DefaultTheme {
-    colors: Palette;
+    colors: Palette & {
+      action: string;
+      error: string;
+    };
+
     gaps: Palette;
+
     fontSizes: Palette;
+
+    borderSizes: PaletteSmall;
+
+    borderRadius: PaletteSmall;
+
     breakpoints: {
       mobile: string;
       tablet: string;

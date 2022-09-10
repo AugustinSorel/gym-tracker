@@ -1,26 +1,44 @@
 import { DefaultTheme } from "styled-components";
 
 const fontBase = 1;
+const gapBase = 1;
+const colorBase = 50;
 
 const theme: DefaultTheme = {
   colors: {
-    "100": "#E1E1E1",
-    "200": "#CFCFCF",
-    "300": "#B1B1B1",
-    "400": "#9E9E9E",
-    "500": "#7E7E7E",
-    "600": "#626262",
-    "700": "#515151",
-    "800": "#3B3B3B",
-    "900": "#222222",
+    "100": `hsl(0, 0%, ${colorBase * 0.2}%)`,
+    "200": `hsl(0, 0%, ${colorBase * 0.4}%)`,
+    "300": `hsl(0, 0%, ${colorBase * 0.6}%)`,
+    "400": `hsl(0, 0%, ${colorBase * 0.8}%)`,
+    "500": `hsl(0, 0%, ${colorBase * 1}%)`,
+    "600": `hsl(0, 0%, ${colorBase * 1.2}%)`,
+    "700": `hsl(0, 0%, ${colorBase * 1.4}%)`,
+    "800": `hsl(0, 0%, ${colorBase * 1.6}%)`,
+    "900": `hsl(0, 0%, ${colorBase * 1.8}%)`,
+  },
+
+  gaps: {
+    "100": `${gapBase * 0.2}rem`,
+    "200": `${gapBase * 0.4}rem`,
+    "300": `${gapBase * 0.6}rem`,
+    "400": `${gapBase * 0.8}rem`,
+    "500": `${gapBase * 1}rem`,
+    "600": `${gapBase * 1.2}rem`,
+    "700": `${gapBase * 1.4}rem`,
+    "800": `${gapBase * 1.6}rem`,
+    "900": `${gapBase * 1.8}rem`,
   },
 
   fontSizes: {
-    extraSmall: `${fontBase * 0.5}rem`,
-    small: `${fontBase * 0.75}rem`,
-    medium: `${fontBase * 1}rem`,
-    large: `${fontBase * 1.25}rem`,
-    extraLarge: `${fontBase * 1.5}rem`,
+    "100": `${fontBase * 0.2}rem`,
+    "200": `${fontBase * 0.4}rem`,
+    "300": `${fontBase * 0.6}rem`,
+    "400": `${fontBase * 0.8}rem`,
+    "500": `${fontBase * 1}rem`,
+    "600": `${fontBase * 1.2}rem`,
+    "700": `${fontBase * 1.4}rem`,
+    "800": `${fontBase * 1.6}rem`,
+    "900": `${fontBase * 1.8}rem`,
   },
 
   breakpoints: {

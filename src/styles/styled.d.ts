@@ -1,27 +1,22 @@
 import "styled-components";
 
+type Palette = {
+  "100": string;
+  "200": string;
+  "300": string;
+  "400": string;
+  "500": string;
+  "600": string;
+  "700": string;
+  "800": string;
+  "900": string;
+};
+
 declare module "styled-components" {
   export interface DefaultTheme {
-    colors: {
-      "900": string;
-      "800": string;
-      "700": string;
-      "600": string;
-      "500": string;
-      "400": string;
-      "300": string;
-      "200": string;
-      "100": string;
-    };
-
-    fontSizes: {
-      extraSmall: strings;
-      small: strings;
-      medium: strings;
-      large: strings;
-      extraLarge: strings;
-    };
-
+    colors: Palette;
+    gaps: Palette;
+    fontSizes: Palette;
     breakpoints: {
       mobile: string;
       tablet: string;

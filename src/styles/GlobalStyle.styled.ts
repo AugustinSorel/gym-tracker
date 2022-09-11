@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.fontSizes[500]};
 
     @media ${({ theme }) => theme.breakpoints.tablet} {
-      font-size: ${({ theme }) => theme.fontSizes[300]};
+      font-size: ${({ theme }) => theme.fontSizes[400]};
     }
   }
 `;

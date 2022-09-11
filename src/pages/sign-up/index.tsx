@@ -65,6 +65,7 @@ const Container = styled.div`
 
 const Main = styled.main`
   margin: auto;
+  max-width: 85%;
 `;
 
 const Title = styled.h1`
@@ -75,6 +76,9 @@ const Title = styled.h1`
 const SubTitle = styled.h2`
   color: ${({ theme }) => theme.colors[500]};
   font-weight: 400;
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: ${({ theme }) => theme.fontSizes[400]};
+  }
 `;
 
 const Form = styled.form`

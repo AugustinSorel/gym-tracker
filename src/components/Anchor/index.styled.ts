@@ -16,7 +16,7 @@ export const Anchor = styled.a`
     left: 0;
     bottom: -3px;
     transition-property: width;
-    transition-duration: ${({ theme }) => theme.animation.duration};
+    transition-duration: ${({ theme }) => theme.animation.durations[300]};
     transition-timing-function: ${({ theme }) =>
       theme.animation.timingFunction};
   }

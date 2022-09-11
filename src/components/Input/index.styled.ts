@@ -1,5 +1,6 @@
-import { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
+import { HTMLInputTypeAttribute } from "react";
 import styled from "styled-components";
+import invalidAnimation from "./invalidAnimation.styled";
 
 type Props = {
   type?: HTMLInputTypeAttribute;
@@ -18,7 +19,7 @@ export const Input = styled.input.attrs(({ type }) => ({
   outline: none;
 
   transition-property: color, border-color, transform;
-  transition-duration: ${({ theme }) => theme.animation.duration};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
   :hover,
@@ -29,10 +30,16 @@ export const Input = styled.input.attrs(({ type }) => ({
   }
 `;
 
-export const FormInputContainer = styled.div`
+type FormInputContainerProps = {
+  isValid: boolean;
+};
+
+export const FormInputContainer = styled.div<FormInputContainerProps>`
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: ${({ theme }) => theme.gaps[200]} 0;
+  grid-template-columns: auto 1fr;
+  gap: ${({ theme }) => theme.gaps[200]};
+
+  ${({ isValid }) => !isValid && invalidAnimation}
 
   input {
     grid-column: span 2;
@@ -45,7 +52,21 @@ export const Label = styled.label`
 `;
 
 export const ErrorText = styled.p`
-  flex-grow: 0;
-  flex-shrink: 1;
   color: ${({ theme }) => theme.colors.error};
+  animation-name: start;
+  animation-duration: ${({ theme }) => theme.animation.durations[500]};
+  animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
+
+  @keyframes start {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  ::before {
+    content: "- ";
+  }
 `;

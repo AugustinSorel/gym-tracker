@@ -11,10 +11,11 @@ const Input = (props: Props.Input) => {
 
 const FormInput = (props: Props.FormInput) => {
   const { labelText, errorText, htmlFor } = props;
+  const isValid = errorText.length === 0;
   return (
-    <Styles.FormInputContainer>
+    <Styles.FormInputContainer isValid={isValid}>
       <Styles.Label htmlFor={htmlFor}>{labelText}</Styles.Label>
-      <Styles.ErrorText>{errorText}</Styles.ErrorText>
+      {errorText && <Styles.ErrorText>{errorText}</Styles.ErrorText>}
       <Styles.Input id={htmlFor} {...props} />
     </Styles.FormInputContainer>
   );

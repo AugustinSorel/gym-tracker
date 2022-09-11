@@ -23,7 +23,7 @@ export const CallToAction = styled(Button)`
   outline-color: ${({ theme }) => theme.colors.action};
   outline-offset: calc(var(--offset-distance) * -1);
 
-  transition-property: transform outline-offset;
+  transition-property: transform, outline-offset;
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 

@@ -13,7 +13,7 @@ const SignUpPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <UserForm />
+      <UserForm role="sign-up" />
     </>
   );
 };

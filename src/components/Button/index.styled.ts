@@ -16,10 +16,10 @@ export const Button = styled.button.attrs(({ type }) => ({
 export const CallToAction = styled(Button)`
   background-color: ${({ theme }) => theme.colors.action};
   padding: ${({ theme }) => theme.gaps[300]};
-  border-radius: ${({ theme }) => theme.borderRadius[500]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
 
   --offset-distance: 3px;
-  outline: ${({ theme }) => theme.borderSizes[500]} solid;
+  outline: ${({ theme }) => theme.border.sizes[500]} solid;
   outline-color: ${({ theme }) => theme.colors.action};
   outline-offset: calc(var(--offset-distance) * -1);
 

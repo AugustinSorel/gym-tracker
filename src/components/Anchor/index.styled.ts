@@ -11,7 +11,7 @@ export const Anchor = styled.a`
     content: "";
     position: absolute;
     background-color: ${({ theme }) => theme.colors.action};
-    height: ${({ theme }) => theme.borderSizes[300]};
+    height: ${({ theme }) => theme.border.sizes[300]};
     width: 0;
     left: 0;
     bottom: -3px;

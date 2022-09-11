@@ -46,16 +46,18 @@ const theme: DefaultTheme = {
     "900": `${fontBase * 1.8}rem`,
   },
 
-  borderRadius: {
-    "300": `${borderRadiusBase * 0.6}rem`,
-    "500": `${borderRadiusBase * 1}rem`,
-    "700": `${borderRadiusBase * 1.4}rem`,
-  },
+  border: {
+    radius: {
+      "300": `${borderRadiusBase * 0.6}rem`,
+      "500": `${borderRadiusBase * 1}rem`,
+      "700": `${borderRadiusBase * 1.4}rem`,
+    },
 
-  borderSizes: {
-    "300": `${borderSizeBase * 0.6}rem`,
-    "500": `${borderSizeBase * 1}rem`,
-    "700": `${borderSizeBase * 1.4}rem`,
+    sizes: {
+      "300": `${borderSizeBase * 0.6}rem`,
+      "500": `${borderSizeBase * 1}rem`,
+      "700": `${borderSizeBase * 1.4}rem`,
+    },
   },
 
   breakpoints: {

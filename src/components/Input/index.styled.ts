@@ -11,10 +11,10 @@ export const Input = styled.input.attrs(({ type }) => ({
   font: inherit;
   color: ${({ theme }) => theme.colors[500]};
   background-color: transparent;
-  border: ${({ theme }) => theme.borderSizes[500]} solid;
+  border: ${({ theme }) => theme.border.sizes[500]} solid;
   border-color: ${({ theme }) => theme.colors[300]};
   padding: ${({ theme }) => theme.gaps[300]};
-  border-radius: ${({ theme }) => theme.borderRadius[500]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
   outline: none;
 
   transition-property: color, border-color, transform;

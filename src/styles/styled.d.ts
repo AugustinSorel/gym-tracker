@@ -29,9 +29,10 @@ declare module "styled-components" {
 
     fontSizes: Palette;
 
-    borderSizes: PaletteSmall;
-
-    borderRadius: PaletteSmall;
+    border: {
+      sizes: PaletteSmall;
+      radius: PaletteSmall;
+    };
 
     breakpoints: {
       mobile: string;

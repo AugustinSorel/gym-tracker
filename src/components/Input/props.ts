@@ -4,7 +4,7 @@ export type FormInput = {
   shape: "form";
   labelText: string;
   htmlFor: string;
-  errorText?: string;
+  errorText: string;
 };
 
 export type DefaultInput = {

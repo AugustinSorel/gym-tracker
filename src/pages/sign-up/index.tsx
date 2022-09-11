@@ -1,6 +1,5 @@
 import Anchor from "@/components/Anchor";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import UserForm from "@/components/UserForm";
 import Head from "next/head";
 import styled from "styled-components";
 
@@ -18,31 +17,7 @@ const SignUpPage = () => {
           <Title>Welcome back</Title>
           <SubTitle>Welcome back! Please enter your details</SubTitle>
 
-          <Form onSubmit={(e) => e.preventDefault()}>
-            <Input
-              shape="form"
-              labelText="name"
-              htmlFor="nameInput"
-              placeholder="Enter your name"
-              autoComplete="off"
-            />
-            <Input
-              shape="form"
-              labelText="email"
-              htmlFor="emailInput"
-              placeholder="Enter your email"
-              autoComplete="new-password"
-            />
-            <Input
-              shape="form"
-              labelText="password"
-              type="password"
-              htmlFor="passwordInput"
-              placeholder="•••••••••••••"
-            />
-
-            <Button shape="callToAction" text="Sign up" type="submit" />
-          </Form>
+          <UserForm />
 
           <NavigationText>
             Already a member? <Anchor href={"/login"} text="login" />
@@ -75,18 +50,6 @@ const SubTitle = styled.h2`
   font-weight: 400;
   @media ${({ theme }) => theme.breakpoints.tablet} {
     font-size: ${({ theme }) => theme.fontSizes[400]};
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin: 15% 0;
-  display: flex;
-  gap: ${({ theme }) => theme.gaps[700]};
-
-  button[type="submit"] {
-    margin-top: ${({ theme }) => theme.gaps[500]};
   }
 `;
 

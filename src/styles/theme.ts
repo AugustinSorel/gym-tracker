@@ -67,7 +67,11 @@ const theme: DefaultTheme = {
   },
 
   animation: {
-    duration: "200ms",
+    durations: {
+      "300": "200ms",
+      "500": "1s",
+      "700": "5s",
+    },
     timingFunction: "ease-in-out",
   },
 };

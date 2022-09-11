@@ -41,7 +41,7 @@ declare module "styled-components" {
     };
 
     animation: {
-      duration: string;
+      durations: PaletteSmall;
       timingFunction: string;
     };
   }

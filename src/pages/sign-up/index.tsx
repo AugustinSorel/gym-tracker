@@ -109,13 +109,14 @@ const CircleScreen = styled.div`
     content: "";
     --circle-radius: 10rem;
     position: absolute;
-    left: calc(50% - 5rem);
-    top: calc(50% - 5rem);
+    left: calc(50% - var(--circle-radius) / 2);
+    top: calc(50% - var(--circle-radius) / 2);
     width: var(--circle-radius);
     aspect-ratio: 1/1;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.action};
-    animation: breath 5s ease-in-out infinite alternate-reverse;
+    animation: breath 5s ${({ theme }) => theme.animation.timingFunction}
+      infinite alternate-reverse;
 
     @keyframes breath {
       from {

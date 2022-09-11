@@ -63,6 +63,11 @@ const theme: DefaultTheme = {
     tablet: "screen and (max-width: 768px)",
     desktop: "screen and (max-width: 1024px)",
   },
+
+  animation: {
+    duration: "200ms",
+    timingFunction: "ease-in-out",
+  },
 };
 
 export default theme;

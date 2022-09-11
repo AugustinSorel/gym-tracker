@@ -38,5 +38,10 @@ declare module "styled-components" {
       tablet: string;
       desktop: string;
     };
+
+    animation: {
+      duration: string;
+      timingFunction: string;
+    };
   }
 }

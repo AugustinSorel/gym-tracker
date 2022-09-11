@@ -18,18 +18,19 @@ export const CallToAction = styled(Button)`
   padding: ${({ theme }) => theme.gaps[300]};
   border-radius: ${({ theme }) => theme.borderRadius[500]};
 
+  --offset-distance: 3px;
   outline: ${({ theme }) => theme.borderSizes[500]} solid;
   outline-color: ${({ theme }) => theme.colors.action};
-  outline-offset: -5px;
+  outline-offset: calc(var(--offset-distance) * -1);
 
   transition-property: transform outline-offset;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
+  transition-duration: ${({ theme }) => theme.animation.duration};
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
   :hover,
   :focus-visible {
     transform: scale(1.01);
-    outline-offset: 5px;
+    outline-offset: var(--offset-distance);
   }
 
   :active {

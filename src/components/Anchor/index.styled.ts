@@ -15,7 +15,10 @@ export const Anchor = styled.a`
     width: 0;
     left: 0;
     bottom: -3px;
-    transition: width 200ms ease-in-out;
+    transition-property: width;
+    transition-duration: ${({ theme }) => theme.animation.duration};
+    transition-timing-function: ${({ theme }) =>
+      theme.animation.timingFunction};
   }
 
   :focus-visible::after,

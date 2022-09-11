@@ -18,8 +18,8 @@ export const Input = styled.input.attrs(({ type }) => ({
   outline: none;
 
   transition-property: color, border-color, transform;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
+  transition-duration: ${({ theme }) => theme.animation.duration};
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
   :hover,
   :focus {

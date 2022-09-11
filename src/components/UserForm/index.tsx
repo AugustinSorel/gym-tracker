@@ -11,7 +11,7 @@ const UserForm = () => {
   return (
     <Styles.Form onSubmit={submitHandler}>
       <Input
-        shape="form"
+        role="form"
         labelText="name"
         htmlFor="nameInput"
         placeholder="Enter your name"
@@ -19,7 +19,7 @@ const UserForm = () => {
         errorText=""
       />
       <Input
-        shape="form"
+        role="form"
         labelText="email"
         htmlFor="emailInput"
         placeholder="Enter your email"
@@ -27,7 +27,7 @@ const UserForm = () => {
         errorText=""
       />
       <Input
-        shape="form"
+        role="form"
         labelText="password"
         type="password"
         htmlFor="passwordInput"
@@ -35,7 +35,7 @@ const UserForm = () => {
         errorText=""
       />
 
-      <Button shape="callToAction" text="Sign up" type="submit" />
+      <Button role="callToAction" text="Sign up" type="submit" />
     </Styles.Form>
   );
 };

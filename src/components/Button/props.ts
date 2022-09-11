@@ -1,12 +1,12 @@
 import { HTMLAttributes } from "react";
 
 export type CallToAction = {
-  shape: "callToAction";
+  role: "callToAction";
   text: string;
 };
 
 export type DefaultButton = {
-  shape: "default";
+  role: "default";
 };
 
 type DefaultProps = {

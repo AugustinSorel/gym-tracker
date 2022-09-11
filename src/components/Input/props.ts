@@ -1,14 +1,14 @@
 import { InputHTMLAttributes } from "react";
 
 export type FormInput = {
-  shape: "form";
+  role: "form";
   labelText: string;
   htmlFor: string;
   errorText: string;
 };
 
 export type DefaultInput = {
-  shape: "default";
+  role: "default";
 };
 
 export type Input = InputHTMLAttributes<HTMLInputElement> &

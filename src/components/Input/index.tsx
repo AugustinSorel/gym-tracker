@@ -2,7 +2,7 @@ import * as Props from "./props";
 import * as Styles from "./index.styled";
 
 const Input = (props: Props.Input) => {
-  if (props.shape === "form") {
+  if (props.role === "form") {
     return <FormInput {...props} />;
   }
 
@@ -10,13 +10,13 @@ const Input = (props: Props.Input) => {
 };
 
 const FormInput = (props: Props.FormInput) => {
-  const { labelText, errorText, htmlFor } = props;
+  const { labelText, errorText, htmlFor, role, ...rest } = props;
   const isValid = errorText.length === 0;
   return (
     <Styles.FormInputContainer isValid={isValid}>
       <Styles.Label htmlFor={htmlFor}>{labelText}</Styles.Label>
       {errorText && <Styles.ErrorText>{errorText}</Styles.ErrorText>}
-      <Styles.Input id={htmlFor} {...props} />
+      <Styles.Input id={htmlFor} {...rest} />
     </Styles.FormInputContainer>
   );
 };

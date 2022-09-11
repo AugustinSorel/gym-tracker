@@ -1,9 +1,10 @@
-import Anchor from "@/components/Anchor";
 import UserForm from "@/components/UserForm";
 import Head from "next/head";
-import styled from "styled-components";
+import { ReactElement } from "react";
+import AuthLayout from "src/layouts/AuthLayout";
+import { NextPageWithLayout } from "../_app";
 
-const SignUpPage = () => {
+const SignUpPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -12,95 +13,13 @@ const SignUpPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container>
-        <Main>
-          <Title>Welcome back</Title>
-          <SubTitle>Welcome back! Please enter your details</SubTitle>
-
-          <UserForm />
-
-          <NavigationText>
-            Already a member? <Anchor href={"/login"} text="login" />
-          </NavigationText>
-        </Main>
-
-        <CircleScreen />
-      </Container>
+      <UserForm />
     </>
   );
 };
 
-const Container = styled.div`
-  height: 100vh;
-  display: flex;
-`;
-
-const Main = styled.main`
-  margin: auto;
-  max-width: 85%;
-`;
-
-const Title = styled.h1`
-  font-weight: 500;
-  margin-bottom: ${({ theme }) => theme.gaps[100]};
-`;
-
-const SubTitle = styled.h2`
-  color: ${({ theme }) => theme.colors[500]};
-  font-weight: 400;
-  @media ${({ theme }) => theme.breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes[400]};
-  }
-`;
-
-const NavigationText = styled.p`
-  text-align: center;
-  color: ${({ theme }) => theme.colors[900]};
-  font-weight: 300;
-`;
-
-const CircleScreen = styled.div`
-  background-color: ${({ theme }) => theme.colors[200]};
-  position: relative;
-  width: 50%;
-
-  @media ${({ theme }) => theme.breakpoints.tablet} {
-    display: none;
-  }
-
-  ::before {
-    content: "";
-    --circle-radius: 10rem;
-    position: absolute;
-    left: calc(50% - var(--circle-radius) / 2);
-    top: calc(50% - var(--circle-radius) / 2);
-    width: var(--circle-radius);
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.action};
-    animation: breath 5s ${({ theme }) => theme.animation.timingFunction}
-      infinite alternate-reverse;
-
-    @keyframes breath {
-      from {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 ${({ theme }) => theme.colors.action};
-      }
-      to {
-        transform: scale(1.1);
-        box-shadow: 0 0 15px 10px ${({ theme }) => theme.colors.action};
-      }
-    }
-  }
-
-  ::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 50%;
-    backdrop-filter: blur(10px);
-  }
-`;
+SignUpPage.getLayout = (page: ReactElement) => {
+  return <AuthLayout isLogin={false}>{page}</AuthLayout>;
+};
 
 export default SignUpPage;

@@ -8,13 +8,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.color};
+    background-color: ${({ theme }) => theme.colors[100]};
+    color: ${({ theme }) => theme.colors[900]};
     font-family: 'Noto Sans', sans-serif;
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes[500]};
 
     @media ${({ theme }) => theme.breakpoints.tablet} {
-      font-size: ${({ theme }) => theme.fontSizes.small};
+      font-size: ${({ theme }) => theme.fontSizes[400]};
     }
   }
 `;

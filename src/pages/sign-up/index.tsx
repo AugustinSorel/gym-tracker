@@ -1,8 +1,8 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Anchor from "@/components/Anchor";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Head from "next/head";
+import styled from "styled-components";
 
 const SignUpPage = () => {
   return (
@@ -45,10 +45,7 @@ const SignUpPage = () => {
           </Form>
 
           <NavigationText>
-            Already a member?{" "}
-            <Link href={"/login"} passHref>
-              <Anchor>Login</Anchor>
-            </Link>
+            Already a member? <Anchor href={"/login"} text="login" />
           </NavigationText>
         </Main>
 
@@ -97,31 +94,6 @@ const NavigationText = styled.p`
   text-align: center;
   color: ${({ theme }) => theme.colors[900]};
   font-weight: 300;
-`;
-
-// TODO: create component for this
-const Anchor = styled.a`
-  color: ${({ theme }) => theme.colors.action};
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  outline: none;
-
-  ::after {
-    content: "";
-    position: absolute;
-    background-color: ${({ theme }) => theme.colors.action};
-    height: ${({ theme }) => theme.borderSizes[300]};
-    width: 0;
-    left: 0;
-    bottom: -3px;
-    transition: width 200ms ease-in-out;
-  }
-
-  :focus-visible::after,
-  :hover::after {
-    width: 100%;
-  }
 `;
 
 const CircleScreen = styled.div`

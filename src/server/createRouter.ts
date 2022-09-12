@@ -1,9 +1,5 @@
 import { router } from "@trpc/server";
 
-const appRouter = router().query("hello", {
-  resolve: () => "world",
-});
+const createRouter = router();
 
-export type AppRouter = typeof appRouter;
-
-export default appRouter;
+export default createRouter;

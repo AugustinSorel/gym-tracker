@@ -1,8 +1,8 @@
 import { createNextApiHandler } from "@trpc/server/adapters/next";
-import createRouter from "src/server/createRouter";
+import appRouter from "src/server/routers/appRouter";
 
 const apiHandler = createNextApiHandler({
-  router: createRouter,
+  router: appRouter,
 });
 
 export default apiHandler;

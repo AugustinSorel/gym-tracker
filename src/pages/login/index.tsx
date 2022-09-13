@@ -1,4 +1,6 @@
-import UserForm from "@/components/UserForm";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import * as Styles from "@/components/UserForm/index.styled";
 import Head from "next/head";
 import { ReactElement } from "react";
 import AuthLayout from "src/layouts/AuthLayout";
@@ -12,8 +14,29 @@ const LoginPage: NextPageWithLayout = () => {
         <meta name="description" content="Login to track your gym progress" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Styles.Form>
+        <Input
+          role="form"
+          labelText="email"
+          htmlFor="emailInput"
+          placeholder="Enter your email"
+          autoComplete="new-password"
+          errorText=""
+          name="email"
+        />
 
-      <UserForm role="login" />
+        <Input
+          role="form"
+          labelText="password"
+          type="password"
+          htmlFor="passwordInput"
+          placeholder="•••••••••••••"
+          errorText=""
+          name="password"
+        />
+
+        <Button role="callToAction" text="Login" type="submit" />
+      </Styles.Form>
     </>
   );
 };

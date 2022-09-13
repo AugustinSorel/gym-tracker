@@ -17,7 +17,7 @@ const SignUpPage: NextPageWithLayout = () => {
   const [user, setUser] = useState(defaultUser);
   const [errors, setErrors] = useState(defaultUser);
 
-  const { mutate } = trpc.useMutation(["user.create"], {
+  const { mutate, isLoading } = trpc.useMutation(["user.create"], {
     onSuccess: () => {
       setUser(defaultUser);
     },
@@ -96,7 +96,12 @@ const SignUpPage: NextPageWithLayout = () => {
           onChange={changeHandler}
         />
 
-        <Button role="callToAction" text="Sign up" type="submit" />
+        <Button
+          role="callToAction"
+          text="Sign up"
+          type="submit"
+          isLoading={isLoading}
+        />
       </Styles.Form>
     </>
   );

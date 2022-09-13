@@ -66,6 +66,7 @@ const SignUpPage: NextPageWithLayout = () => {
           htmlFor="nameInput"
           placeholder="Enter your name"
           autoComplete="off"
+          autoCapitalize="none"
           errorText={errors.name}
           value={user.name}
           name={"name"}
@@ -78,6 +79,7 @@ const SignUpPage: NextPageWithLayout = () => {
           htmlFor="emailInput"
           placeholder="Enter your email"
           autoComplete="new-password"
+          autoCapitalize="none"
           errorText={errors.email}
           value={user.email}
           name="email"
@@ -91,6 +93,7 @@ const SignUpPage: NextPageWithLayout = () => {
           htmlFor="passwordInput"
           placeholder="•••••••••••••"
           autoComplete="new-password"
+          autoCapitalize="none"
           errorText={errors.password}
           value={user.password}
           name="password"

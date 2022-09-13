@@ -90,6 +90,7 @@ const SignUpPage: NextPageWithLayout = () => {
           type="password"
           htmlFor="passwordInput"
           placeholder="•••••••••••••"
+          autoComplete="new-password"
           errorText={errors.password}
           value={user.password}
           name="password"

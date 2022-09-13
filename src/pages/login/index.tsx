@@ -35,7 +35,12 @@ const LoginPage: NextPageWithLayout = () => {
           name="password"
         />
 
-        <Button role="callToAction" text="Login" type="submit" />
+        <Button
+          role="callToAction"
+          text="Login"
+          type="submit"
+          isLoading={false}
+        />
       </Styles.Form>
     </>
   );

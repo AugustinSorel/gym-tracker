@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 type Props = {
   type?: "submit" | "button" | "reset";
@@ -13,7 +13,8 @@ export const Button = styled.button.attrs(({ type }) => ({
   background-color: transparent;
 `;
 
-export const CallToAction = styled(Button)`
+export const CallToAction = styled(Button)<{ isLoading: boolean }>`
+  position: relative;
   background-color: ${({ theme }) => theme.colors.action};
   padding: ${({ theme }) => theme.gaps[300]};
   border-radius: ${({ theme }) => theme.border.radius[500]};
@@ -27,13 +28,48 @@ export const CallToAction = styled(Button)`
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
-  :hover,
-  :focus-visible {
+  &:hover,
+  &:focus-visible {
     transform: scale(1.01);
     outline-offset: var(--offset-distance);
   }
 
-  :active {
+  &:active {
     transform: scale(0.99);
+  }
+
+  ${({ isLoading }) => isLoading && loader};
+`;
+
+const spin = keyframes` 
+  from {
+    transform: translateY(-50%) rotate(0);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+`;
+
+const loader = css`
+  &::after {
+    content: "";
+
+    position: absolute;
+    right: ${({ theme }) => theme.gaps[300]};
+    top: 50%;
+
+    border: ${({ theme }) => theme.border.sizes[500]} solid;
+    border-color: ${({ theme }) => theme.colors[100]};
+    border-top-color: transparent;
+    border-radius: 50%;
+
+    height: ${({ theme }) => theme.fontSizes[500]};
+    aspect-ratio: 1 / 1;
+
+    animation-name: ${spin};
+    animation-duration: ${({ theme }) => theme.animation.durations[500]};
+    animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
+    animation-iteration-count: infinite;
   }
 `;

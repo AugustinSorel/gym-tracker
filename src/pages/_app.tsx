@@ -1,11 +1,11 @@
-import type { AppProps } from "next/app";
-import GlobalStyle from "../styles/GlobalStyle.styled";
-import { ThemeProvider } from "styled-components";
-import theme from "../styles/theme";
-import { ReactElement, ReactNode } from "react";
-import { NextPage } from "next";
 import { withTRPC } from "@trpc/next";
-import { AppRouter } from "src/server/createRouter";
+import { NextPage } from "next";
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode } from "react";
+import type { AppRouter } from "src/server/routers/appRouter";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "../styles/GlobalStyle.styled";
+import theme from "../styles/theme";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

@@ -1,9 +1,17 @@
 import { router } from "@trpc/server";
+import { ZodError } from "zod";
 
-const appRouter = router().query("hello", {
-  resolve: () => "world",
+const createRouter = router().formatError(({ shape, error }) => {
+  return {
+    ...shape,
+    data: {
+      ...shape.data,
+      zodError:
+        error.code === "BAD_REQUEST" && error.cause instanceof ZodError
+          ? error.cause.flatten()
+          : null,
+    },
+  };
 });
 
-export type AppRouter = typeof appRouter;
-
-export default appRouter;
+export default createRouter;

@@ -7,7 +7,7 @@ export const Anchor = styled.a`
   position: relative;
   outline: none;
 
-  ::after {
+  &::after {
     content: "";
     position: absolute;
     background-color: ${({ theme }) => theme.colors.action};
@@ -21,8 +21,8 @@ export const Anchor = styled.a`
       theme.animation.timingFunction};
   }
 
-  :focus-visible::after,
-  :hover::after {
+  &:focus-visible::after,
+  &:hover::after {
     width: 100%;
   }
 `;

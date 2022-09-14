@@ -12,6 +12,7 @@ const Input = (props: Props.Input) => {
 const FormInput = (props: Props.FormInput) => {
   const { labelText, errorText, htmlFor, role, ...rest } = props;
   const isValid = errorText.length === 0;
+
   return (
     <Styles.FormInputContainer isValid={isValid}>
       <Styles.Label htmlFor={htmlFor}>{labelText}</Styles.Label>

@@ -30,7 +30,7 @@ export const NavigationText = styled.p`
 `;
 
 const circle = css`
-  ::before {
+  &::before {
     content: "";
     --circle-radius: 10rem;
     position: absolute;
@@ -57,7 +57,7 @@ const circle = css`
 `;
 
 const glass = css`
-  ::after {
+  &::after {
     content: "";
     position: absolute;
     top: 50%;

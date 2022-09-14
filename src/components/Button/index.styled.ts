@@ -28,13 +28,13 @@ export const CallToAction = styled(Button)<{ isLoading: boolean }>`
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
-  :hover,
-  :focus-visible {
+  &:hover,
+  &:focus-visible {
     transform: scale(1.01);
     outline-offset: var(--offset-distance);
   }
 
-  :active {
+  &:active {
     transform: scale(0.99);
   }
 
@@ -52,14 +52,14 @@ const spin = keyframes`
 `;
 
 const loader = css`
-  ::after {
+  &::after {
     content: "";
 
     position: absolute;
     right: ${({ theme }) => theme.gaps[300]};
     top: 50%;
 
-    border: ${({ theme }) => theme.border.sizes[700]} solid;
+    border: ${({ theme }) => theme.border.sizes[500]} solid;
     border-color: ${({ theme }) => theme.colors[100]};
     border-top-color: transparent;
     border-radius: 50%;

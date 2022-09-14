@@ -22,8 +22,8 @@ export const Input = styled.input.attrs(({ type }) => ({
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
 
-  :hover,
-  :focus {
+  &:hover,
+  &:focus {
     color: ${({ theme }) => theme.colors[900]};
     border-color: ${({ theme }) => theme.colors[900]};
     transform: scale(1.01);
@@ -66,7 +66,7 @@ export const ErrorText = styled.p`
     }
   }
 
-  ::before {
+  &::before {
     content: "- ";
   }
 `;

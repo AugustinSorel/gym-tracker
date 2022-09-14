@@ -21,3 +21,8 @@ export const create = z.object({
   email,
   password,
 });
+
+export const login = z.object({
+  email,
+  password,
+});

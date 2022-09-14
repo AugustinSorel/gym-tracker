@@ -12,7 +12,7 @@ const userRouter = router()
         return await userServices.create({
           data: {
             ...input,
-            password: await bcrypt.encryptString(input.password),
+            password: await bcrypt.encrypt(input.password),
           },
         });
       } catch (error) {
@@ -25,6 +25,32 @@ const userRouter = router()
           }
         }
       }
+    },
+  })
+  .mutation("login", {
+    input: userSchemas.login,
+    resolve: async ({ input }) => {
+      const user = await userServices.findUnique({
+        where: { email: input.email },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "this email does not exist",
+        });
+      }
+
+      const passwordValid = await bcrypt.compare(input.password, user.password);
+
+      if (!passwordValid) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "this password is invalid",
+        });
+      }
+
+      return user;
     },
   })
   .query("all", {

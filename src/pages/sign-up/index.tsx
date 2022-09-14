@@ -68,7 +68,6 @@ const SignUpPage: NextPageWithLayout = () => {
           labelText="name"
           htmlFor="nameInput"
           placeholder="Enter your name"
-          autoComplete="off"
           autoCapitalize="none"
           errorText={errors.name}
           value={user.name}
@@ -81,7 +80,6 @@ const SignUpPage: NextPageWithLayout = () => {
           labelText="email"
           htmlFor="emailInput"
           placeholder="Enter your email"
-          autoComplete="new-password"
           autoCapitalize="none"
           errorText={errors.email}
           value={user.email}

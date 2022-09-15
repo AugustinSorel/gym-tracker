@@ -1,7 +1,8 @@
 import { router } from "@trpc/server";
 import { ZodError } from "zod";
+import { Context } from "./context";
 
-const createRouter = router().formatError(({ shape, error }) => {
+const createRouter = router<Context>().formatError(({ shape, error }) => {
   return {
     ...shape,
     data: {

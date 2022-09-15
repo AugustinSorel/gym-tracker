@@ -1,8 +1,8 @@
-import { NextApiRequest } from "next";
+import { Cookies } from "src/utils/cookie";
 import * as jwt from "src/utils/jwt";
 
-const deserializeUser = (req: NextApiRequest) => {
-  const { accessToken } = req.cookies;
+const deserializeUser = (cookies: Partial<Cookies>) => {
+  const { accessToken } = cookies;
 
   if (!accessToken) {
     return null;

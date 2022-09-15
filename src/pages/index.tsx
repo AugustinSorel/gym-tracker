@@ -3,7 +3,7 @@ import Head from "next/head";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
-  const query = trpc.useQuery(["user.all"], {
+  const query = trpc.useQuery(["user.me"], {
     onSuccess: (data) => {
       console.log(data);
     },
@@ -32,7 +32,6 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Hello world</h1>
       {JSON.stringify(query.data, null, 2)}
     </div>
   );

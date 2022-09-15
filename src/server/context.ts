@@ -2,7 +2,7 @@ import { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import deserializeUser from "./middlewares/deserializeUser";
 
 const createContext = ({ req, res }: CreateNextContextOptions) => {
-  const user = deserializeUser(req);
+  const user = deserializeUser(req.cookies);
 
   return {
     req,

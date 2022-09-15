@@ -19,8 +19,8 @@ const userRouter = createRouter
           },
         });
 
-        const refreshToken = jwt.sign({ id: user.id }, "REFRESH_TOKEN_KEY");
-        const accessToken = jwt.sign({ id: user.id }, "ACCESS_TOKEN_KEY");
+        const refreshToken = jwt.getRefreshToken({ id: user.id });
+        const accessToken = jwt.getAccessToken({ id: user.id });
 
         cookie.setAuthCookie(ctx.res, { accessToken, refreshToken });
 
@@ -60,8 +60,8 @@ const userRouter = createRouter
         });
       }
 
-      const refreshToken = jwt.sign({ id: user.id }, "REFRESH_TOKEN_KEY");
-      const accessToken = jwt.sign({ id: user.id }, "ACCESS_TOKEN_KEY");
+      const refreshToken = jwt.getRefreshToken({ id: user.id });
+      const accessToken = jwt.getAccessToken({ id: user.id });
 
       cookie.setAuthCookie(ctx.res, { accessToken, refreshToken });
 
@@ -75,14 +75,11 @@ const userRouter = createRouter
 
     return next({ ctx: { ...ctx, user: ctx.user } });
   })
-  .query("all", {
-    resolve: async () => {
-      try {
-        return await userServices.findMany({});
-      } catch (error) {
-        console.log(error);
-        return error;
-      }
+  .query("me", {
+    resolve: async ({ ctx }) => {
+      return await userServices.findUnique({
+        where: { id: ctx.user.id },
+      });
     },
   });
 

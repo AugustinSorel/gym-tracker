@@ -1,5 +1,10 @@
-import type { NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import Head from "next/head";
+import deserializeUser from "src/server/middlewares/deserializeUser";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
@@ -35,6 +40,25 @@ const Home: NextPage = () => {
       {JSON.stringify(query.data, null, 2)}
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  const user = deserializeUser(req.cookies);
+
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Home;

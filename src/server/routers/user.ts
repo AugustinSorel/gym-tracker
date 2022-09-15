@@ -13,10 +13,7 @@ const userRouter = createRouter
     resolve: async ({ input, ctx }) => {
       try {
         const user = await userServices.create({
-          data: {
-            ...input,
-            password: await bcrypt.encrypt(input.password),
-          },
+          data: { ...input, password: await bcrypt.encrypt(input.password) },
         });
 
         const refreshToken = jwt.getRefreshToken({ id: user.id });

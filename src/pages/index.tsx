@@ -8,15 +8,7 @@ import deserializeUser from "src/server/middlewares/deserializeUser";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
-  const query = trpc.useQuery(["user.me"], {
-    onSuccess: (data) => {
-      console.log(data);
-    },
-
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  const query = trpc.useQuery(["user.me"]);
 
   if (query.isError) {
     return <p>{JSON.stringify(query.error, null, 2)}</p>;

@@ -1,10 +1,6 @@
 import { NextApiRequest } from "next";
 import * as jwt from "src/utils/jwt";
 
-type User = {
-  id: string;
-};
-
 const deserializeUser = (req: NextApiRequest) => {
   const { accessToken } = req.cookies;
 
@@ -12,7 +8,7 @@ const deserializeUser = (req: NextApiRequest) => {
     return null;
   }
 
-  const user = jwt.verify<User>(accessToken, "ACCESS_TOKEN_KEY");
+  const user = jwt.verify<jwt.AccessToken>(accessToken, "ACCESS_TOKEN_KEY");
 
   return user;
 };

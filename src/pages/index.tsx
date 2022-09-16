@@ -1,14 +1,13 @@
-import type {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  NextPage,
-} from "next";
+import Button from "@/components/Button";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
   const query = trpc.user.me.useQuery();
+
+  const logout = trpc.user.logout.useMutation();
 
   if (query.isError) {
     return <p>{JSON.stringify(query.error, null, 2)}</p>;
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>Gym Tracker Home</title>
         <meta
@@ -30,7 +29,14 @@ const Home: NextPage = () => {
       </Head>
 
       {JSON.stringify(query.data, null, 2)}
-    </div>
+
+      <Button
+        role="callToAction"
+        onClick={() => logout.mutate()}
+        text="logout"
+        isLoading={logout.isLoading}
+      />
+    </>
   );
 };
 

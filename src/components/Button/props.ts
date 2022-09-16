@@ -8,6 +8,7 @@ export type CallToAction = {
 
 export type DefaultButton = {
   role: "default";
+  text: string;
 };
 
 type DefaultProps = {

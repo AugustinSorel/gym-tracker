@@ -1,10 +1,12 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import * as Styles from "@/components/UserForm/index.styled";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import AuthLayout from "src/layouts/AuthLayout";
+import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 import { NextPageWithLayout } from "../_app";
 
@@ -21,7 +23,6 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const { mutate, isLoading } = trpc.user.create.useMutation({
     onSuccess: () => {
-      setUser(defaultUser);
       router.push("/");
     },
 
@@ -114,6 +115,25 @@ const SignUpPage: NextPageWithLayout = () => {
 
 SignUpPage.getLayout = (page: ReactElement) => {
   return <AuthLayout isLogin={false}>{page}</AuthLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  const user = deserializeUser(req.cookies);
+
+  if (user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default SignUpPage;

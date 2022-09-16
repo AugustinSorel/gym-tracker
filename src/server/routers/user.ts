@@ -20,7 +20,7 @@ const userRouter = t.router({
         const refreshToken = jwt.getRefreshToken({ id: user.id });
         const accessToken = jwt.getAccessToken({ id: user.id });
 
-        cookie.setAuthCookie(ctx.res, { accessToken, refreshToken });
+        cookie.setAuthCookies(ctx.res, { accessToken, refreshToken });
 
         return user;
       } catch (error) {
@@ -61,7 +61,7 @@ const userRouter = t.router({
       const refreshToken = jwt.getRefreshToken({ id: user.id });
       const accessToken = jwt.getAccessToken({ id: user.id });
 
-      cookie.setAuthCookie(ctx.res, { accessToken, refreshToken });
+      cookie.setAuthCookies(ctx.res, { accessToken, refreshToken });
 
       return user;
     }),
@@ -70,6 +70,10 @@ const userRouter = t.router({
     return await userServices.findUnique({
       where: { id: ctx.user.id },
     });
+  }),
+
+  logout: t.procedure.mutation(({ ctx }) => {
+    cookie.resetAuthCookies(ctx.res);
   }),
 });
 

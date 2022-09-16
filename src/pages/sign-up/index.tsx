@@ -19,7 +19,7 @@ const SignUpPage: NextPageWithLayout = () => {
   const [errors, setErrors] = useState(defaultUser);
   const router = useRouter();
 
-  const { mutate, isLoading } = trpc.useMutation(["user.create"], {
+  const { mutate, isLoading } = trpc.user.create.useMutation({
     onSuccess: () => {
       setUser(defaultUser);
       router.push("/");

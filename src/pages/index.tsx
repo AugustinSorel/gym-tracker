@@ -4,11 +4,11 @@ import type {
   NextPage,
 } from "next";
 import Head from "next/head";
-import deserializeUser from "src/server/middlewares/deserializeUser";
+import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
-  const query = trpc.useQuery(["user.me"]);
+  const query = trpc.user.me.useQuery();
 
   if (query.isError) {
     return <p>{JSON.stringify(query.error, null, 2)}</p>;

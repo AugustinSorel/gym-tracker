@@ -1,7 +1,7 @@
-import { Cookies } from "src/utils/cookie";
-import * as jwt from "src/utils/jwt";
+import { Cookies } from "./cookie";
+import * as jwt from "./jwt";
 
-const deserializeUser = (cookies: Partial<Cookies>) => {
+export const deserializeUser = (cookies: Partial<Cookies>) => {
   const { accessToken } = cookies;
 
   if (!accessToken) {
@@ -12,5 +12,3 @@ const deserializeUser = (cookies: Partial<Cookies>) => {
 
   return user;
 };
-
-export default deserializeUser;

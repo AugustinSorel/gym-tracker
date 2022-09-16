@@ -4,13 +4,14 @@ import { TRPCError } from "@trpc/server";
 import * as bcrypt from "src/utils/bcrypts";
 import * as cookie from "src/utils/cookie";
 import * as jwt from "src/utils/jwt";
-import createRouter from "../createRouter";
+import requireUserProcedure from "../procedures/requireUserProcedure";
 import * as userServices from "../services/userServices";
+import t from "../trpc";
 
-const userRouter = createRouter
-  .mutation("create", {
-    input: userSchemas.create,
-    resolve: async ({ input, ctx }) => {
+const userRouter = t.router({
+  create: t.procedure
+    .input(userSchemas.create)
+    .mutation(async ({ input, ctx }) => {
       try {
         const user = await userServices.create({
           data: { ...input, password: await bcrypt.encrypt(input.password) },
@@ -32,11 +33,11 @@ const userRouter = createRouter
           }
         }
       }
-    },
-  })
-  .mutation("login", {
-    input: userSchemas.login,
-    resolve: async ({ input, ctx }) => {
+    }),
+
+  login: t.procedure
+    .input(userSchemas.login)
+    .mutation(async ({ input, ctx }) => {
       const user = await userServices.findUnique({
         where: { email: input.email },
       });
@@ -63,21 +64,13 @@ const userRouter = createRouter
       cookie.setAuthCookie(ctx.res, { accessToken, refreshToken });
 
       return user;
-    },
-  })
-  .middleware(({ ctx, next }) => {
-    if (!ctx.user) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
+    }),
 
-    return next({ ctx: { ...ctx, user: ctx.user } });
-  })
-  .query("me", {
-    resolve: async ({ ctx }) => {
-      return await userServices.findUnique({
-        where: { id: ctx.user.id },
-      });
-    },
-  });
+  me: requireUserProcedure.query(async ({ ctx }) => {
+    return await userServices.findUnique({
+      where: { id: ctx.user.id },
+    });
+  }),
+});
 
 export default userRouter;

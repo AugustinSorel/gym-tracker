@@ -18,7 +18,7 @@ const LoginPage: NextPageWithLayout = () => {
   const [errors, setErrors] = useState(defaultUser);
   const router = useRouter();
 
-  const { mutate, isLoading } = trpc.useMutation(["user.login"], {
+  const { mutate, isLoading } = trpc.user.login.useMutation({
     onSuccess: () => {
       setUser(defaultUser);
       router.push("/");

@@ -1,8 +1,7 @@
-import { withTRPC } from "@trpc/next";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
-import type { AppRouter } from "src/server/routers/appRouter";
+import trpc from "src/utils/trpc";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../styles/GlobalStyle.styled";
 import theme from "../styles/theme";
@@ -26,8 +25,6 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   );
 };
 
-const MyAppWithTrpc = withTRPC<AppRouter>({
-  config: () => ({ url: "/api/trpc" }),
-})(MyApp);
+const MyAppWithTrpc = trpc.withTRPC(MyApp);
 
 export default MyAppWithTrpc;

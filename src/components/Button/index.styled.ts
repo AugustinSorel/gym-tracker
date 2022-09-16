@@ -9,12 +9,14 @@ export const Button = styled.button.attrs(({ type }) => ({
 }))<Props>`
   cursor: pointer;
   font: inherit;
+  color: inherit;
   border: none;
   background-color: transparent;
 `;
 
 export const CallToAction = styled(Button)<{ isLoading: boolean }>`
   position: relative;
+  color: ${({ theme }) => theme.colors[100]};
   background-color: ${({ theme }) => theme.colors.action};
   padding: ${({ theme }) => theme.gaps[300]};
   border-radius: ${({ theme }) => theme.border.radius[500]};

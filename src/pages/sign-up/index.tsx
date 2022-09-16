@@ -21,7 +21,6 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const { mutate, isLoading } = trpc.user.create.useMutation({
     onSuccess: () => {
-      setUser(defaultUser);
       router.push("/");
     },
 

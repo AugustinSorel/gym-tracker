@@ -5,6 +5,9 @@ import { appRouter } from "src/server/routers/_app";
 const apiHandler = createNextApiHandler({
   router: appRouter,
   createContext,
+  onError: ({ error }) => {
+    console.log(error);
+  },
 });
 
 export default apiHandler;

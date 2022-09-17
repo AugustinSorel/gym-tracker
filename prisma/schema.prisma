@@ -15,6 +15,15 @@ model User {
   name        String
   email       String   @unique
   password    String
+  session     Session  @relation(fields: [sessionId], references: [id])
+  sessionId   String   @unique
+  createtedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Session {
+  id          String   @id @default(uuid())
+  User        User?
   createtedAt DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

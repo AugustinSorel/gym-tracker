@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import * as bcrypt from "src/utils/bcrypts";
 import * as cookie from "src/utils/cookie";
 import * as jwt from "src/utils/jwt";
-import requireUserProcedure from "../procedures/requireUserProcedure";
+import requireUser from "../middlewares/requireUser";
 import * as userServices from "../services/userServices";
 import t from "../trpc";
 
@@ -66,7 +66,7 @@ const userRouter = t.router({
       return user;
     }),
 
-  me: requireUserProcedure.query(async ({ ctx }) => {
+  me: t.procedure.use(requireUser).query(async ({ ctx }) => {
     return await userServices.findUnique({
       where: { id: ctx.user.id },
     });

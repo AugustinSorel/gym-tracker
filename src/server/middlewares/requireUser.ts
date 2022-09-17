@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { deserializeUser } from "src/utils/auth";
 import t from "../trpc";
 
-const requireUserProcedure = t.procedure.use(({ ctx, next }) => {
+const requireUser = t.middleware(({ ctx, next }) => {
   const user = deserializeUser(ctx.req.cookies);
 
   if (!user) {
@@ -12,4 +12,4 @@ const requireUserProcedure = t.procedure.use(({ ctx, next }) => {
   return next({ ctx: { user } });
 });
 
-export default requireUserProcedure;
+export default requireUser;

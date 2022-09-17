@@ -14,7 +14,11 @@ const userRouter = t.router({
     .mutation(async ({ input, ctx }) => {
       try {
         const user = await userServices.create({
-          data: { ...input, password: await bcrypt.encrypt(input.password) },
+          data: {
+            ...input,
+            password: await bcrypt.encrypt(input.password),
+            session: { create: {} },
+          },
         });
 
         const refreshToken = jwt.getRefreshToken({ id: user.id });

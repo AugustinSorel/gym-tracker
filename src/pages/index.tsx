@@ -1,13 +1,26 @@
 import Button from "@/components/Button";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   const query = trpc.user.me.useQuery();
 
-  const logout = trpc.user.logout.useMutation();
+  const logout = trpc.user.logout.useMutation({
+    onMutate: () => {
+      router.push("/login");
+    },
+  });
+
+  const invalidateToken = trpc.user.revokeRefreshToken.useMutation({
+    onMutate: () => {
+      router.push("/login");
+    },
+  });
 
   if (query.isError) {
     return <p>{JSON.stringify(query.error, null, 2)}</p>;
@@ -36,14 +49,21 @@ const Home: NextPage = () => {
         text="logout"
         isLoading={logout.isLoading}
       />
+
+      <Button
+        role="callToAction"
+        onClick={() => invalidateToken.mutate()}
+        text="invalidate token"
+        isLoading={invalidateToken.isLoading}
+      />
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-}: GetServerSidePropsContext) => {
-  const user = deserializeUser(req.cookies);
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const user = await deserializeUser(ctx.res, ctx.req.cookies);
 
   if (!user) {
     return {

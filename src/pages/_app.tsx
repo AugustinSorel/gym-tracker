@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
@@ -21,6 +22,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       {getLayout(<Component {...pageProps} />)}
+      <ReactQueryDevtools />
     </ThemeProvider>
   );
 };

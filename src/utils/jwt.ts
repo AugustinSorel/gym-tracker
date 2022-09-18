@@ -1,20 +1,38 @@
-import { User } from "@prisma/client";
+import { Session, User } from "@prisma/client";
 import jwt from "jsonwebtoken";
 
 type Key = "ACCESS_TOKEN_KEY" | "REFRESH_TOKEN_KEY";
 
-export type AccessToken = Pick<User, "id">;
-export type RefreshToken = Pick<User, "id">;
-
-export const getRefreshToken = (payload: RefreshToken) => {
-  return jwt.sign(payload, process.env["REFRESH_TOKEN_KEY"]);
+export type AuthTokensPayload = {
+  accessToken: Pick<User, "id">;
+  refreshToken: Pick<User, "id"> & Pick<Session, "tokenVersion">;
 };
 
-export const getAccessToken = (payload: AccessToken) => {
-  return jwt.sign(payload, process.env["ACCESS_TOKEN_KEY"]);
+export const getAuthTokens = (authTokens: AuthTokensPayload) => {
+  const accessToken = jwt.sign(
+    authTokens.accessToken,
+    process.env["ACCESS_TOKEN_KEY"],
+    {
+      expiresIn: "7d",
+    }
+  );
+
+  const refreshToken = jwt.sign(
+    authTokens.refreshToken,
+    process.env["REFRESH_TOKEN_KEY"],
+    {
+      expiresIn: "15min",
+    }
+  );
+
+  return { accessToken, refreshToken };
 };
 
-export const verify = <T>(token: string, key: Key) => {
+export const verify = <T>(token: string | undefined, key: Key) => {
+  if (!token) {
+    return null;
+  }
+
   try {
     return jwt.verify(token, process.env[key]) as T;
   } catch (error) {

@@ -1,35 +1,37 @@
-import { AuthCookies } from "./cookie";
+import { ServerResponse } from "http";
+import { NextApiResponse } from "next";
+import { AuthCookies, setAuthCookies } from "./cookie";
 import * as jwt from "./jwt";
+import * as cookie from "./cookie";
 import prisma from "./prisma";
 
-export const deserializeUser = (cookies: Partial<AuthCookies>) => {
-  const { accessToken } = cookies;
+export const deserializeUser = async (
+  res: NextApiResponse | ServerResponse,
+  cookies: Partial<AuthCookies>
+) => {
+  const { accessToken, refreshToken } = cookies;
 
-  if (!accessToken) {
+  if (!refreshToken && !accessToken) {
+    cookie.deleteAuthCookies(res);
     return null;
   }
 
-  const accessTokenPayload = jwt.verify<jwt.AuthTokens["accessToken"]>(
+  const accessTokenPayload = jwt.verify<jwt.AuthTokensPayload["accessToken"]>(
     accessToken,
     "ACCESS_TOKEN_KEY"
   );
 
-  return accessTokenPayload;
-};
-
-export const refreshAuthTokens = async (cookies: Partial<AuthCookies>) => {
-  const { refreshToken } = cookies;
-
-  if (!refreshToken) {
-    return null;
+  if (accessTokenPayload) {
+    return accessTokenPayload;
   }
 
-  const refreshTokenPayload = jwt.verify<jwt.AuthTokens["refreshToken"]>(
+  const refreshTokenPayload = jwt.verify<jwt.AuthTokensPayload["refreshToken"]>(
     refreshToken,
     "REFRESH_TOKEN_KEY"
   );
 
   if (!refreshTokenPayload) {
+    cookie.deleteAuthCookies(res);
     return null;
   }
 
@@ -39,20 +41,15 @@ export const refreshAuthTokens = async (cookies: Partial<AuthCookies>) => {
   });
 
   if (!user) {
+    cookie.deleteAuthCookies(res);
     return null;
   }
 
   if (user.session.tokenVersion !== refreshTokenPayload.tokenVersion) {
+    cookie.deleteAuthCookies(res);
     return null;
   }
 
-  const authTokens = jwt.getAuthTokens({
-    accessToken: { id: user.id },
-    refreshToken: {
-      id: user.id,
-      tokenVersion: user.session.tokenVersion,
-    },
-  });
-
-  return authTokens;
+  setAuthCookies(res, user);
+  return user;
 };

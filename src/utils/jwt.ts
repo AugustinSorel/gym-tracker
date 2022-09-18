@@ -3,12 +3,12 @@ import jwt from "jsonwebtoken";
 
 type Key = "ACCESS_TOKEN_KEY" | "REFRESH_TOKEN_KEY";
 
-export type AuthTokens = {
+export type AuthTokensPayload = {
   accessToken: Pick<User, "id">;
   refreshToken: Pick<User, "id"> & Pick<Session, "tokenVersion">;
 };
 
-export const getAuthTokens = (authTokens: AuthTokens) => {
+export const getAuthTokens = (authTokens: AuthTokensPayload) => {
   const accessToken = jwt.sign(
     authTokens.accessToken,
     process.env["ACCESS_TOKEN_KEY"],

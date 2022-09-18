@@ -1,32 +1,23 @@
 import Button from "@/components/Button";
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetStaticProps,
-  GetStaticPropsContext,
-  NextPage,
-} from "next";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import { refreshAuthTokens } from "src/utils/auth";
-import * as cookie from "src/utils/cookie";
+import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
-// TODO: Add access token to zustand
-// TODO: remove export default
 const Home: NextPage = () => {
-  // const query = trpc.user.me.useQuery();
+  const query = trpc.user.me.useQuery();
 
   const logout = trpc.user.logout.useMutation();
 
   const invalidateToken = trpc.user.revokeRefreshToken.useMutation();
 
-  // if (query.isError) {
-  //   return <p>{JSON.stringify(query.error, null, 2)}</p>;
-  // }
+  if (query.isError) {
+    return <p>{JSON.stringify(query.error, null, 2)}</p>;
+  }
 
-  // if (query.isLoading) {
-  //   return <p>Loading...</p>;
-  // }
+  if (query.isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -39,7 +30,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* {JSON.stringify(query.data, null, 2)} */}
+      {JSON.stringify(query.data, null, 2)}
 
       <Button
         role="callToAction"
@@ -61,11 +52,9 @@ const Home: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const authTokens = await refreshAuthTokens(ctx.req.cookies);
+  const user = await deserializeUser(ctx.res, ctx.req.cookies);
 
-  if (!authTokens) {
-    cookie.deleteAuthCookies(ctx.res);
-
+  if (!user) {
     return {
       redirect: {
         destination: "/login",
@@ -73,8 +62,6 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   }
-
-  cookie.setAuthCookies(ctx.res, authTokens);
 
   return {
     props: {},

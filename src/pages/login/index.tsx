@@ -108,21 +108,21 @@ LoginPage.getLayout = (page: ReactElement) => {
   return <AuthLayout isLogin>{page}</AuthLayout>;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-}: GetServerSidePropsContext) => {
-  const user = deserializeUser(req.cookies);
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const user = await deserializeUser(ctx.res, ctx.req.cookies);
 
-  if (user) {
+  if (!user) {
     return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
+      props: {},
     };
   }
 
   return {
-    props: {},
+    redirect: {
+      destination: "/",
+      permanent: false,
+    },
   };
 };

@@ -37,6 +37,7 @@ type FormInputContainerProps = {
 export const FormInputContainer = styled.div<FormInputContainerProps>`
   display: grid;
   grid-template-columns: auto 1fr;
+  align-items: center;
   gap: ${({ theme }) => theme.gaps[200]};
 
   ${({ isValid }) => !isValid && invalidAnimation}
@@ -56,6 +57,10 @@ export const ErrorText = styled.p`
   animation-name: start;
   animation-duration: ${({ theme }) => theme.animation.durations[500]};
   animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: ${({ theme }) => theme.fontSizes[400]};
+  }
 
   @keyframes start {
     from {

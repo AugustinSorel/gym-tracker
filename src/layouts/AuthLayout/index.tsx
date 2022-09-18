@@ -6,7 +6,7 @@ const NavigationText = ({ isLogin }: { isLogin: boolean }) => {
   if (isLogin) {
     return (
       <Styles.NavigationText>
-        Dont&apos;t have an account? <Anchor href={"/sign-up"} text="Sign Up" />
+        Don&apos;t have an account? <Anchor href={"/sign-up"} text="Sign Up" />
       </Styles.NavigationText>
     );
   }

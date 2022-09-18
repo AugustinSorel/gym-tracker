@@ -12,10 +12,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors[900]};
     font-family: 'Noto Sans', sans-serif;
     font-size: ${({ theme }) => theme.fontSizes[500]};
-
-    @media ${({ theme }) => theme.breakpoints.tablet} {
-      font-size: ${({ theme }) => theme.fontSizes[400]};
-    }
   }
 `;
 

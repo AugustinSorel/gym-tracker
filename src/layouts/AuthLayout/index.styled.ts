@@ -13,13 +13,18 @@ export const Main = styled.main`
 export const Title = styled.h1`
   font-weight: 500;
   margin-bottom: ${({ theme }) => theme.gaps[100]};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    text-align: center;
+  }
 `;
 
 export const SubTitle = styled.h2`
   color: ${({ theme }) => theme.colors[500]};
   font-weight: 400;
   @media ${({ theme }) => theme.breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes[400]};
+    font-size: ${({ theme }) => theme.fontSizes[500]};
+    text-align: center;
   }
 `;
 

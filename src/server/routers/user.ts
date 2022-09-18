@@ -3,7 +3,6 @@ import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import * as bcrypt from "src/utils/bcrypts";
 import * as cookie from "src/utils/cookie";
-import * as jwt from "src/utils/jwt";
 import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
 import t from "../trpc";
@@ -22,15 +21,7 @@ const userRouter = t.router({
           include: { session: { select: { tokenVersion: true } } },
         });
 
-        const authTokens = jwt.getAuthTokens({
-          accessToken: { id: user.id },
-          refreshToken: {
-            id: user.id,
-            tokenVersion: user.session.tokenVersion,
-          },
-        });
-
-        cookie.setAuthCookies(ctx.res, authTokens);
+        cookie.setAuthCookies(ctx.res, user);
 
         return user;
       } catch (error) {
@@ -69,15 +60,7 @@ const userRouter = t.router({
         });
       }
 
-      const authTokens = jwt.getAuthTokens({
-        accessToken: { id: user.id },
-        refreshToken: {
-          id: user.id,
-          tokenVersion: user.session.tokenVersion,
-        },
-      });
-
-      cookie.setAuthCookies(ctx.res, authTokens);
+      cookie.setAuthCookies(ctx.res, user);
 
       return user;
     }),
@@ -92,8 +75,8 @@ const userRouter = t.router({
     cookie.deleteAuthCookies(ctx.res);
   }),
 
-  // TODO: create an auth route
   revokeRefreshToken: t.procedure.use(requireUser).mutation(async ({ ctx }) => {
+    cookie.deleteAuthCookies(ctx.res);
     return await prisma.user.update({
       where: { id: ctx.user.id },
       data: { session: { update: { tokenVersion: { increment: 1 } } } },

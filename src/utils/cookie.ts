@@ -1,5 +1,7 @@
+import { User } from "@prisma/client";
 import { ServerResponse } from "http";
 import { NextApiResponse } from "next";
+import { getAuthTokens } from "./jwt";
 
 export type AuthCookies = {
   accessToken: string;
@@ -11,11 +13,16 @@ const accessTokenMaxAge = 60 * 15;
 
 export const setAuthCookies = (
   res: NextApiResponse | ServerResponse,
-  tokens: AuthCookies
+  user: User & { session: { tokenVersion: number } }
 ) => {
+  const authTokens = getAuthTokens({
+    accessToken: { id: user.id },
+    refreshToken: { id: user.id, tokenVersion: user.session.tokenVersion },
+  });
+
   res.setHeader("Set-cookie", [
-    `refreshToken=${tokens.refreshToken}; Max-Age=${refreshTokenMaxAge}; Path=/; HttpOnly`,
-    `accessToken=${tokens.accessToken}; Max-Age=${accessTokenMaxAge}; Path=/; HttpOnly`,
+    `refreshToken=${authTokens.refreshToken}; Max-Age=${refreshTokenMaxAge}; Path=/; HttpOnly`,
+    `accessToken=${authTokens.accessToken}; Max-Age=${accessTokenMaxAge}; Path=/; HttpOnly`,
   ]);
 };
 

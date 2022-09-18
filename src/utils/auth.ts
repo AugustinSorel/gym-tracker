@@ -8,7 +8,10 @@ export const deserializeUser = (cookies: Partial<Cookies>) => {
     return null;
   }
 
-  const user = jwt.verify<jwt.AccessToken>(accessToken, "ACCESS_TOKEN_KEY");
+  const accessTokenPayload = jwt.verify<jwt.AccessToken>(
+    accessToken,
+    "ACCESS_TOKEN_KEY"
+  );
 
-  return user;
+  return accessTokenPayload;
 };

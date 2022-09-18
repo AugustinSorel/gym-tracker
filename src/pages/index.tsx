@@ -1,15 +1,26 @@
 import Button from "@/components/Button";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   const query = trpc.user.me.useQuery();
 
-  const logout = trpc.user.logout.useMutation();
+  const logout = trpc.user.logout.useMutation({
+    onMutate: () => {
+      router.push("/login");
+    },
+  });
 
-  const invalidateToken = trpc.user.revokeRefreshToken.useMutation();
+  const invalidateToken = trpc.user.revokeRefreshToken.useMutation({
+    onMutate: () => {
+      router.push("/login");
+    },
+  });
 
   if (query.isError) {
     return <p>{JSON.stringify(query.error, null, 2)}</p>;

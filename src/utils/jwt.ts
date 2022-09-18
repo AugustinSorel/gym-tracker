@@ -3,19 +3,29 @@ import jwt from "jsonwebtoken";
 
 type Key = "ACCESS_TOKEN_KEY" | "REFRESH_TOKEN_KEY";
 
-export type AccessToken = Pick<User, "id">;
-export type RefreshToken = Pick<User, "id"> & Pick<Session, "tokenVersion">;
-
-export const getRefreshToken = (payload: RefreshToken) => {
-  return jwt.sign(payload, process.env["REFRESH_TOKEN_KEY"], {
-    expiresIn: "15min",
-  });
+export type AuthTokens = {
+  accessToken: Pick<User, "id">;
+  refreshToken: Pick<User, "id"> & Pick<Session, "tokenVersion">;
 };
 
-export const getAccessToken = (payload: AccessToken) => {
-  return jwt.sign(payload, process.env["ACCESS_TOKEN_KEY"], {
-    expiresIn: "7d",
-  });
+export const getAuthTokens = (authTokens: AuthTokens) => {
+  const accessToken = jwt.sign(
+    authTokens.accessToken,
+    process.env["ACCESS_TOKEN_KEY"],
+    {
+      expiresIn: "7d",
+    }
+  );
+
+  const refreshToken = jwt.sign(
+    authTokens.refreshToken,
+    process.env["REFRESH_TOKEN_KEY"],
+    {
+      expiresIn: "15min",
+    }
+  );
+
+  return { accessToken, refreshToken };
 };
 
 export const verify = <T>(token: string, key: Key) => {

@@ -5,6 +5,7 @@ import trpc from "src/utils/trpc";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../styles/GlobalStyle.styled";
 import theme from "../styles/theme";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,6 +22,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       {getLayout(<Component {...pageProps} />)}
+      <ReactQueryDevtools />
     </ThemeProvider>
   );
 };

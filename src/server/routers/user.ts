@@ -4,8 +4,8 @@ import { TRPCError } from "@trpc/server";
 import * as bcrypt from "src/utils/bcrypts";
 import * as cookie from "src/utils/cookie";
 import * as jwt from "src/utils/jwt";
+import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
-import * as userServices from "../services/userServices";
 import t from "../trpc";
 
 const userRouter = t.router({
@@ -13,18 +13,24 @@ const userRouter = t.router({
     .input(userSchemas.create)
     .mutation(async ({ input, ctx }) => {
       try {
-        const user = await userServices.create({
+        const user = await prisma.user.create({
           data: {
             ...input,
             password: await bcrypt.encrypt(input.password),
             session: { create: {} },
           },
+          include: { session: { select: { tokenVersion: true } } },
         });
 
-        const refreshToken = jwt.getRefreshToken({ id: user.id });
-        const accessToken = jwt.getAccessToken({ id: user.id });
+        const authTokens = jwt.getAuthTokens({
+          accessToken: { id: user.id },
+          refreshToken: {
+            id: user.id,
+            tokenVersion: user.session.tokenVersion,
+          },
+        });
 
-        cookie.setAuthCookies(ctx.res, { accessToken, refreshToken });
+        cookie.setAuthCookies(ctx.res, authTokens);
 
         return user;
       } catch (error) {
@@ -42,8 +48,9 @@ const userRouter = t.router({
   login: t.procedure
     .input(userSchemas.login)
     .mutation(async ({ input, ctx }) => {
-      const user = await userServices.findUnique({
+      const user = await prisma.user.findUnique({
         where: { email: input.email },
+        include: { session: { select: { tokenVersion: true } } },
       });
 
       if (!user) {
@@ -62,22 +69,35 @@ const userRouter = t.router({
         });
       }
 
-      const refreshToken = jwt.getRefreshToken({ id: user.id });
-      const accessToken = jwt.getAccessToken({ id: user.id });
+      const authTokens = jwt.getAuthTokens({
+        accessToken: { id: user.id },
+        refreshToken: {
+          id: user.id,
+          tokenVersion: user.session.tokenVersion,
+        },
+      });
 
-      cookie.setAuthCookies(ctx.res, { accessToken, refreshToken });
+      cookie.setAuthCookies(ctx.res, authTokens);
 
       return user;
     }),
 
   me: t.procedure.use(requireUser).query(async ({ ctx }) => {
-    return await userServices.findUnique({
+    return await prisma.user.findUnique({
       where: { id: ctx.user.id },
     });
   }),
 
   logout: t.procedure.mutation(({ ctx }) => {
-    cookie.resetAuthCookies(ctx.res);
+    cookie.deleteAuthCookies(ctx.res);
+  }),
+
+  // TODO: create an auth route
+  revokeRefreshToken: t.procedure.use(requireUser).mutation(async ({ ctx }) => {
+    return await prisma.user.update({
+      where: { id: ctx.user.id },
+      data: { session: { update: { tokenVersion: { increment: 1 } } } },
+    });
   }),
 });
 

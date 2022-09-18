@@ -28,7 +28,11 @@ export const getAuthTokens = (authTokens: AuthTokens) => {
   return { accessToken, refreshToken };
 };
 
-export const verify = <T>(token: string, key: Key) => {
+export const verify = <T>(token: string | undefined, key: Key) => {
+  if (!token) {
+    return null;
+  }
+
   try {
     return jwt.verify(token, process.env[key]) as T;
   } catch (error) {

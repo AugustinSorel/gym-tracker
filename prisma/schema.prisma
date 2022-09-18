@@ -22,8 +22,9 @@ model User {
 }
 
 model Session {
-  id          String   @id @default(uuid())
-  User        User?
-  createtedAt DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid())
+  User         User?
+  tokenVersion Int      @default(0)
+  createtedAt  DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

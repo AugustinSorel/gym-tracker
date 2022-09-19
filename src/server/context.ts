@@ -4,6 +4,7 @@ import { deserializeUser } from "src/utils/auth";
 
 export const createContext = async ({ req, res }: CreateNextContextOptions) => {
   const user = await deserializeUser(res, req.cookies);
+
   return { req, res, user };
 };
 

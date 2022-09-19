@@ -52,5 +52,4 @@ export const GoogleAuthButton = styled(Button).attrs({
   id: "googleAuthButton",
 })`
   width: min-content;
-  margin: 0 auto;
 `;

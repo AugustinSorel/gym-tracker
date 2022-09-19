@@ -47,3 +47,10 @@ export const CallToActionText = styled.p`
   grid-column-start: 2;
   color: ${({ theme }) => theme.colors[100]};
 `;
+
+export const GoogleAuthButton = styled(Button).attrs({
+  id: "googleAuthButton",
+})`
+  width: min-content;
+  margin: 0 auto;
+`;

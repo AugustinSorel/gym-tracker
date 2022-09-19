@@ -1,10 +1,15 @@
 import Loader from "../Loader";
 import * as Styles from "./index.styled";
 import * as Props from "./props";
+import useGoogleAuth from "./useGoogleAuth";
 
 const Button = (props: Props.Button) => {
   if (props.role === "callToAction") {
     return <CallToActionButton {...props} />;
+  }
+
+  if (props.role === "googleAuth") {
+    return <GoogleAuthButton />;
   }
 
   return <DefaultButton {...props} />;
@@ -20,7 +25,13 @@ const CallToActionButton = (props: Props.CallToAction) => {
   );
 };
 
-const DefaultButton = ({ text, ...props }: Props.DefaultButton) => {
+const GoogleAuthButton = () => {
+  useGoogleAuth();
+
+  return <Styles.GoogleAuthButton />;
+};
+
+const DefaultButton = ({ text, ...props }: Props.Default) => {
   return <Styles.Button {...props}>{text}</Styles.Button>;
 };
 

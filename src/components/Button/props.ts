@@ -6,9 +6,13 @@ export type CallToAction = {
   isLoading: boolean;
 };
 
-export type DefaultButton = {
+export type Default = {
   role: "default";
   text: string;
+};
+
+export type GoogleAuth = {
+  role: "googleAuth";
 };
 
 type DefaultProps = {
@@ -17,4 +21,4 @@ type DefaultProps = {
 
 export type Button = HTMLAttributes<HTMLButtonElement> &
   DefaultProps &
-  (CallToAction | DefaultButton);
+  (CallToAction | Default | GoogleAuth);

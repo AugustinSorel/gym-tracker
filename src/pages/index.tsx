@@ -11,13 +11,13 @@ const Home: NextPage = () => {
   const query = trpc.user.me.useQuery();
 
   const logout = trpc.user.logout.useMutation({
-    onMutate: () => {
+    onSettled: () => {
       router.push("/login");
     },
   });
 
   const invalidateToken = trpc.user.revokeRefreshToken.useMutation({
-    onMutate: () => {
+    onSettled: () => {
       router.push("/login");
     },
   });

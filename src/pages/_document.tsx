@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
+import Script from "next/script";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -36,6 +37,10 @@ export default class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700&display=swap"
             rel="stylesheet"
+          />
+          <Script
+            src="https://accounts.google.com/gsi/client"
+            strategy="afterInteractive"
           />
         </Head>
         <body>

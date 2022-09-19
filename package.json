@@ -26,6 +26,7 @@
   "devDependencies": {
     "@tanstack/react-query-devtools": "^4.3.7",
     "@types/bcrypt": "^5.0.0",
+    "@types/google-one-tap": "^1.2.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.7.16",
     "@types/react": "18.0.19",

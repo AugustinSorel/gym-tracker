@@ -97,6 +97,8 @@ const LoginPage: NextPageWithLayout = () => {
           type="submit"
           isLoading={isLoading}
         />
+
+        <Button role="googleAuth" />
       </Styles.Form>
     </>
   );

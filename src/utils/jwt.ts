@@ -28,6 +28,10 @@ export const getAuthTokens = (authTokens: AuthTokensPayload) => {
   return { accessToken, refreshToken };
 };
 
+export const decode = (token: string) => {
+  return jwt.decode(token);
+};
+
 export const verify = <T>(token: string | undefined, key: Key) => {
   if (!token) {
     return null;

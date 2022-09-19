@@ -11,7 +11,7 @@
   "dependencies": {
     "@prisma/client": "^4.3.1",
     "@tanstack/react-query": "^4.3.4",
-    "@trpc/client": "^10.0.0-proxy-alpha.77",
+    "@trpc/client": "^10.0.0-proxy-alpha.81",
     "@trpc/next": "^10.0.0-proxy-alpha.77",
     "@trpc/react": "^10.0.0-proxy-alpha.77",
     "@trpc/server": "^10.0.0-proxy-alpha.77",

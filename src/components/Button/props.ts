@@ -11,10 +11,18 @@ export type DefaultButton = {
   text: string;
 };
 
+export type GoogleButton = {
+  role: "google";
+};
+
+export type GitHubButton = {
+  role: "gitHub";
+};
+
 type DefaultProps = {
   type?: "button" | "submit" | "reset";
 };
 
 export type Button = HTMLAttributes<HTMLButtonElement> &
   DefaultProps &
-  (CallToAction | DefaultButton);
+  (CallToAction | DefaultButton | GitHubButton | GoogleButton);

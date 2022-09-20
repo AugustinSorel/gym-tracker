@@ -47,3 +47,26 @@ export const CallToActionText = styled.p`
   grid-column-start: 2;
   color: ${({ theme }) => theme.colors[100]};
 `;
+
+export const Text = styled.p``;
+
+const AuthProviderButton = styled(Button)`
+  padding: ${({ theme }) => theme.gaps[300]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
+  display: flex;
+  position: relative;
+
+  p {
+    flex: 1;
+  }
+`;
+
+export const GoogleButton = styled(AuthProviderButton)`
+  background-color: #fff;
+  color: #000;
+`;
+
+export const GitHubButton = styled(AuthProviderButton)`
+  background-color: #000;
+  color: #fff;
+`;

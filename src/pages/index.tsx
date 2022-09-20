@@ -1,10 +1,12 @@
 import Button from "@/components/Button";
-import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { deserializeUser } from "src/utils/auth";
 import trpc from "src/utils/trpc";
 
+// TODO: remove unused files
+// TODO: remove unused packages
+// TODO make this private
 const Home: NextPage = () => {
   const router = useRouter();
 
@@ -58,25 +60,6 @@ const Home: NextPage = () => {
       />
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const user = await deserializeUser(ctx.res, ctx.req.cookies);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 };
 
 export default Home;

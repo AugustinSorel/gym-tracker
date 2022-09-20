@@ -12,7 +12,7 @@ export const Form = styled.form`
   }
 `;
 
-export const AuthProviderContainer = styled.div`
+export const AuthProvidersContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.gaps[500]};

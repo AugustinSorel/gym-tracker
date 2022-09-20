@@ -71,10 +71,10 @@ const Authentication = () => {
             />
           </Styles.Form>
 
-          <Styles.AuthProviderContainer>
+          <Styles.AuthProvidersContainer>
             <Button role="google" />
             <Button role="gitHub" />
-          </Styles.AuthProviderContainer>
+          </Styles.AuthProvidersContainer>
         </Styles.Main>
 
         <Styles.CircleScreen />

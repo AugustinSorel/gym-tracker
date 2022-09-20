@@ -59,6 +59,19 @@ const AuthProviderButton = styled(Button)`
   p {
     flex: 1;
   }
+
+  transition-property: transform;
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.01);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
 `;
 
 export const GoogleButton = styled(AuthProviderButton)`

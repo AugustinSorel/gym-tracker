@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 15% 0;
+  margin-top: 15%;
   display: flex;
   gap: ${({ theme }) => theme.gaps[700]};
 
@@ -15,7 +15,7 @@ export const Form = styled.form`
 export const AuthProvidersContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.gaps[500]};
+  gap: ${({ theme }) => theme.gaps[700]};
 `;
 
 export const Container = styled.div`
@@ -41,10 +41,9 @@ export const SubTitle = styled.h2`
   }
 `;
 
-export const NavigationText = styled.p`
+export const SeparatorText = styled.p`
+  margin: ${({ theme }) => theme.gaps[900]} 0;
   text-align: center;
-  color: ${({ theme }) => theme.colors[900]};
-  font-weight: 400;
 `;
 
 const circle = css`

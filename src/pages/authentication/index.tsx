@@ -71,6 +71,8 @@ const Authentication = () => {
             />
           </Styles.Form>
 
+          <Styles.SeparatorText>or</Styles.SeparatorText>
+
           <Styles.AuthProvidersContainer>
             <Button role="google" />
             <Button role="gitHub" />

@@ -68,7 +68,7 @@ const circle = css`
       }
       to {
         transform: scale(1.1);
-        box-shadow: 0 0 15px 10px ${({ theme }) => theme.colors.action};
+        box-shadow: 0 0 20px 5px ${({ theme }) => theme.colors.action};
       }
     }
   }

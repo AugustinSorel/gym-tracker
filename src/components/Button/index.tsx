@@ -9,11 +9,11 @@ const Button = (props: Props.Button) => {
   }
 
   if (props.role === "google") {
-    return <GoogleButton />;
+    return <GoogleButton {...props} />;
   }
 
   if (props.role === "gitHub") {
-    return <GitHubButton />;
+    return <GitHubButton {...props} />;
   }
 
   return <DefaultButton {...props} />;
@@ -29,9 +29,9 @@ const CallToActionButton = (props: Props.CallToAction) => {
   );
 };
 
-const GitHubButton = () => {
+const GitHubButton = (props: Props.GitHubButton) => {
   return (
-    <Styles.GitHubButton>
+    <Styles.GitHubButton {...props}>
       <Image
         src={"/GitHubIcon.png"}
         alt="google icon"
@@ -43,9 +43,9 @@ const GitHubButton = () => {
   );
 };
 
-const GoogleButton = () => {
+const GoogleButton = (props: Props.GoogleButton) => {
   return (
-    <Styles.GoogleButton>
+    <Styles.GoogleButton {...props}>
       <Image
         src={"/GoogleIcon.png"}
         alt="google icon"

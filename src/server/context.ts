@@ -1,9 +1,8 @@
 import { inferAsyncReturnType } from "@trpc/server";
 import { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { deserializeUser } from "src/utils/auth";
 
 export const createContext = async ({ req, res }: CreateNextContextOptions) => {
-  const user = await deserializeUser(res, req.cookies);
+  const user = null;
   return { req, res, user };
 };
 

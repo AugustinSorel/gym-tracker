@@ -26,3 +26,5 @@ export const login = z.object({
   email,
   password,
 });
+
+export const auth = email;

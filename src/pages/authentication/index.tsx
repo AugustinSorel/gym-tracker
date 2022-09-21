@@ -3,14 +3,31 @@ import Input from "@/components/Input";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
 import * as Styles from "src/components/UserForm/index.styled";
+import { signIn } from "next-auth/react";
+import z, { ZodError } from "zod";
+import * as userSchemas from "@/schemas/userSchemas";
 
-const Authentication = () => {
+const AuthenticationPage = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
+  const signInGoogleHandler = () => {
+    signIn("google", { redirect: true, callbackUrl: "/" });
+  };
+
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    // mutate(user);
+    setEmailError("");
+
+    try {
+      userSchemas.auth.parse(email);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        setEmailError(error.errors[0].message);
+      }
+    }
+
+    signIn("email", { redirect: true, callbackUrl: "/", email });
   };
 
   return (
@@ -45,7 +62,6 @@ const Authentication = () => {
               role="callToAction"
               text="Sign up"
               type="submit"
-              //   isLoading={isLoading}
               isLoading={false}
             />
           </Styles.Form>
@@ -53,7 +69,7 @@ const Authentication = () => {
           <Styles.SeparatorText>or</Styles.SeparatorText>
 
           <Styles.AuthProvidersContainer>
-            <Button role="google" />
+            <Button role="google" onClick={signInGoogleHandler} />
             <Button role="gitHub" />
           </Styles.AuthProvidersContainer>
         </Styles.Main>
@@ -64,4 +80,4 @@ const Authentication = () => {
   );
 };
 
-export default Authentication;
+export default AuthenticationPage;

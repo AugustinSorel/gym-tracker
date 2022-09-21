@@ -6,10 +6,6 @@ export const Form = styled.form`
   margin-top: 15%;
   display: flex;
   gap: ${({ theme }) => theme.gaps[700]};
-
-  button[type="submit"] {
-    margin-top: ${({ theme }) => theme.gaps[500]};
-  }
 `;
 
 export const AuthProvidersContainer = styled.div`
@@ -25,7 +21,7 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   margin: auto;
-  max-width: 85%;
+  max-width: 95%;
 `;
 
 export const Title = styled.h1`
@@ -37,13 +33,36 @@ export const SubTitle = styled.h2`
   color: ${({ theme }) => theme.colors[500]};
   font-weight: 400;
   @media ${({ theme }) => theme.breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes[400]};
+    font-size: ${({ theme }) => theme.fontSizes[500]};
   }
 `;
 
 export const SeparatorText = styled.p`
   margin: ${({ theme }) => theme.gaps[900]} 0;
   text-align: center;
+  --line-height: 1px;
+  --line-width: 3rem;
+
+  ::before,
+  ::after {
+    content: "";
+    position: relative;
+    background-color: ${({ theme }) => theme.colors[900]};
+    display: inline-block;
+    height: var(--line-height);
+    vertical-align: middle;
+    width: var(--line-width);
+  }
+
+  ::before {
+    right: ${({ theme }) => theme.gaps[300]};
+    margin-left: -50%;
+  }
+
+  ::after {
+    left: ${({ theme }) => theme.gaps[300]};
+    margin-right: -50%;
+  }
 `;
 
 const circle = css`

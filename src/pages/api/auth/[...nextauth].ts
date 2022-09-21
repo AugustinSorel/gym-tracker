@@ -4,8 +4,16 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "src/utils/prisma";
 import EmailProvider from "next-auth/providers/email";
 
-const nextAuthOptions: NextAuthOptions = {
+export const nextAuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    session({ session, user }) {
+      if (session.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,

@@ -1,21 +1,24 @@
 import Button from "@/components/Button";
 import { NextPage } from "next";
-import { useSession, signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import AuthenticationPage from "./authentication";
+import { useRouter } from "next/router";
 
 // TODO: remove unused files
 // TODO: remove unused packages
-// TODO make this private
+// TODO: make this private
+// TODO: make custom email
+// TODO: make custom send email page
 const Home: NextPage = () => {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => router.push("/authentication"),
+  });
 
   if (status === "loading") {
     return null;
-  }
-
-  if (status === "unauthenticated" || !session) {
-    return <AuthenticationPage />;
   }
 
   return (

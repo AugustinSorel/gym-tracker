@@ -1,15 +1,18 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import { emailSchema } from "@/schemas/userSchemas";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import * as Styles from "src/components/UserForm/index.styled";
-import { signIn } from "next-auth/react";
-import z, { ZodError } from "zod";
-import * as userSchemas from "@/schemas/userSchemas";
+import { ZodError } from "zod";
 
 const AuthenticationPage = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const { status } = useSession();
+  const router = useRouter();
 
   const signInGoogleHandler = () => {
     signIn("google", { redirect: true, callbackUrl: "/" });
@@ -20,15 +23,23 @@ const AuthenticationPage = () => {
     setEmailError("");
 
     try {
-      userSchemas.auth.parse(email);
+      emailSchema.parse(email);
+      signIn("email", { redirect: true, callbackUrl: "/", email });
     } catch (error) {
       if (error instanceof ZodError) {
         setEmailError(error.errors[0].message);
       }
     }
-
-    signIn("email", { redirect: true, callbackUrl: "/", email });
   };
+
+  if (status === "loading") {
+    return null;
+  }
+
+  if (status === "authenticated") {
+    router.push("/");
+    return null;
+  }
 
   return (
     <>

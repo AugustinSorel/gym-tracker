@@ -9,12 +9,15 @@ import { useRouter } from "next/router";
 // TODO: make this private
 // TODO: make custom email
 // TODO: make custom send email page
+// TODO: make layout for auth
+// TODO: make layout for styled component
+// TODO: parse env var
 const Home: NextPage = () => {
   const router = useRouter();
 
   const { data: session, status } = useSession({
     required: true,
-    onUnauthenticated: () => router.push("/authentication"),
+    onUnauthenticated: () => router.push("/sign-in"),
   });
 
   if (status === "loading") {

@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "src/utils/prisma";
 import EmailProvider from "next-auth/providers/email";
+import { sendVerificationRequest } from "src/utils/email";
 
 export const nextAuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -19,7 +20,6 @@ export const nextAuthOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    // TODO:  try with other way
     // TODO: add missing env
     EmailProvider({
       server: {
@@ -31,11 +31,13 @@ export const nextAuthOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest,
     }),
   ],
   pages: {
     signIn: "/sign-in",
     verifyRequest: "/verify-request",
+    signOut: "/sign-out",
   },
 };
 

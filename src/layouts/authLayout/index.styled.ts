@@ -27,6 +27,16 @@ export const SubTitle = styled.h2`
   }
 `;
 
+export const SigningOutContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gaps[900]};
+
+  button:nth-child(2) {
+    background-color: ${({ theme }) => theme.colors.error};
+    outline-color: ${({ theme }) => theme.colors.error};
+  }
+`;
+
 export const SvgContainer = styled.div`
   display: flex;
   align-items: center;

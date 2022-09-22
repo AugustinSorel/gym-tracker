@@ -39,9 +39,7 @@ const Home: NextPage = () => {
 
       <Button
         role="callToAction"
-        onClick={() =>
-          signOut({ redirect: true, callbackUrl: "/authentication" })
-        }
+        onClick={() => signOut({ redirect: true, callbackUrl: "/sign-in" })}
         isLoading={false}
         text="sign out"
       />

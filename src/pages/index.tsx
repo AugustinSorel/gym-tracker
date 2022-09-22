@@ -6,10 +6,6 @@ import { useRouter } from "next/router";
 
 // TODO: remove unused files
 // TODO: remove unused packages
-// TODO: make this private
-// TODO: make custom email
-// TODO: make custom send email page
-// TODO: make layout for auth
 // TODO: make layout for styled component
 // TODO: parse env var
 const Home: NextPage = () => {

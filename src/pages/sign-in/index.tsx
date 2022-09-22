@@ -26,7 +26,7 @@ const SignInPage: NextPageWithLayout = () => {
 
     try {
       emailSchema.parse(email);
-      await signIn("email", { email });
+      await signIn("email", { redirect: true, callbackUrl: "/", email });
     } catch (error) {
       error instanceof ZodError && setEmailError(error.errors[0].message);
     } finally {

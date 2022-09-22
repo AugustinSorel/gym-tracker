@@ -3,7 +3,7 @@ import { HTMLAttributes } from "react";
 export type CallToAction = {
   role: "callToAction";
   text: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 export type DefaultButton = {

@@ -24,7 +24,7 @@ const CallToActionButton = (props: Props.CallToAction) => {
   return (
     <Styles.CallToAction {...rest}>
       <Styles.CallToActionText>{text}</Styles.CallToActionText>
-      <Loader isLoading={isLoading} />
+      <Loader isLoading={isLoading ?? false} />
     </Styles.CallToAction>
   );
 };

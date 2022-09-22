@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Form = styled.form`
   display: flex;
@@ -12,16 +12,6 @@ export const AuthProvidersContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.gaps[700]};
-`;
-
-export const Container = styled.div`
-  height: 100vh;
-  display: flex;
-`;
-
-export const Main = styled.main`
-  margin: auto;
-  max-width: 95%;
 `;
 
 export const Title = styled.h1`
@@ -65,53 +55,10 @@ export const SeparatorText = styled.p`
   }
 `;
 
-const circle = css`
-  &::before {
-    content: "";
-    --circle-radius: 10rem;
-    position: absolute;
-    left: calc(50% - var(--circle-radius) / 2);
-    top: calc(50% - var(--circle-radius) / 2);
-    width: var(--circle-radius);
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.action};
-    animation: breath 5s ${({ theme }) => theme.animation.timingFunction}
-      infinite alternate-reverse;
-
-    @keyframes breath {
-      from {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 ${({ theme }) => theme.colors.action};
-      }
-      to {
-        transform: scale(1.1);
-        box-shadow: 0 0 20px 5px ${({ theme }) => theme.colors.action};
-      }
-    }
-  }
-`;
-
-const glass = css`
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 50%;
-    backdrop-filter: blur(10px);
-  }
-`;
-
-export const CircleScreen = styled.div`
-  background-color: ${({ theme }) => theme.colors[200]};
-  position: relative;
-  width: 50%;
-
-  @media ${({ theme }) => theme.breakpoints.tablet} {
-    display: none;
-  }
-
-  ${circle}
-  ${glass}
+export const SvgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10% 0;
+  fill: ${({ theme }) => theme.colors[500]};
 `;

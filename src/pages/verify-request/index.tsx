@@ -3,7 +3,7 @@ import SvgIcon from "@/components/SvgIcon";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import * as Styles from "src/components/UserForm/index.styled";
+import * as Styles from "src/layouts/authLayout/index.styled";
 import AuthLayout from "src/layouts/authLayout";
 import { NextPageWithLayout } from "../_app";
 
@@ -21,7 +21,7 @@ const VerifyRequestPage: NextPageWithLayout = () => {
   }
 
   const goBack = () => {
-    router.back();
+    router.push("/");
   };
 
   return (
@@ -41,12 +41,7 @@ const VerifyRequestPage: NextPageWithLayout = () => {
         <SvgIcon svgName="email" />
       </Styles.SvgContainer>
 
-      <Button
-        role="callToAction"
-        text="Go back"
-        onClick={goBack}
-        style={{ width: "100%" }}
-      />
+      <Button role="callToAction" text="Go back" onClick={goBack} />
     </>
   );
 };

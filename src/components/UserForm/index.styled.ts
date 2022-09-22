@@ -14,19 +14,6 @@ export const AuthProvidersContainer = styled.div`
   gap: ${({ theme }) => theme.gaps[700]};
 `;
 
-export const Title = styled.h1`
-  font-weight: 500;
-  margin-bottom: ${({ theme }) => theme.gaps[100]};
-`;
-
-export const SubTitle = styled.h2`
-  color: ${({ theme }) => theme.colors[500]};
-  font-weight: 400;
-  @media ${({ theme }) => theme.breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes[500]};
-  }
-`;
-
 export const SeparatorText = styled.p`
   margin: ${({ theme }) => theme.gaps[900]} 0;
   text-align: center;
@@ -53,12 +40,4 @@ export const SeparatorText = styled.p`
     left: ${({ theme }) => theme.gaps[300]};
     margin-right: -50%;
   }
-`;
-
-export const SvgContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10% 0;
-  fill: ${({ theme }) => theme.colors[500]};
 `;

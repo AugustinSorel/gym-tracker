@@ -5,8 +5,9 @@ import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import * as Styles from "src/components/UserForm/index.styled";
+import * as UserFormStyles from "src/components/UserForm/index.styled";
 import AuthLayout from "src/layouts/authLayout";
+import * as AuthLayoutStyles from "src/layouts/authLayout/index.styled";
 import { ZodError } from "zod";
 import { NextPageWithLayout } from "../_app";
 
@@ -53,10 +54,12 @@ const SignInPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Styles.Title>Welcome back</Styles.Title>
-      <Styles.SubTitle>Welcome back! Please enter your details</Styles.SubTitle>
+      <AuthLayoutStyles.Title>Welcome back</AuthLayoutStyles.Title>
+      <AuthLayoutStyles.SubTitle>
+        Welcome back! Please enter your details
+      </AuthLayoutStyles.SubTitle>
 
-      <Styles.Form onSubmit={submitHandler}>
+      <UserFormStyles.Form onSubmit={submitHandler}>
         <Input
           role="form"
           labelText="email"
@@ -75,14 +78,14 @@ const SignInPage: NextPageWithLayout = () => {
           type="submit"
           isLoading={isLoading}
         />
-      </Styles.Form>
+      </UserFormStyles.Form>
 
-      <Styles.SeparatorText>or</Styles.SeparatorText>
+      <UserFormStyles.SeparatorText>or</UserFormStyles.SeparatorText>
 
-      <Styles.AuthProvidersContainer>
+      <UserFormStyles.AuthProvidersContainer>
         <Button role="google" onClick={signInGoogleHandler} />
         <Button role="gitHub" />
-      </Styles.AuthProvidersContainer>
+      </UserFormStyles.AuthProvidersContainer>
     </>
   );
 };

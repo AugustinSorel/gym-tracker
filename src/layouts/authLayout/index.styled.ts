@@ -8,6 +8,36 @@ export const Container = styled.div`
 export const Main = styled.main`
   margin: auto;
   max-width: 95%;
+
+  button {
+    width: 100%;
+  }
+`;
+
+export const Title = styled.h1`
+  font-weight: 500;
+  margin-bottom: ${({ theme }) => theme.gaps[100]};
+`;
+
+export const SubTitle = styled.h2`
+  color: ${({ theme }) => theme.colors[500]};
+  font-weight: 400;
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: ${({ theme }) => theme.fontSizes[500]};
+  }
+`;
+
+export const SvgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15% 0;
+  fill: ${({ theme }) => theme.colors[500]};
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const circle = css`

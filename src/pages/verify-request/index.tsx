@@ -1,24 +1,13 @@
 import Button from "@/components/Button";
 import SvgIcon from "@/components/SvgIcon";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import * as Styles from "src/layouts/authLayout/index.styled";
 import AuthLayout from "src/layouts/authLayout";
+import * as Styles from "src/layouts/authLayout/index.styled";
 import { NextPageWithLayout } from "../_app";
 
 const VerifyRequestPage: NextPageWithLayout = () => {
-  const { status } = useSession();
   const router = useRouter();
-
-  if (status === "loading") {
-    return null;
-  }
-
-  if (status === "authenticated") {
-    router.push("/");
-    return null;
-  }
 
   const goBack = () => {
     router.push("/");
@@ -46,8 +35,6 @@ const VerifyRequestPage: NextPageWithLayout = () => {
   );
 };
 
-VerifyRequestPage.getLayout = function getLayout(page) {
-  return <AuthLayout>{page}</AuthLayout>;
-};
+VerifyRequestPage.getLayout = (page) => <AuthLayout>{page}</AuthLayout>;
 
 export default VerifyRequestPage;

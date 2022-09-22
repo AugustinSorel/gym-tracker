@@ -1,9 +1,8 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { emailSchema } from "@/schemas/userSchemas";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import * as UserFormStyles from "src/components/UserForm/index.styled";
 import AuthLayout from "src/layouts/authLayout";
@@ -15,8 +14,6 @@ const SignInPage: NextPageWithLayout = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { status } = useSession();
-  const router = useRouter();
 
   const signInGoogleHandler = () => {
     signIn("google", { redirect: true, callbackUrl: "/" });
@@ -29,22 +26,13 @@ const SignInPage: NextPageWithLayout = () => {
 
     try {
       emailSchema.parse(email);
-      await signIn("email", { redirect: true, callbackUrl: "/", email });
+      await signIn("email", { email });
     } catch (error) {
       error instanceof ZodError && setEmailError(error.errors[0].message);
     } finally {
       setIsLoading(() => false);
     }
   };
-
-  if (status === "loading") {
-    return null;
-  }
-
-  if (status === "authenticated") {
-    router.push("/");
-    return null;
-  }
 
   return (
     <>
@@ -90,8 +78,6 @@ const SignInPage: NextPageWithLayout = () => {
   );
 };
 
-SignInPage.getLayout = function getLayout(page) {
-  return <AuthLayout>{page}</AuthLayout>;
-};
+SignInPage.getLayout = (page) => <AuthLayout>{page}</AuthLayout>;
 
 export default SignInPage;

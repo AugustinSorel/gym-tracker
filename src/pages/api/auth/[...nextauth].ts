@@ -20,6 +20,7 @@ export const nextAuthOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     // TODO:  try with other way
+    // TODO: add missing env
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
@@ -33,7 +34,8 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/authentication",
+    signIn: "/sign-in",
+    verifyRequest: "/verify-request",
   },
 };
 

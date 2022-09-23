@@ -4,9 +4,6 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-// TODO: remove unused files
-// TODO: remove unused packages
-// TODO: make layout for styled component
 // TODO: parse env var
 const Home: NextPage = () => {
   const router = useRouter();

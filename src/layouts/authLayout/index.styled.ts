@@ -7,7 +7,11 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   margin: auto;
-  max-width: 85%;
+  max-width: 95%;
+
+  button {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`
@@ -19,14 +23,31 @@ export const SubTitle = styled.h2`
   color: ${({ theme }) => theme.colors[500]};
   font-weight: 400;
   @media ${({ theme }) => theme.breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes[400]};
+    font-size: ${({ theme }) => theme.fontSizes[500]};
   }
 `;
 
-export const NavigationText = styled.p`
-  text-align: center;
-  color: ${({ theme }) => theme.colors[900]};
-  font-weight: 400;
+export const SigningOutContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gaps[900]};
+
+  button:nth-child(2) {
+    background-color: ${({ theme }) => theme.colors.error};
+    outline-color: ${({ theme }) => theme.colors.error};
+  }
+`;
+
+export const SvgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15% 0;
+  fill: ${({ theme }) => theme.colors[500]};
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const circle = css`
@@ -50,7 +71,7 @@ const circle = css`
       }
       to {
         transform: scale(1.1);
-        box-shadow: 0 0 15px 10px ${({ theme }) => theme.colors.action};
+        box-shadow: 0 0 20px 5px ${({ theme }) => theme.colors.action};
       }
     }
   }

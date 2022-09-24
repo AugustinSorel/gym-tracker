@@ -1,28 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type Props = {
   type?: "submit" | "button" | "reset";
 };
 
-export const Button = styled.button.attrs(({ type }) => ({
-  type: type || "button",
-}))<Props>`
-  cursor: pointer;
-  font: inherit;
-  color: inherit;
-  border: none;
-  background-color: transparent;
-`;
-
-export const CallToAction = styled(Button)`
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-
-  background-color: ${({ theme }) => theme.colors.action};
-  padding: ${({ theme }) => theme.gaps[300]};
-  border-radius: ${({ theme }) => theme.border.radius[500]};
-
+const callToActionAnimation = css`
   --offset-distance: 3px;
   outline: ${({ theme }) => theme.border.sizes[500]} solid;
   outline-color: ${({ theme }) => theme.colors.action};
@@ -43,7 +25,56 @@ export const CallToAction = styled(Button)`
   }
 `;
 
+export const Button = styled.button.attrs(({ type }) => ({
+  type: type || "button",
+}))<Props>`
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  border: none;
+  background-color: transparent;
+`;
+
+export const CallToAction = styled(Button)`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.colors.action};
+  padding: ${({ theme }) => theme.gaps[300]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
+
+  ${callToActionAnimation}
+`;
+
 export const CallToActionText = styled.p`
   grid-column-start: 2;
   color: ${({ theme }) => theme.colors[100]};
+`;
+
+export const Text = styled.p``;
+
+const AuthProviderButton = styled(Button)`
+  padding: ${({ theme }) => theme.gaps[300]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
+  display: flex;
+  align-items: center;
+
+  ${callToActionAnimation}
+
+  p {
+    flex: 1;
+  }
+`;
+
+export const GoogleButton = styled(AuthProviderButton)`
+  background-color: #fff;
+  color: #000;
+  outline-color: #fff;
+`;
+
+export const GitHubButton = styled(AuthProviderButton)`
+  background-color: #000;
+  color: #fff;
+  outline-color: #000;
 `;

@@ -1,33 +1,19 @@
 import Button from "@/components/Button";
-import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { NextPage } from "next";
+import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { deserializeUser } from "src/utils/auth";
-import trpc from "src/utils/trpc";
 
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const query = trpc.user.me.useQuery();
-
-  const logout = trpc.user.logout.useMutation({
-    onMutate: () => {
-      router.push("/login");
-    },
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => router.push("/sign-in"),
   });
 
-  const invalidateToken = trpc.user.revokeRefreshToken.useMutation({
-    onMutate: () => {
-      router.push("/login");
-    },
-  });
-
-  if (query.isError) {
-    return <p>{JSON.stringify(query.error, null, 2)}</p>;
-  }
-
-  if (query.isLoading) {
-    return <p>Loading...</p>;
+  if (status === "loading") {
+    return null;
   }
 
   return (
@@ -41,42 +27,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {JSON.stringify(query.data, null, 2)}
+      {JSON.stringify(session.user, null, 2)}
 
       <Button
         role="callToAction"
-        onClick={() => logout.mutate()}
-        text="logout"
-        isLoading={logout.isLoading}
-      />
-
-      <Button
-        role="callToAction"
-        onClick={() => invalidateToken.mutate()}
-        text="invalidate token"
-        isLoading={invalidateToken.isLoading}
+        onClick={() => signOut({ redirect: true, callbackUrl: "/sign-in" })}
+        isLoading={false}
+        text="sign out"
       />
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const user = await deserializeUser(ctx.res, ctx.req.cookies);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 };
 
 export default Home;

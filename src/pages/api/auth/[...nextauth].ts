@@ -20,7 +20,6 @@ export const nextAuthOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    // TODO: add missing env
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,

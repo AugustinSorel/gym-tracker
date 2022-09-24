@@ -16,8 +16,11 @@ const VerifyRequestPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Gym Tracker Sign Up</title>
-        <meta name="description" content="Sign up to track your gym progress" />
+        <title>Gym Tracker verify account</title>
+        <meta
+          name="description"
+          content="Verify your account with the email received"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

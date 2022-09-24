@@ -7,7 +7,6 @@ import { ReactElement, ReactNode } from "react";
 import StyledComponentsLayout from "src/layouts/StyledComponentsLayout";
 import trpc from "src/utils/trpc";
 
-//TODO: Clean that
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };

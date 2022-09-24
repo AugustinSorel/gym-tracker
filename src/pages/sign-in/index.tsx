@@ -19,6 +19,10 @@ const SignInPage: NextPageWithLayout = () => {
     signIn("google", { redirect: true, callbackUrl: "/" });
   };
 
+  const signInGitHubHandler = () => {
+    signIn("discord", { redirect: true, callbackUrl: "/" });
+  };
+
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setEmailError("");
@@ -72,7 +76,7 @@ const SignInPage: NextPageWithLayout = () => {
 
       <UserFormStyles.AuthProvidersContainer>
         <Button role="google" onClick={signInGoogleHandler} />
-        <Button role="gitHub" />
+        <Button role="gitHub" onClick={signInGitHubHandler} />
       </UserFormStyles.AuthProvidersContainer>
     </>
   );

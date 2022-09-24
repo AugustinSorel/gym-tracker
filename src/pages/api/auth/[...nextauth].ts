@@ -1,8 +1,10 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "src/utils/prisma";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+import prisma from "src/utils/prisma";
+
 import { sendVerificationRequest } from "src/utils/email";
 
 export const nextAuthOptions: NextAuthOptions = {
@@ -19,6 +21,10 @@ export const nextAuthOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_ID,
+      clientSecret: process.env.DISCORD_SECRET,
     }),
     EmailProvider({
       server: {

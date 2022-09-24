@@ -11,6 +11,8 @@ declare global {
       EMAIL_FROM: string;
       NEXTAUTH_SECRET: string;
       NEXTAUTH_URL: string;
+      DISCORD_ID: string;
+      DISCORD_SECRET: string;
       NODE_ENV: "development" | "production";
       PORT?: string;
     }

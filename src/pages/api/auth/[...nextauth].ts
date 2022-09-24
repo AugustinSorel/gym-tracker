@@ -44,6 +44,7 @@ export const nextAuthOptions: NextAuthOptions = {
     verifyRequest: "/verify-request",
     signOut: "/sign-out",
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(nextAuthOptions);

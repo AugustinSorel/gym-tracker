@@ -3,10 +3,12 @@ import Input from "@/components/Input";
 import { emailSchema } from "@/schemas/userSchemas";
 import { signIn } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import * as UserFormStyles from "src/components/UserForm/index.styled";
 import AuthLayout from "src/layouts/authLayout";
 import * as AuthLayoutStyles from "src/layouts/authLayout/index.styled";
+import { AUTH_ERRORS } from "src/utils/auth";
 import { ZodError } from "zod";
 import { NextPageWithLayout } from "../_app";
 
@@ -14,13 +16,14 @@ const SignInPage: NextPageWithLayout = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const signInGoogleHandler = () => {
     signIn("google", { redirect: true, callbackUrl: "/" });
   };
 
   const signInGitHubHandler = () => {
-    signIn("discord", { redirect: true, callbackUrl: "/" });
+    signIn("github", { redirect: true, callbackUrl: "/" });
   };
 
   const submitHandler = async (e: FormEvent) => {
@@ -78,6 +81,12 @@ const SignInPage: NextPageWithLayout = () => {
         <Button role="google" onClick={signInGoogleHandler} />
         <Button role="gitHub" onClick={signInGitHubHandler} />
       </UserFormStyles.AuthProvidersContainer>
+
+      {router.query.error && (
+        <UserFormStyles.AuthProviderErrorText>
+          {AUTH_ERRORS[router.query.error as keyof typeof AUTH_ERRORS]}
+        </UserFormStyles.AuthProviderErrorText>
+      )}
     </>
   );
 };

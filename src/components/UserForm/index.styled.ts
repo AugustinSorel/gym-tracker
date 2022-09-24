@@ -14,6 +14,18 @@ export const AuthProvidersContainer = styled.div`
   gap: ${({ theme }) => theme.gaps[700]};
 `;
 
+export const AuthProviderErrorText = styled.p`
+  padding-top: ${({ theme }) => theme.gaps[500]};
+  color: ${({ theme }) => theme.colors.error};
+  margin: 0 auto;
+  text-align: center;
+  max-width: 80%;
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    max-width: 100%;
+  }
+`;
+
 export const SeparatorText = styled.p`
   margin: ${({ theme }) => theme.gaps[900]} 0;
   text-align: center;

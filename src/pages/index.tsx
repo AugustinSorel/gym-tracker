@@ -4,7 +4,6 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-// TODO: parse env var
 const Home: NextPage = () => {
   const router = useRouter();
 

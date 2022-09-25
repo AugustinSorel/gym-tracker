@@ -1,8 +1,9 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { ReactNode } from "react";
 
 type Props = {
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 const PriveRouteLayout = ({ children }: Props) => {
@@ -17,7 +18,7 @@ const PriveRouteLayout = ({ children }: Props) => {
     return null;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default PriveRouteLayout;

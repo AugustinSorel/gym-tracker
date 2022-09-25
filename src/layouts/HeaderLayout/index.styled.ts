@@ -25,7 +25,11 @@ export const Title = styled.h1`
   transform: translate(-50%, -50%);
 `;
 
-export const Name = styled.p``;
+export const Name = styled.p`
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    display: none;
+  }
+`;
 
 export const Avatar = styled.img.attrs({ alt: "user profile picture" })`
   width: 40px;

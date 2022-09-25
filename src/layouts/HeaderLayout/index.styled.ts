@@ -9,6 +9,7 @@ export const Header = styled.header`
 
   background-color: ${({ theme }) => theme.colors[200]};
   padding: ${({ theme }) => theme.gaps[500]};
+  margin-bottom: ${({ theme }) => theme.gaps[500]};
 
   position: relative;
 

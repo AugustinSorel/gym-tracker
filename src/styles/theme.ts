@@ -74,6 +74,8 @@ const theme: DefaultTheme = {
     },
     timingFunction: "ease-in-out",
   },
+
+  maxWidth: "1500px",
 };
 
 export default theme;

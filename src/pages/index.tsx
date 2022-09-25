@@ -1,20 +1,13 @@
 import Button from "@/components/Button";
-import { NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import HeaderLayout from "src/layouts/HeaderLayout";
+import MaxWidthLayout from "src/layouts/MaxWidthLayout";
+import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
+import { NextPageWithLayout } from "./_app";
 
-const Home: NextPage = () => {
-  const router = useRouter();
-
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => router.push("/sign-in"),
-  });
-
-  if (status === "loading") {
-    return null;
-  }
+const Home: NextPageWithLayout = () => {
+  const { data: session } = useSession();
 
   return (
     <>
@@ -27,7 +20,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {JSON.stringify(session.user, null, 2)}
+      {JSON.stringify(session?.user, null, 2)}
 
       <Button
         role="callToAction"
@@ -36,6 +29,17 @@ const Home: NextPage = () => {
         text="sign out"
       />
     </>
+  );
+};
+
+Home.getLayout = (page) => {
+  return (
+    <PriveRouteLayout>
+      <MaxWidthLayout>
+        <HeaderLayout />
+        {page}
+      </MaxWidthLayout>
+    </PriveRouteLayout>
   );
 };
 

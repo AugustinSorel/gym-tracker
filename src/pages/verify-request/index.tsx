@@ -2,8 +2,8 @@ import Button from "@/components/Button";
 import SvgIcon from "@/components/SvgIcon";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import AuthLayout from "src/layouts/authLayout";
-import * as Styles from "src/layouts/authLayout/index.styled";
+import AuthLayout from "src/layouts/AuthLayout";
+import * as Styles from "src/layouts/AuthLayout/index.styled";
 import { NextPageWithLayout } from "../_app";
 
 const VerifyRequestPage: NextPageWithLayout = () => {

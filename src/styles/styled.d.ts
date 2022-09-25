@@ -44,5 +44,7 @@ declare module "styled-components" {
       durations: PaletteSmall;
       timingFunction: string;
     };
+
+    maxWidth: string;
   }
 }

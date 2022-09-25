@@ -1,7 +1,7 @@
 import Head from "next/head";
-import AuthLayout from "src/layouts/authLayout";
+import AuthLayout from "src/layouts/AuthLayout";
 import { NextPageWithLayout } from "../_app";
-import * as Styles from "src/layouts/authLayout/index.styled";
+import * as Styles from "src/layouts/AuthLayout/index.styled";
 import SvgIcon from "@/components/SvgIcon";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";

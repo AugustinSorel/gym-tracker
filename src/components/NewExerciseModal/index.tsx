@@ -30,9 +30,9 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
       >
         <Input
           role="form"
-          labelText="name"
+          labelText="exercise name"
           htmlFor="nameInput"
-          placeholder="Enter name"
+          placeholder="Enter exercise name"
           autoCapitalize="none"
           errorText={exerciseNameError}
           value={exerciseName}

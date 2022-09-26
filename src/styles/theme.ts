@@ -77,7 +77,7 @@ const theme: DefaultTheme = {
 
   maxWidth: "1500px",
 
-  blur: "20px",
+  blur: "10px",
 };
 
 export default theme;

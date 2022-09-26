@@ -11,12 +11,8 @@ export type DefaultButton = {
   text: string;
 };
 
-export type GoogleButton = {
-  role: "google";
-};
-
-export type GitHubButton = {
-  role: "gitHub";
+export type NewExerciseButton = {
+  role: "newExercise";
 };
 
 type DefaultProps = {
@@ -25,4 +21,4 @@ type DefaultProps = {
 
 export type Button = HTMLAttributes<HTMLButtonElement> &
   DefaultProps &
-  (CallToAction | DefaultButton | GitHubButton | GoogleButton);
+  (CallToAction | DefaultButton | NewExerciseButton);

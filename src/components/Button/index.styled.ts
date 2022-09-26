@@ -78,3 +78,37 @@ export const GitHubButton = styled(AuthProviderButton)`
   color: #fff;
   outline-color: #000;
 `;
+
+export const NewExerciseButton = styled(Button)`
+  position: fixed;
+  bottom: ${({ theme }) => theme.gaps[900]};
+  right: ${({ theme }) => theme.gaps[900]};
+  outline: none;
+  height: 50px;
+  width: 50px;
+  font-size: ${({ theme }) => theme.fontSizes[900]};
+  font-weight: 500;
+
+  color: ${({ theme }) => theme.colors[500]};
+  border: ${({ theme }) => theme.border.sizes[700]} solid;
+  border-color: ${({ theme }) => theme.colors[500]};
+  border-radius: 50%;
+
+  transition-property: color, border-color, transform;
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+
+  line-height: ${({ theme }) => theme.fontSizes[900]};
+  text-align: center;
+
+  &:focus-visible,
+  &:hover {
+    border-color: ${({ theme }) => theme.colors[900]};
+    color: ${({ theme }) => theme.colors[900]};
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;

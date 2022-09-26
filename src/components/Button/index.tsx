@@ -16,7 +16,15 @@ const Button = (props: Props.Button) => {
     return <GitHubButton {...props} />;
   }
 
+  if (props.role === "newExercise") {
+    return <NewExerciseButton {...props} />;
+  }
+
   return <DefaultButton {...props} />;
+};
+
+const NewExerciseButton = (props: Props.NewExerciseButton) => {
+  return <Styles.NewExerciseButton {...props}>+ </Styles.NewExerciseButton>;
 };
 
 const CallToActionButton = (props: Props.CallToAction) => {

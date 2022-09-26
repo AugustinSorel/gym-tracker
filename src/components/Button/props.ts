@@ -19,10 +19,20 @@ export type GitHubButton = {
   role: "gitHub";
 };
 
+export type NewExerciseButton = {
+  role: "newExercise";
+};
+
 type DefaultProps = {
   type?: "button" | "submit" | "reset";
 };
 
 export type Button = HTMLAttributes<HTMLButtonElement> &
   DefaultProps &
-  (CallToAction | DefaultButton | GitHubButton | GoogleButton);
+  (
+    | CallToAction
+    | DefaultButton
+    | GitHubButton
+    | GoogleButton
+    | NewExerciseButton
+  );

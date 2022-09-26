@@ -7,13 +7,17 @@ export const Header = styled.header`
   flex-direction: row;
   gap: ${({ theme }) => theme.gaps[500]};
 
-  background-color: ${({ theme }) => theme.colors[200]};
-  padding: ${({ theme }) => theme.gaps[500]};
-  margin-bottom: ${({ theme }) => theme.gaps[500]};
+  --color: hsla(0, 0%, 11%, 85%);
 
-  position: relative;
+  background-color: var(--color);
+  backdrop-filter: blur(${({ theme }) => theme.blur});
+  padding: ${({ theme }) => theme.gaps[500]} 0;
 
-  box-shadow: 0 0 0 100vmax ${({ theme }) => theme.colors[200]};
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  box-shadow: 0 0 0 100vmax var(--color);
   clip-path: inset(0 -100vmax);
 `;
 

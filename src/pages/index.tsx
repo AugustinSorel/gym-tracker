@@ -1,5 +1,4 @@
-import Button from "@/components/Button";
-import { signOut, useSession } from "next-auth/react";
+import GridOfExercises from "@/components/GridOfExercies";
 import Head from "next/head";
 import HeaderLayout from "src/layouts/HeaderLayout";
 import MaxWidthLayout from "src/layouts/MaxWidthLayout";
@@ -7,8 +6,6 @@ import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
 import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
-  const { data: session } = useSession();
-
   return (
     <>
       <Head>
@@ -20,14 +17,7 @@ const Home: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {JSON.stringify(session?.user, null, 2)}
-
-      <Button
-        role="callToAction"
-        onClick={() => signOut({ redirect: true, callbackUrl: "/sign-in" })}
-        isLoading={false}
-        text="sign out"
-      />
+      <GridOfExercises />
     </>
   );
 };

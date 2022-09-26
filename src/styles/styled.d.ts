@@ -46,5 +46,7 @@ declare module "styled-components" {
     };
 
     maxWidth: string;
+
+    blur: string;
   }
 }

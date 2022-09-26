@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import Form from "@/components/Form";
 import Input from "@/components/Input";
 import { emailSchema } from "@/schemas/userSchemas";
 import { signIn } from "next-auth/react";
@@ -6,9 +7,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import * as UserFormStyles from "src/components/UserForm/index.styled";
+import * as Styles from "src/components/UserForm/index.styled";
 import AuthLayout from "src/layouts/AuthLayout";
-import * as AuthLayoutStyles from "src/layouts/AuthLayout/index.styled";
 import { AUTH_ERRORS } from "src/utils/auth";
 import { ZodError } from "zod";
 import { NextPageWithLayout } from "../_app";
@@ -50,12 +50,11 @@ const SignInPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AuthLayoutStyles.Title>Welcome back</AuthLayoutStyles.Title>
-      <AuthLayoutStyles.SubTitle>
-        Welcome back! Please enter your details
-      </AuthLayoutStyles.SubTitle>
-
-      <UserFormStyles.Form onSubmit={submitHandler}>
+      <Form
+        title="Welcome back"
+        subTitle="Welcome back! Please enter your details"
+        submitHandler={submitHandler}
+      >
         <Input
           role="form"
           labelText="email"
@@ -74,36 +73,36 @@ const SignInPage: NextPageWithLayout = () => {
           type="submit"
           isLoading={isLoading}
         />
-      </UserFormStyles.Form>
+      </Form>
 
-      <UserFormStyles.SeparatorText>or</UserFormStyles.SeparatorText>
+      <Styles.SeparatorText>or</Styles.SeparatorText>
 
-      <UserFormStyles.AuthProvidersContainer>
-        <UserFormStyles.GoogleButton onClick={signInGoogleHandler}>
+      <Styles.AuthProvidersContainer>
+        <Styles.GoogleButton onClick={signInGoogleHandler}>
           <Image
             src={"/GoogleIcon.png"}
             alt="google icon"
             height={"20px"}
             width={"20px"}
           />
-          <UserFormStyles.Text>Continue with Google</UserFormStyles.Text>
-        </UserFormStyles.GoogleButton>
+          <Styles.Text>Continue with Google</Styles.Text>
+        </Styles.GoogleButton>
 
-        <UserFormStyles.GitHubButton onClick={signInGitHubHandler}>
+        <Styles.GitHubButton onClick={signInGitHubHandler}>
           <Image
             src={"/GitHubIcon.png"}
             alt="google icon"
             height={"20px"}
             width={"20px"}
           />
-          <UserFormStyles.Text>Continue with Github</UserFormStyles.Text>
-        </UserFormStyles.GitHubButton>
-      </UserFormStyles.AuthProvidersContainer>
+          <Styles.Text>Continue with Github</Styles.Text>
+        </Styles.GitHubButton>
+      </Styles.AuthProvidersContainer>
 
       {router.query.error && (
-        <UserFormStyles.AuthProviderErrorText>
+        <Styles.AuthProviderErrorText>
           {AUTH_ERRORS[router.query.error as keyof typeof AUTH_ERRORS]}
-        </UserFormStyles.AuthProviderErrorText>
+        </Styles.AuthProviderErrorText>
       )}
     </>
   );

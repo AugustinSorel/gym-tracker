@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { AuthProviderButton } from "../Button/index.styled";
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-top: 15%;
-  display: flex;
-  gap: ${({ theme }) => theme.gaps[700]};
-`;
-
 export const AuthProvidersContainer = styled.div`
   display: flex;
   flex-direction: column;

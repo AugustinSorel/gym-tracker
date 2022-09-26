@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AuthProviderButton } from "../Button/index.styled";
 
 export const Form = styled.form`
   display: flex;
@@ -52,4 +53,18 @@ export const SeparatorText = styled.p`
     left: ${({ theme }) => theme.gaps[300]};
     margin-right: -50%;
   }
+`;
+
+export const Text = styled.p``;
+
+export const GoogleButton = styled(AuthProviderButton)`
+  background-color: #fff;
+  color: #000;
+  outline-color: #fff;
+`;
+
+export const GitHubButton = styled(AuthProviderButton)`
+  background-color: #000;
+  color: #fff;
+  outline-color: #000;
 `;

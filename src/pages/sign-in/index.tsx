@@ -3,6 +3,7 @@ import Input from "@/components/Input";
 import { emailSchema } from "@/schemas/userSchemas";
 import { signIn } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import * as UserFormStyles from "src/components/UserForm/index.styled";
@@ -78,8 +79,25 @@ const SignInPage: NextPageWithLayout = () => {
       <UserFormStyles.SeparatorText>or</UserFormStyles.SeparatorText>
 
       <UserFormStyles.AuthProvidersContainer>
-        <Button role="google" onClick={signInGoogleHandler} />
-        <Button role="gitHub" onClick={signInGitHubHandler} />
+        <UserFormStyles.GoogleButton onClick={signInGoogleHandler}>
+          <Image
+            src={"/GoogleIcon.png"}
+            alt="google icon"
+            height={"20px"}
+            width={"20px"}
+          />
+          <UserFormStyles.Text>Continue with Google</UserFormStyles.Text>
+        </UserFormStyles.GoogleButton>
+
+        <UserFormStyles.GitHubButton onClick={signInGitHubHandler}>
+          <Image
+            src={"/GitHubIcon.png"}
+            alt="google icon"
+            height={"20px"}
+            width={"20px"}
+          />
+          <UserFormStyles.Text>Continue with Github</UserFormStyles.Text>
+        </UserFormStyles.GitHubButton>
       </UserFormStyles.AuthProvidersContainer>
 
       {router.query.error && (

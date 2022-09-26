@@ -52,9 +52,7 @@ export const CallToActionText = styled.p`
   color: ${({ theme }) => theme.colors[100]};
 `;
 
-export const Text = styled.p``;
-
-const AuthProviderButton = styled(Button)`
+export const AuthProviderButton = styled(Button)`
   padding: ${({ theme }) => theme.gaps[300]};
   border-radius: ${({ theme }) => theme.border.radius[500]};
   display: flex;
@@ -65,18 +63,6 @@ const AuthProviderButton = styled(Button)`
   p {
     flex: 1;
   }
-`;
-
-export const GoogleButton = styled(AuthProviderButton)`
-  background-color: #fff;
-  color: #000;
-  outline-color: #fff;
-`;
-
-export const GitHubButton = styled(AuthProviderButton)`
-  background-color: #000;
-  color: #fff;
-  outline-color: #000;
 `;
 
 export const NewExerciseButton = styled(Button)`

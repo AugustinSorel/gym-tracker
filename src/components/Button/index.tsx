@@ -29,7 +29,7 @@ const CallToActionButton = (props: Props.CallToAction) => {
 };
 
 const DefaultButton = ({ text, ...props }: Props.DefaultButton) => {
-  return <Styles.Button {...props}>{text}</Styles.Button>;
+  return <Styles.DefaultButton {...props}>{text}</Styles.DefaultButton>;
 };
 
 export default Button;

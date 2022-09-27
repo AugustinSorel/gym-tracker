@@ -1,18 +1,15 @@
 import Button from "@/components/Button";
 import GridOfExercises from "@/components/GridOfExercies";
+import useModal from "@/components/Modal/useModal";
 import NewExerciseModal from "@/components/NewExerciseModal";
 import Head from "next/head";
-import { useState } from "react";
 import HeaderLayout from "src/layouts/HeaderLayout";
 import MaxWidthLayout from "src/layouts/MaxWidthLayout";
 import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
 import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const { closeModal, openModal, showModal, startExitAnimation } = useModal();
 
   return (
     <>
@@ -29,7 +26,12 @@ const Home: NextPageWithLayout = () => {
 
       <Button role="newExercise" onClick={openModal} />
 
-      <NewExerciseModal isOpen={showModal} closeHandler={closeModal} />
+      {showModal && (
+        <NewExerciseModal
+          closeHandler={closeModal}
+          startExitAnimation={startExitAnimation}
+        />
+      )}
     </>
   );
 };

@@ -17,7 +17,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
 
   const newExerciseMutation = trpc.exercise.new.useMutation({
     onSuccess: () => {
-      closeHandler();
+      setExerciseName("");
     },
 
     onError: (error) => {

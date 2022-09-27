@@ -21,6 +21,7 @@ const Modal = ({ children, closeHandler }: Props) => {
 
   return createPortal(
     <Styles.Backdrop
+      onKeyDown={(e) => e.key === "Escape" && startExitAnimationHandler()}
       onClick={startExitAnimationHandler}
       startExitAnimation={startExitAnimation}
       onAnimationEndCapture={onAnimationEndHandler}

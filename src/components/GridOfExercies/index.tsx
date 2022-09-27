@@ -1,13 +1,16 @@
 import { Exercise } from "@prisma/client";
 import { memo, useRef } from "react";
 import trpc from "src/utils/trpc";
+import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
 
 const GridSkeleton = () => {
   return (
     <Styles.GridSkeleton>
       {[...Array(10)].map((_, i) => (
-        <Styles.ItemSkeleton key={i} />
+        <Styles.ItemSkeleton key={i}>
+          <Styles.HeaderSkeleton />
+        </Styles.ItemSkeleton>
       ))}
     </Styles.GridSkeleton>
   );
@@ -25,7 +28,12 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
           key={exercise.id}
           delay={i * 50 * (renderCounter.current > 1 ? 0 : 1)}
         >
-          <Styles.Title>{exercise.name}</Styles.Title>
+          <Styles.Header>
+            <Styles.ExerciseName>{exercise.name}</Styles.ExerciseName>
+            <SvgIcon svgName="menu" />
+          </Styles.Header>
+
+          <Styles.Graph />
         </Styles.Item>
       ))}
     </Styles.Grid>

@@ -28,6 +28,13 @@ const exerciseRouter = t.router({
         }
       }
     }),
+
+  all: t.procedure.use(requireUser).query(async ({ ctx }) => {
+    return await prisma.exercise.findMany({
+      where: { userId: ctx.user.id },
+      orderBy: { createdAt: "asc" },
+    });
+  }),
 });
 
 export default exerciseRouter;

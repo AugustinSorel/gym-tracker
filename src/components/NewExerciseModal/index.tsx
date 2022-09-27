@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import trpc from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
 import Input from "../Input";
@@ -12,6 +13,25 @@ type Props = {
 const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseNameError, setExerciseNameError] = useState("");
+  const newExerciseMutation = trpc.exercise.new.useMutation({
+    onSuccess: () => {
+      closeHandler();
+    },
+
+    onError: (error) => {
+      if (error.data?.zodError) {
+        setExerciseNameError(error.data.zodError.formErrors[0]);
+      }
+
+      if (error.data?.code === "CONFLICT") {
+        setExerciseNameError(error.message);
+      }
+    },
+
+    onMutate: () => {
+      setExerciseNameError("");
+    },
+  });
 
   if (!isOpen) {
     return null;
@@ -19,6 +39,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
+    newExerciseMutation.mutate(exerciseName);
   };
 
   return (
@@ -44,7 +65,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
           role="callToAction"
           text="Add"
           type="submit"
-          isLoading={false}
+          isLoading={newExerciseMutation.isLoading}
         />
       </Form>
     </Modal>

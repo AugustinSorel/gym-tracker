@@ -9,6 +9,7 @@ const Input = forwardRef<HTMLInputElement, Props.Input>((props, ref) => {
 
   return <Styles.Input {...props} />;
 });
+Input.displayName = "InputComponent";
 
 const FormInput = forwardRef<HTMLInputElement, Props.FormInput>(
   (props, ref) => {
@@ -24,5 +25,6 @@ const FormInput = forwardRef<HTMLInputElement, Props.FormInput>(
     );
   }
 );
+FormInput.displayName = "FormInputComponent";
 
 export default Input;

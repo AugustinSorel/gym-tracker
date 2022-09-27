@@ -31,6 +31,7 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
     </Styles.Grid>
   );
 });
+Grid.displayName = "GridComponent";
 
 const GridOfExercises = () => {
   const exercisesQuery = trpc.exercise.all.useQuery();

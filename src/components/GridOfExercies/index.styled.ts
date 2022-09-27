@@ -30,15 +30,14 @@ export const GridSkeleton = styled(Grid)`
   &::after {
     content: "";
     position: absolute;
-    background-color: ${({ theme }) => theme.colors[400]};
     opacity: 0.2;
 
-    --width: 10%;
+    --width: 20%;
 
     background: linear-gradient(
       to right,
       transparent 0%,
-      ${({ theme }) => theme.colors[500]} 50%,
+      ${({ theme }) => theme.colors[100]} 50%,
       transparent 100%
     );
     top: 0;

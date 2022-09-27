@@ -1,5 +1,5 @@
 import t from "../trpc";
-import * as exerciseSchemas from "@/schemas/exerciseSchema";
+import * as exerciseSchemas from "@/schemas/newExerciseSchema";
 import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";

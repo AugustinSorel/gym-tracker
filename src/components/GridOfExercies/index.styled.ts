@@ -1,10 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
 export const Grid = styled.main`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.gaps[900]};
   margin-top: ${({ theme }) => theme.gaps[900]};
+
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(auto-fit, 300px);
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    grid-template-columns: repeat(auto-fit, 100%);
+  }
 `;
 
 const lineMove = keyframes`

@@ -6,13 +6,16 @@ import Input from "../Input";
 import Modal from "../Modal";
 
 type Props = {
-  isOpen: boolean;
   closeHandler: () => void;
+  startExitAnimation: boolean;
 };
 
-const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
+const NewExerciseModal = ({ closeHandler, startExitAnimation }: Props) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseNameError, setExerciseNameError] = useState("");
+
+  const utils = trpc.useContext();
+
   const newExerciseMutation = trpc.exercise.new.useMutation({
     onSuccess: () => {
       closeHandler();
@@ -28,14 +31,14 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
       }
     },
 
+    onSettled: () => {
+      utils.exercise.all.invalidate();
+    },
+
     onMutate: () => {
       setExerciseNameError("");
     },
   });
-
-  if (!isOpen) {
-    return null;
-  }
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -43,7 +46,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
   };
 
   return (
-    <Modal closeHandler={closeHandler}>
+    <Modal closeHandler={closeHandler} startExitAnimation={startExitAnimation}>
       <Form
         title="New Exercise"
         subTitle="Enter your new exercise name"
@@ -59,6 +62,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
           value={exerciseName}
           name="email"
           onChange={(e) => setExerciseName(e.target.value)}
+          ref={(e) => e?.focus()}
         />
 
         <Button

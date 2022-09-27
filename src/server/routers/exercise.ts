@@ -1,5 +1,5 @@
 import t from "../trpc";
-import * as exerciseSchemas from "@/schemas/exerciseSchema";
+import * as exerciseSchemas from "@/schemas/newExerciseSchema";
 import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
@@ -28,6 +28,13 @@ const exerciseRouter = t.router({
         }
       }
     }),
+
+  all: t.procedure.use(requireUser).query(async ({ ctx }) => {
+    return await prisma.exercise.findMany({
+      where: { userId: ctx.user.id },
+      orderBy: { createdAt: "asc" },
+    });
+  }),
 });
 
 export default exerciseRouter;

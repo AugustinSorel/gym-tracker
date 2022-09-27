@@ -1,10 +1,54 @@
 import styled, { keyframes } from "styled-components";
 
 export const Grid = styled.main`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.gaps[900]};
   margin-top: ${({ theme }) => theme.gaps[900]};
+
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(auto-fit, 300px);
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    grid-template-columns: repeat(auto-fit, 100%);
+  }
+`;
+
+const lineMove = keyframes`
+  from {
+    left: calc(var(--width) * -1);
+  }
+
+  to {
+    left: 100%;
+  }
+`;
+
+export const GridSkeleton = styled(Grid)`
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    opacity: 0.2;
+
+    --width: 20%;
+
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      ${({ theme }) => theme.colors[100]} 50%,
+      transparent 100%
+    );
+    top: 0;
+    height: 100%;
+    width: var(--width);
+
+    animation-name: ${lineMove};
+    animation-duration: ${({ theme }) => theme.animation.durations[500]};
+    animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
+    animation-iteration-count: infinite;
+  }
 `;
 
 const fade = keyframes`
@@ -47,4 +91,16 @@ export const Item = styled.div<{ delay: number }>`
   &:active {
     transform: scale(0.98);
   }
+`;
+
+export const ItemSkeleton = styled.div`
+  background-color: ${({ theme }) => theme.colors[300]};
+  aspect-ratio: 1;
+  cursor: pointer;
+  outline: none;
+`;
+
+export const Title = styled.h2`
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;

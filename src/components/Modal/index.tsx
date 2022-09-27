@@ -6,24 +6,19 @@ import * as Styles from "./index.styled";
 type Props = {
   children: ReactNode;
   closeHandler: () => void;
+  startExitAnimation: boolean;
 };
 
-const Modal = ({ children, closeHandler }: Props) => {
-  const [startExitAnimation, setStartExitAnimation] = useState(false);
-
+const Modal = ({ children, closeHandler, startExitAnimation }: Props) => {
   const startExitAnimationHandler = () => {
-    setStartExitAnimation(true);
-  };
-
-  const onAnimationEndHandler = () => {
-    startExitAnimation && closeHandler();
+    closeHandler();
   };
 
   return createPortal(
     <Styles.Backdrop
+      onKeyDown={(e) => e.key === "Escape" && startExitAnimationHandler()}
       onClick={startExitAnimationHandler}
       startExitAnimation={startExitAnimation}
-      onAnimationEndCapture={onAnimationEndHandler}
     >
       <Styles.Container
         onClick={(e) => e.stopPropagation()}

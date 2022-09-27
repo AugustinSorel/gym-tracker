@@ -27,6 +27,11 @@ export const Title = styled.h1`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  white-space: nowrap;
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    transform: translate(-100%, -50%);
+  }
 `;
 
 export const Name = styled.p`

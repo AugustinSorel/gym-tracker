@@ -35,6 +35,30 @@ export const Button = styled.button.attrs(({ type }) => ({
   background-color: transparent;
 `;
 
+export const DefaultButton = styled(Button)`
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: currentColor;
+
+    height: 1px;
+    width: 0;
+    bottom: 0;
+    left: 0;
+
+    transition-property: width;
+    transition-duration: ${({ theme }) => theme.animation.durations[300]};
+    transition-timing-function: ${({ theme }) =>
+      theme.animation.timingFunction};
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+`;
+
 export const CallToAction = styled(Button)`
   display: grid;
   grid-template-columns: 1fr auto 1fr;

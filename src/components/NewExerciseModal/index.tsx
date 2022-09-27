@@ -13,6 +13,8 @@ type Props = {
 const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseNameError, setExerciseNameError] = useState("");
+  const utils = trpc.useContext();
+
   const newExerciseMutation = trpc.exercise.new.useMutation({
     onSuccess: () => {
       closeHandler();
@@ -26,6 +28,10 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
       if (error.data?.code === "CONFLICT") {
         setExerciseNameError(error.message);
       }
+    },
+
+    onSettled: () => {
+      utils.exercise.all.invalidate();
     },
 
     onMutate: () => {
@@ -59,6 +65,7 @@ const NewExerciseModal = ({ isOpen, closeHandler }: Props) => {
           value={exerciseName}
           name="email"
           onChange={(e) => setExerciseName(e.target.value)}
+          ref={(e) => e?.focus()}
         />
 
         <Button

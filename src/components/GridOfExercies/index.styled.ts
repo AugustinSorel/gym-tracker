@@ -5,8 +5,7 @@ export const Grid = styled.main`
   margin-top: ${({ theme }) => theme.gaps[900]};
 
   display: grid;
-  place-content: center;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(4, 1fr);
 
   @media ${({ theme }) => theme.breakpoints.tablet} {
     grid-template-columns: repeat(auto-fit, 100%);

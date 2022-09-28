@@ -28,7 +28,7 @@ const CallToActionButton = (props: Props.CallToAction) => {
   );
 };
 
-const DefaultButton = ({ text, ...props }: Props.DefaultButton) => {
+const DefaultButton = ({ text, role, ...props }: Props.DefaultButton) => {
   return <Styles.DefaultButton {...props}>{text}</Styles.DefaultButton>;
 };
 

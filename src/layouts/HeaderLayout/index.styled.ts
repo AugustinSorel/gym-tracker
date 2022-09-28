@@ -7,7 +7,7 @@ export const Header = styled.header`
   flex-direction: row;
   gap: ${({ theme }) => theme.gaps[500]};
 
-  --color: hsla(0, 0%, 11%, 85%);
+  --color: hsla(0, 0%, 11%, 50%);
 
   background-color: var(--color);
   backdrop-filter: blur(${({ theme }) => theme.blur});

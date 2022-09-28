@@ -1,5 +1,7 @@
 import { Exercise } from "@prisma/client";
 import { memo, useRef } from "react";
+import { Line, LineChart, ResponsiveContainer } from "recharts";
+import theme from "src/styles/theme";
 import trpc from "src/utils/trpc";
 import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
@@ -20,6 +22,41 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
+  const getRandomValue = () => {
+    return Math.random() * 100;
+  };
+
+  const data = () => [
+    {
+      name: "Page A",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page B",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page C",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page D",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page E",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page F",
+      pv: getRandomValue(),
+    },
+    {
+      name: "Page G",
+      pv: getRandomValue(),
+    },
+  ];
+
   return (
     <Styles.Grid>
       {exercises.map((exercise, i) => (
@@ -33,7 +70,20 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
             <SvgIcon svgName="menu" />
           </Styles.Header>
 
-          <Styles.Graph />
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={data()}
+              margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
+            >
+              <Line
+                type="monotone"
+                dataKey="pv"
+                stroke={theme.colors.action}
+                strokeWidth={1}
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </Styles.Item>
       ))}
     </Styles.Grid>

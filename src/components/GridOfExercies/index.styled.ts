@@ -50,6 +50,55 @@ export const GridSkeleton = styled(Grid)`
   }
 `;
 
+export const Item = styled.div`
+  background-color: ${({ theme }) => theme.colors[200]};
+  aspect-ratio: 1;
+  cursor: pointer;
+  outline: none;
+  border-radius: ${({ theme }) => theme.border.radius[300]};
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition-property: transform, background-color;
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+`;
+
+export const ItemSkeleton = styled(Item)``;
+
+export const ExerciseName = styled.h2`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes[600]};
+  flex: 1;
+`;
+
+export const Header = styled.header`
+  background-color: ${({ theme }) => theme.colors[300]};
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gaps[200]};
+  fill: currentColor;
+  padding: ${({ theme }) => theme.gaps[200]};
+
+  transition-property: background-color;
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+`;
+
+export const HeaderSkeleton = styled(Header)`
+  height: ${({ theme }) => theme.fontSizes[900]};
+`;
+
+export const Graph = styled.div`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors[400]};
+  margin: ${({ theme }) => theme.gaps[900]};
+`;
+
 const fade = keyframes`
   from {
     opacity: 0;
@@ -66,16 +115,10 @@ const scaleUp = keyframes`
   }
 `;
 
-export const Item = styled.div<{ delay: number }>`
-  background-color: ${({ theme }) => theme.colors[300]};
-  aspect-ratio: 1;
-  cursor: pointer;
+export const Anchor = styled.a<{ delay: number }>`
+  color: inherit;
+  text-decoration: none;
   outline: none;
-  border-radius: ${({ theme }) => theme.border.radius[300]};
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
 
   animation: ${scaleUp}, ${fade} both;
   animation-duration: ${({ theme }) => theme.animation.durations[300]};
@@ -86,63 +129,24 @@ export const Item = styled.div<{ delay: number }>`
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
 
+  & * {
+    cursor: pointer;
+  }
+
   &:focus-visible,
   &:hover {
     transform: scale(1.02);
-    background-color: ${({ theme }) => theme.colors[400]};
-  }
 
-  &:hover svg {
-    opacity: 1;
+    & > div {
+      background-color: ${({ theme }) => theme.colors[300]};
+    }
+
+    header {
+      background-color: ${({ theme }) => theme.colors[400]};
+    }
   }
 
   &:active {
     transform: scale(0.98);
   }
-`;
-
-export const ItemSkeleton = styled.div`
-  background-color: ${({ theme }) => theme.colors[300]};
-  aspect-ratio: 1;
-  border-radius: ${({ theme }) => theme.border.radius[300]};
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-
-  & > * {
-    padding: ${({ theme }) => theme.gaps[200]};
-  }
-`;
-
-export const ExerciseName = styled.h2`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes[600]};
-  flex: 1;
-`;
-
-export const Header = styled.header`
-  background-color: ${({ theme }) => theme.colors[400]};
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gaps[200]};
-  fill: currentColor;
-  padding: ${({ theme }) => theme.gaps[200]};
-
-  svg {
-    opacity: 0;
-    cursor: move;
-  }
-`;
-
-export const HeaderSkeleton = styled(Header)`
-  height: ${({ theme }) => theme.fontSizes[900]};
-`;
-
-export const Graph = styled.div`
-  flex: 1;
-  background-color: ${({ theme }) => theme.colors[400]};
-  margin: ${({ theme }) => theme.gaps[900]};
 `;

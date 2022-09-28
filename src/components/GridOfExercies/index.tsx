@@ -1,11 +1,52 @@
 import { Exercise } from "@prisma/client";
+import Link from "next/link";
 import { memo, useRef } from "react";
-import { Line, LineChart, ResponsiveContainer } from "recharts";
+import { Legend, Line, LineChart, ResponsiveContainer } from "recharts";
 import theme from "src/styles/theme";
 import trpc from "src/utils/trpc";
-import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
 
+const getRandomValue = () => {
+  return Math.random() * 100;
+};
+
+const data = () => [
+  {
+    name: "Page A",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page B",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page C",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page D",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page E",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page F",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+  {
+    name: "Page G",
+    actual: getRandomValue(),
+    predicted: getRandomValue(),
+  },
+];
 const GridSkeleton = () => {
   return (
     <Styles.GridSkeleton>
@@ -22,69 +63,41 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
   const renderCounter = useRef(0);
   renderCounter.current += 1;
 
-  const getRandomValue = () => {
-    return Math.random() * 100;
-  };
-
-  const data = () => [
-    {
-      name: "Page A",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page B",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page C",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page D",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page E",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page F",
-      pv: getRandomValue(),
-    },
-    {
-      name: "Page G",
-      pv: getRandomValue(),
-    },
-  ];
-
   return (
     <Styles.Grid>
       {exercises.map((exercise, i) => (
-        <Styles.Item
-          tabIndex={0}
-          key={exercise.id}
-          delay={i * 50 * (renderCounter.current > 1 ? 0 : 1)}
-        >
-          <Styles.Header>
-            <Styles.ExerciseName>{exercise.name}</Styles.ExerciseName>
-            <SvgIcon svgName="menu" />
-          </Styles.Header>
+        <Link href={`/exercise/${exercise.id}`} passHref key={exercise.id}>
+          <Styles.Anchor delay={i * 50 * (renderCounter.current > 1 ? 0 : 1)}>
+            <Styles.Item>
+              <Styles.Header>
+                <Styles.ExerciseName>{exercise.name}</Styles.ExerciseName>
+              </Styles.Header>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={data()}
-              margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
-            >
-              <Line
-                type="monotone"
-                dataKey="pv"
-                stroke={theme.colors.action}
-                strokeWidth={1}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </Styles.Item>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={data()}
+                  margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
+                >
+                  <Line
+                    type="monotone"
+                    dataKey="actual"
+                    stroke={theme.colors.action}
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="predicted"
+                    stroke={theme.colors[400]}
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                  <Legend />
+                </LineChart>
+              </ResponsiveContainer>
+            </Styles.Item>
+          </Styles.Anchor>
+        </Link>
       ))}
     </Styles.Grid>
   );

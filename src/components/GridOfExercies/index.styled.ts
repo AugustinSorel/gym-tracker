@@ -78,10 +78,6 @@ export const Item = styled.div<{ delay: number }>`
   display: flex;
   flex-direction: column;
 
-  & > * {
-    padding: ${({ theme }) => theme.gaps[200]};
-  }
-
   animation: ${scaleUp}, ${fade} both;
   animation-duration: ${({ theme }) => theme.animation.durations[300]};
   animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
@@ -134,6 +130,7 @@ export const Header = styled.header`
   align-items: center;
   gap: ${({ theme }) => theme.gaps[200]};
   fill: currentColor;
+  padding: ${({ theme }) => theme.gaps[200]};
 
   svg {
     opacity: 0;

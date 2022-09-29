@@ -30,7 +30,9 @@ export const Title = styled.h1`
   white-space: nowrap;
 
   @media ${({ theme }) => theme.breakpoints.tablet} {
-    transform: translate(-100%, -50%);
+    position: absolute;
+    left: 0;
+    transform: translate(0, -50%);
   }
 `;
 

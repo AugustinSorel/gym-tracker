@@ -19,7 +19,11 @@ export const Form = styled.form`
   flex-direction: column;
   display: flex;
 
+  & > *:not(h1, h2, button) {
+    margin-bottom: ${({ theme }) => theme.gaps[700]};
+  }
+
   button[type="submit"] {
-    margin-top: ${({ theme }) => theme.gaps[700]};
+    margin-top: ${({ theme }) => theme.gaps[300]};
   }
 `;

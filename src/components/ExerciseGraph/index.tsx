@@ -2,6 +2,7 @@ import * as Styles from "./index.styled";
 import { Legend, Line, LineChart, ResponsiveContainer } from "recharts";
 import data from "src/utils/toDelete";
 import theme from "src/styles/theme";
+import { memo } from "react";
 
 // TODO: FETCH the exericse with placeholder ?
 const ExerciseGraph = () => {
@@ -42,4 +43,4 @@ const ExerciseGraph = () => {
   );
 };
 
-export default ExerciseGraph;
+export default memo(ExerciseGraph);

@@ -27,8 +27,7 @@ const SignInPage: NextPageWithLayout = () => {
     signIn("github", { redirect: true, callbackUrl: "/" });
   };
 
-  const submitHandler = async (e: FormEvent) => {
-    e.preventDefault();
+  const submitHandler = async () => {
     setEmailError("");
     setIsLoading(() => true);
 

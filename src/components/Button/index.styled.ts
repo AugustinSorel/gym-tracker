@@ -37,6 +37,7 @@ export const Button = styled.button.attrs(({ type }) => ({
 
 export const DefaultButton = styled(Button)`
   position: relative;
+  outline: none;
 
   &::after {
     content: "";
@@ -54,6 +55,7 @@ export const DefaultButton = styled(Button)`
       theme.animation.timingFunction};
   }
 
+  &:focus-visible::after,
   &:hover::after {
     width: 100%;
   }

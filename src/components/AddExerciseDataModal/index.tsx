@@ -14,7 +14,7 @@ type Props = Omit<ComponentProps<typeof Modal>, "children">;
 
 const defaultFormValues = { numberOfReps: "", weight: "" };
 
-const AddNewExerciseDataModal = (props: Props) => {
+const AddExerciseDataModal = (props: Props) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState(defaultFormValues);
   const [formError, setFormError] = useState(defaultFormValues);
@@ -74,4 +74,4 @@ const AddNewExerciseDataModal = (props: Props) => {
   );
 };
 
-export default AddNewExerciseDataModal;
+export default AddExerciseDataModal;

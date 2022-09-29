@@ -7,7 +7,7 @@ export const newExerciseName = z
   .min(3, "minimum lenght is 3")
   .max(255, "maximum length is 255");
 
-export const addNewExerciseData = z.object({
+export const addExerciseData = z.object({
   numberOfReps: z
     .number({
       required_error: "number of reps are required",

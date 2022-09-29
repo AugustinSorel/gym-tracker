@@ -36,10 +36,9 @@ const exerciseRouter = t.router({
     });
   }),
 
-  //TODO: addNewExerciseData => addExerciseData
   addData: t.procedure
     .use(requireUser)
-    .input(exerciseSchemas.addNewExerciseData)
+    .input(exerciseSchemas.addExerciseData)
     .mutation(({ input }) => {
       console.log(input);
     }),

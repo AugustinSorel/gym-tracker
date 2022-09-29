@@ -1,4 +1,4 @@
-import AddNewExerciseDataModal from "@/components/AddNewExerciseDataModal";
+import AddExerciseDataModal from "@/components/AddExerciseDataModal";
 import Button from "@/components/Button";
 import ExerciseGraph from "@/components/ExerciseGraph";
 import ExerciseHistory from "@/components/ExerciseHistory";
@@ -52,7 +52,7 @@ const ExercisePage: NextPageWithLayout = () => {
       <Button role="newExercise" onClick={modal.open} />
 
       {modal.isOpen && (
-        <AddNewExerciseDataModal
+        <AddExerciseDataModal
           closeHandler={modal.close}
           startExitAnimation={modal.startExitAnimation}
         />

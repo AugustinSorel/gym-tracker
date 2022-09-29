@@ -5,9 +5,10 @@ export const Grid = styled.main`
   margin-top: ${({ theme }) => theme.gaps[900]};
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  place-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
 
-  @media ${({ theme }) => theme.breakpoints.tablet} {
+  @media ${({ theme }) => theme.breakpoints.mobile} {
     grid-template-columns: repeat(auto-fit, 100%);
   }
 `;

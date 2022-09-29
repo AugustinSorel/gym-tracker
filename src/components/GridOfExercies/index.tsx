@@ -3,50 +3,10 @@ import Link from "next/link";
 import { memo, useRef } from "react";
 import { Legend, Line, LineChart, ResponsiveContainer } from "recharts";
 import theme from "src/styles/theme";
+import data from "src/utils/toDelete";
 import trpc from "src/utils/trpc";
 import * as Styles from "./index.styled";
 
-const getRandomValue = () => {
-  return Math.random() * 100;
-};
-
-const data = () => [
-  {
-    name: "Page A",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page B",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page C",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page D",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page E",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page F",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-  {
-    name: "Page G",
-    actual: getRandomValue(),
-    predicted: getRandomValue(),
-  },
-];
 const GridSkeleton = () => {
   return (
     <Styles.GridSkeleton>

@@ -71,6 +71,7 @@ const GridOfExercises = () => {
     return <GridSkeleton />;
   }
 
+  // TODO: Something better ?
   if (exercisesQuery.data.length < 1) {
     return <p>No data</p>;
   }

@@ -1,5 +1,5 @@
 import t from "../trpc";
-import * as exerciseSchemas from "@/schemas/newExerciseSchema";
+import * as exerciseSchemas from "@/schemas/exerciseSchema";
 import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
@@ -35,6 +35,14 @@ const exerciseRouter = t.router({
       orderBy: { createdAt: "asc" },
     });
   }),
+
+  //TODO: addNewExerciseData => addExerciseData
+  addData: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.addNewExerciseData)
+    .mutation(({ input }) => {
+      console.log(input);
+    }),
 });
 
 export default exerciseRouter;

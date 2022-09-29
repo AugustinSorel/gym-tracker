@@ -74,15 +74,11 @@ export const ExerciseName = styled.h2`
   overflow: hidden;
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes[600]};
-  flex: 1;
+  white-space: nowrap;
 `;
 
 export const Header = styled.header`
   background-color: ${({ theme }) => theme.colors[300]};
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gaps[200]};
-  fill: currentColor;
   padding: ${({ theme }) => theme.gaps[200]};
 
   transition-property: background-color;

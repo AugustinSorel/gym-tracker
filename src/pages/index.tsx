@@ -9,7 +9,7 @@ import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
 import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
-  const { closeModal, openModal, showModal, startExitAnimation } = useModal();
+  const modal = useModal();
 
   return (
     <>
@@ -24,12 +24,12 @@ const Home: NextPageWithLayout = () => {
 
       <GridOfExercises />
 
-      <Button role="newExercise" onClick={openModal} />
+      <Button role="newExercise" onClick={modal.open} />
 
-      {showModal && (
+      {modal.isOpen && (
         <NewExerciseModal
-          closeHandler={closeModal}
-          startExitAnimation={startExitAnimation}
+          closeHandler={modal.close}
+          startExitAnimation={modal.startExitAnimation}
         />
       )}
     </>

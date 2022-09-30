@@ -1,25 +1,20 @@
 import { useState } from "react";
 
 const useModal = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsShow] = useState(false);
   const [startExitAnimation, setStartExitAnimation] = useState(false);
 
-  const openModal = () => {
+  const open = () => {
     setStartExitAnimation(false);
-    setShowModal(true);
+    setIsShow(true);
   };
 
-  const closeModal = () => {
+  const close = () => {
     setStartExitAnimation(true);
-    setTimeout(() => setShowModal(false), 1000);
+    setTimeout(() => setIsShow(false), 1000);
   };
 
-  return {
-    closeModal,
-    openModal,
-    showModal,
-    startExitAnimation,
-  };
+  return { close, open, isOpen, startExitAnimation };
 };
 
 export default useModal;

@@ -5,12 +5,17 @@ type Props = {
   title: string;
   subTitle: string;
   children: ReactNode;
-  submitHandler: (e: FormEvent) => void;
+  submitHandler: () => void;
 };
 
 const Form = ({ title, subTitle, children, submitHandler }: Props) => {
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    submitHandler();
+  };
+
   return (
-    <Styles.Form onSubmit={submitHandler}>
+    <Styles.Form onSubmit={onSubmit}>
       <Styles.Title>{title}</Styles.Title>
       <Styles.SubTitle>{subTitle}</Styles.SubTitle>
 

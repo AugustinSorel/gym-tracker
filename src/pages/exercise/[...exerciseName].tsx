@@ -1,6 +1,8 @@
+import AddExerciseDataModal from "@/components/AddExerciseDataModal";
 import Button from "@/components/Button";
 import ExerciseGraph from "@/components/ExerciseGraph";
 import ExerciseHistory from "@/components/ExerciseHistory";
+import useModal from "@/components/Modal/useModal";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import HeaderLayout from "src/layouts/HeaderLayout";
@@ -28,6 +30,7 @@ const Main = styled.main`
 
 const ExercisePage: NextPageWithLayout = () => {
   const router = useRouter();
+  const modal = useModal();
 
   return (
     <>
@@ -46,7 +49,14 @@ const ExercisePage: NextPageWithLayout = () => {
         <ExerciseGraph />
       </Main>
 
-      <Button role="newExercise" />
+      <Button role="newExercise" onClick={modal.open} />
+
+      {modal.isOpen && (
+        <AddExerciseDataModal
+          closeHandler={modal.close}
+          startExitAnimation={modal.startExitAnimation}
+        />
+      )}
     </>
   );
 };

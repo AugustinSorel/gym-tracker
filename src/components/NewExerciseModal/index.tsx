@@ -1,16 +1,13 @@
-import { FormEvent, useState } from "react";
+import { ComponentProps, FormEvent, useState } from "react";
 import trpc from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
 import Input from "../Input";
 import Modal from "../Modal";
 
-type Props = {
-  closeHandler: () => void;
-  startExitAnimation: boolean;
-};
+type Props = Omit<ComponentProps<typeof Modal>, "children">;
 
-const NewExerciseModal = ({ closeHandler, startExitAnimation }: Props) => {
+const NewExerciseModal = (props: Props) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseNameError, setExerciseNameError] = useState("");
 
@@ -18,7 +15,7 @@ const NewExerciseModal = ({ closeHandler, startExitAnimation }: Props) => {
 
   const newExerciseMutation = trpc.exercise.new.useMutation({
     onSuccess: () => {
-      closeHandler();
+      props.closeHandler();
     },
 
     onError: (error) => {
@@ -40,13 +37,12 @@ const NewExerciseModal = ({ closeHandler, startExitAnimation }: Props) => {
     },
   });
 
-  const submitHandler = (e: FormEvent) => {
-    e.preventDefault();
+  const submitHandler = () => {
     newExerciseMutation.mutate(exerciseName);
   };
 
   return (
-    <Modal closeHandler={closeHandler} startExitAnimation={startExitAnimation}>
+    <Modal {...props}>
       <Form
         title="New Exercise"
         subTitle="Enter your new exercise name"

@@ -11,16 +11,20 @@ const dataRouter = t.router({
       const { numberOfReps, weight, exerciseName } = input;
       const oneRepMax = weight * (1 + numberOfReps / 30);
       console.log(input);
-      return;
       try {
-        await prisma.data.create({
+        const data = await prisma.data.create({
           data: {
-            ...input,
+            numberOfReps,
+            weight,
             oneRepMax,
             exercise: { connect: { name: exerciseName } },
           },
         });
-      } catch (error) {}
+
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
     }),
 });
 

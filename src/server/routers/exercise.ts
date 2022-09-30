@@ -35,6 +35,18 @@ const exerciseRouter = t.router({
       orderBy: { createdAt: "asc" },
     });
   }),
+
+  get: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.getExercise)
+    .query(async ({ input }) => {
+      const { exerciseName } = input;
+
+      return await prisma.exercise.findUnique({
+        where: { name: exerciseName },
+        include: { Data: { orderBy: { createdAt: "asc" } } },
+      });
+    }),
 });
 
 export default exerciseRouter;

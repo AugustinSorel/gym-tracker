@@ -15,8 +15,6 @@ const CustomTooltip = ({
     return null;
   }
 
-  console.log(payload, label);
-
   return (
     <Styles.Container>
       <Styles.Text>

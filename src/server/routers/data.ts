@@ -16,27 +16,18 @@ const dataRouter = t.router({
       const oneRepMax = getOneRepMax(numberOfReps, weight);
       const createdAt = getCurrentDateFormated();
 
-      try {
-        const data = await prisma.data.upsert({
-          where: { createdAt },
-          create: {
-            numberOfReps,
-            weight,
-            oneRepMax,
-            exercise: { connect: { name: exerciseName } },
-            createdAt,
-          },
+      return await prisma.data.upsert({
+        where: { createdAt },
+        create: {
+          numberOfReps,
+          weight,
+          oneRepMax,
+          exercise: { connect: { name: exerciseName } },
+          createdAt,
+        },
 
-          update: { numberOfReps, weight, oneRepMax },
-        });
-
-        return data;
-      } catch (error) {
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Something went wrong",
-        });
-      }
+        update: { numberOfReps, weight, oneRepMax },
+      });
     }),
 });
 

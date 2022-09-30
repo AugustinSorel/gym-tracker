@@ -19,10 +19,6 @@ export const Footer = styled.footer`
   gap: ${({ theme }) => theme.gaps[900]};
 `;
 
-export const TimeText = styled.p`
-  text-transform: uppercase;
-`;
-
 export const ExerciseName = styled.h2`
   text-overflow: ellipsis;
   overflow: hidden;

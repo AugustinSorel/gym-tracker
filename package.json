@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "recharts": "^2.1.12",
     "styled-components": "^5.3.5",
+    "superjson": "^1.10.0",
     "zod": "^3.19.1"
   },
   "devDependencies": {

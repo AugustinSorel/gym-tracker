@@ -60,7 +60,18 @@ model Exercise {
   id        String   @id @default(cuid())
   name      String   @unique
   User      User     @relation(fields: [userId], references: [id])
+  Data      Data[]
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Data {
+  id           String   @id @default(cuid())
+  exerciseId   String
+  numberOfReps Int
+  weight       Int
+  oneRepMax    Int
+  exercise     Exercise @relation(fields: [exerciseId], references: [id])
+  createdAt    DateTime @default(now())
 }

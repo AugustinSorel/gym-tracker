@@ -26,7 +26,7 @@ const Grid = memo(({ exercises }: { exercises: Exercise[] }) => {
   return (
     <Styles.Grid>
       {exercises.map((exercise, i) => (
-        <Link href={`/exercise/${exercise.id}`} passHref key={exercise.id}>
+        <Link href={`/exercise/${exercise.name}`} passHref key={exercise.id}>
           <Styles.Anchor delay={i * 50 * (renderCounter.current > 1 ? 0 : 1)}>
             <Styles.Item>
               <Styles.Header>

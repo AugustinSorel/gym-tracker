@@ -35,13 +35,6 @@ const exerciseRouter = t.router({
       orderBy: { createdAt: "asc" },
     });
   }),
-
-  addData: t.procedure
-    .use(requireUser)
-    .input(exerciseSchemas.addExerciseData)
-    .mutation(({ input }) => {
-      console.log(input);
-    }),
 });
 
 export default exerciseRouter;

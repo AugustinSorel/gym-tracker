@@ -73,5 +73,5 @@ model Data {
   weight       Float
   oneRepMax    Float
   exercise     Exercise @relation(fields: [exerciseId], references: [id])
-  createdAt    DateTime @default(now())
+  createdAt    String   @unique
 }

@@ -23,7 +23,12 @@ const AddExerciseDataModal = (props: Props) => {
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
+  //TODO: heuristic update
   const addExerciseData = trpc.data.new.useMutation({
+    onSuccess: () => {
+      props.closeHandler();
+    },
+
     onError: (error) => {
       if (error.data?.zodError) {
         const { numberOfReps, weight } = error.data.zodError.fieldErrors;

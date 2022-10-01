@@ -1,6 +1,6 @@
 import { TimeFrame, TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { useRouter } from "next/router";
-import { memo, useState } from "react";
+import { useState } from "react";
 import {
   Legend,
   Line,
@@ -12,55 +12,44 @@ import {
 } from "recharts";
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";
-import trpc from "src/utils/trpc";
+import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import CustomTooltip from "../CustomTooltip";
 import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
 
-const Footer = ({
-  setSelectedTimeFrame,
-  selectedTimeFrame,
-}: {
-  setSelectedTimeFrame: (timeFrame: TimeFrame) => void;
-  selectedTimeFrame: TimeFrame;
-}) => {
-  return (
-    <Styles.Footer>
-      {TIME_FRAME_ENUM.map((text) => (
-        <Button
-          key={text}
-          role="default"
-          text={text}
-          onClick={() => setSelectedTimeFrame(text)}
-          style={
-            selectedTimeFrame === text
-              ? {
-                  textDecoration: "underline",
-                  textUnderlineOffset: "4px",
-                }
-              : {}
-          }
-        />
-      ))}
-    </Styles.Footer>
-  );
-};
-
-// TODO: FETCH the exericse with placeholder ?
 const ExerciseGraph = () => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
 
   const router = useRouter();
+  const utils = trpc.useContext();
+  const exerciseName = (router.query.exerciseName ?? [""])[0] as string;
 
-  const dataQuery = trpc.exercise.get.useQuery({
-    exerciseName: (router.query.exerciseName ?? [""])[0] as string,
-    timeFrame: selectedTimeFrame,
-  });
+  const dataQuery = trpc.exercise.get.useQuery(
+    {
+      exerciseName,
+      timeFrame: selectedTimeFrame,
+    },
+    {
+      placeholderData: () => {
+        if (selectedTimeFrame === "1M") {
+          return utils.exercise.all
+            .getData()
+            ?.find((d) => d.name === exerciseName);
+        }
 
-  // TODO: make this look nicer
+        return undefined;
+      },
+    }
+  );
+
   if (dataQuery.isLoading || !dataQuery.data) {
-    return <p>Loading...</p>;
+    return (
+      <Styles.ContainerSkeleton>
+        <Styles.HeaderSkeleton />
+        <Styles.FooterSkeleton />
+      </Styles.ContainerSkeleton>
+    );
   }
 
   return (
@@ -69,7 +58,7 @@ const ExerciseGraph = () => {
         <Styles.ExerciseName>{router.query.exerciseName}</Styles.ExerciseName>
       </Styles.Header>
 
-      {dataQuery.data.Data.length === 0 ? (
+      {dataQuery.data.Data.length < 1 ? (
         <>
           <SvgIcon svgName="graph" />
           <Styles.NoDataText>no data</Styles.NoDataText>
@@ -78,7 +67,7 @@ const ExerciseGraph = () => {
         <>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={dataQuery.data.Data}
+              data={[...dataQuery.data.Data]}
               margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
             >
               <Line
@@ -88,13 +77,13 @@ const ExerciseGraph = () => {
                 strokeWidth={2}
                 dot={true}
               />
-              <Line
+              {/* <Line
                 type="monotone"
                 dataKey="predictedOneRepMax"
                 stroke={theme.colors[400]}
                 strokeWidth={2}
                 dot={false}
-              />
+              /> */}
               <XAxis
                 dataKey="createdAt"
                 type="number"
@@ -113,14 +102,28 @@ const ExerciseGraph = () => {
             </LineChart>
           </ResponsiveContainer>
 
-          <Footer
-            selectedTimeFrame={selectedTimeFrame}
-            setSelectedTimeFrame={setSelectedTimeFrame}
-          />
+          <Styles.Footer>
+            {TIME_FRAME_ENUM.map((text) => (
+              <Button
+                key={text}
+                role="default"
+                text={text}
+                onClick={() => setSelectedTimeFrame(text)}
+                style={
+                  selectedTimeFrame === text
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "4px",
+                      }
+                    : {}
+                }
+              />
+            ))}
+          </Styles.Footer>
         </>
       )}
     </Styles.Container>
   );
 };
 
-export default memo(ExerciseGraph);
+export default ExerciseGraph;

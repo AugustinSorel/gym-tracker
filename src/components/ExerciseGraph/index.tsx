@@ -67,9 +67,13 @@ const ExerciseGraph = () => {
     }
   );
 
-  // TODO: make this look nicer
   if (dataQuery.isLoading || !dataQuery.data) {
-    return <p>Loading...</p>;
+    return (
+      <Styles.ContainerSkeleton>
+        <Styles.HeaderSkeleton />
+        <Styles.FooterSkeleton />
+      </Styles.ContainerSkeleton>
+    );
   }
 
   return (

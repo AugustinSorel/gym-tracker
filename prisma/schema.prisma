@@ -68,10 +68,12 @@ model Exercise {
 
 model Data {
   id           String   @id @default(cuid())
-  exerciseId   String
+  exerciseName String
   numberOfReps Float
   weight       Float
   oneRepMax    Float
-  exercise     Exercise @relation(fields: [exerciseId], references: [id])
-  createdAt    DateTime @unique
+  exercise     Exercise @relation(fields: [exerciseName], references: [name])
+  createdAt    DateTime
+
+  @@unique([exerciseName, createdAt])
 }

@@ -16,7 +16,7 @@ const dataRouter = t.router({
       const createdAt = getCurrentDate();
 
       return await prisma.data.upsert({
-        where: { createdAt },
+        where: { exerciseName_createdAt: { createdAt, exerciseName } },
         create: {
           numberOfReps,
           weight,

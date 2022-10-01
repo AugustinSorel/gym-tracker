@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import trpc from "src/utils/trpc";
+import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
 import Input from "../Input";

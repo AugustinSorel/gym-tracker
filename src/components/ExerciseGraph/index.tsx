@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";
-import trpc from "src/utils/trpc";
+import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import CustomTooltip from "../CustomTooltip";
 import SvgIcon from "../SvgIcon";
@@ -47,16 +47,25 @@ const Footer = ({
   );
 };
 
-// TODO: FETCH the exericse with placeholder ?
+// TODO: loading skeleton baby
 const ExerciseGraph = () => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
 
   const router = useRouter();
+  const utils = trpc.useContext();
+  const exerciseName = (router.query.exerciseName ?? [""])[0] as string;
 
-  const dataQuery = trpc.exercise.get.useQuery({
-    exerciseName: (router.query.exerciseName ?? [""])[0] as string,
-    timeFrame: selectedTimeFrame,
-  });
+  const dataQuery = trpc.exercise.get.useQuery(
+    {
+      exerciseName,
+      timeFrame: selectedTimeFrame,
+    },
+    {
+      placeholderData: utils.exercise.all
+        .getData()
+        ?.find((d) => d.name === exerciseName),
+    }
+  );
 
   // TODO: make this look nicer
   if (dataQuery.isLoading || !dataQuery.data) {

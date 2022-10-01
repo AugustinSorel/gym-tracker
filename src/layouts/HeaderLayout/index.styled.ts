@@ -36,6 +36,11 @@ export const Title = styled.h1`
   }
 `;
 
+export const Anchor = styled.a`
+  color: inherit;
+  text-decoration: none;
+`;
+
 export const Name = styled.p`
   @media ${({ theme }) => theme.breakpoints.tablet} {
     display: none;

@@ -1,6 +1,6 @@
 import { TimeFrame, TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { useRouter } from "next/router";
-import { memo, useState } from "react";
+import { useState } from "react";
 import {
   Legend,
   Line,
@@ -17,35 +17,6 @@ import Button from "../Button";
 import CustomTooltip from "../CustomTooltip";
 import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
-
-const Footer = ({
-  setSelectedTimeFrame,
-  selectedTimeFrame,
-}: {
-  setSelectedTimeFrame: (timeFrame: TimeFrame) => void;
-  selectedTimeFrame: TimeFrame;
-}) => {
-  return (
-    <Styles.Footer>
-      {TIME_FRAME_ENUM.map((text) => (
-        <Button
-          key={text}
-          role="default"
-          text={text}
-          onClick={() => setSelectedTimeFrame(text)}
-          style={
-            selectedTimeFrame === text
-              ? {
-                  textDecoration: "underline",
-                  textUnderlineOffset: "4px",
-                }
-              : {}
-          }
-        />
-      ))}
-    </Styles.Footer>
-  );
-};
 
 const ExerciseGraph = () => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
@@ -131,14 +102,28 @@ const ExerciseGraph = () => {
             </LineChart>
           </ResponsiveContainer>
 
-          <Footer
-            selectedTimeFrame={selectedTimeFrame}
-            setSelectedTimeFrame={setSelectedTimeFrame}
-          />
+          <Styles.Footer>
+            {TIME_FRAME_ENUM.map((text) => (
+              <Button
+                key={text}
+                role="default"
+                text={text}
+                onClick={() => setSelectedTimeFrame(text)}
+                style={
+                  selectedTimeFrame === text
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "4px",
+                      }
+                    : {}
+                }
+              />
+            ))}
+          </Styles.Footer>
         </>
       )}
     </Styles.Container>
   );
 };
 
-export default memo(ExerciseGraph);
+export default ExerciseGraph;

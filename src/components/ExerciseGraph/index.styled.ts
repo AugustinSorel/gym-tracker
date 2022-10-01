@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import SkeletonLoader from "src/styles/shared/SkeletonLoader.styled";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors[200]};
@@ -16,9 +17,18 @@ export const Container = styled.div`
   }
 `;
 
+export const ContainerSkeleton = styled(Container)`
+  justify-content: space-between;
+  ${SkeletonLoader}
+`;
+
 export const Header = styled.header`
   background-color: ${({ theme }) => theme.colors[300]};
   padding: ${({ theme }) => theme.gaps[200]};
+`;
+
+export const HeaderSkeleton = styled(Header)`
+  height: 45px;
 `;
 
 export const Footer = styled.footer`
@@ -27,6 +37,10 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: center;
   gap: ${({ theme }) => theme.gaps[900]};
+`;
+
+export const FooterSkeleton = styled(Footer)`
+  height: 45px;
 `;
 
 export const ExerciseName = styled.h2`

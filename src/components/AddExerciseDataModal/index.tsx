@@ -19,6 +19,7 @@ const defaultFormErrors = { numberOfReps: "", weight: "" };
 
 const AddExerciseDataModal = (props: Props) => {
   const router = useRouter();
+  const utils = trpc.useContext();
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
@@ -41,7 +42,11 @@ const AddExerciseDataModal = (props: Props) => {
       }
     },
 
-    onMutate: () => {
+    onSettled: () => {
+      utils.exercise.get.invalidate();
+    },
+
+    onMutate: async () => {
       setFormErrors(defaultFormErrors);
     },
   });

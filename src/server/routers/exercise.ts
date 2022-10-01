@@ -4,6 +4,7 @@ import prisma from "src/utils/prisma";
 import requireUser from "../middlewares/requireUser";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { TRPCError } from "@trpc/server";
+import { timeFrameDict } from "src/utils/date";
 
 const exerciseRouter = t.router({
   new: t.procedure
@@ -35,6 +36,23 @@ const exerciseRouter = t.router({
       orderBy: { createdAt: "asc" },
     });
   }),
+
+  get: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.getExercise)
+    .query(async ({ input }) => {
+      const { exerciseName, timeFrame } = input;
+
+      return await prisma.exercise.findUnique({
+        where: { name: exerciseName },
+        include: {
+          Data: {
+            orderBy: { createdAt: "asc" },
+            where: { createdAt: { gte: timeFrameDict[timeFrame] } },
+          },
+        },
+      });
+    }),
 });
 
 export default exerciseRouter;

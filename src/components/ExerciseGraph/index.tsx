@@ -47,7 +47,6 @@ const Footer = ({
   );
 };
 
-// TODO: loading skeleton baby
 const ExerciseGraph = () => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
 
@@ -61,9 +60,15 @@ const ExerciseGraph = () => {
       timeFrame: selectedTimeFrame,
     },
     {
-      placeholderData: utils.exercise.all
-        .getData()
-        ?.find((d) => d.name === exerciseName),
+      placeholderData: () => {
+        if (selectedTimeFrame === "1M") {
+          return utils.exercise.all
+            .getData()
+            ?.find((d) => d.name === exerciseName);
+        }
+
+        return undefined;
+      },
     }
   );
 
@@ -82,7 +87,7 @@ const ExerciseGraph = () => {
         <Styles.ExerciseName>{router.query.exerciseName}</Styles.ExerciseName>
       </Styles.Header>
 
-      {dataQuery.data.Data.length === 0 ? (
+      {dataQuery.data.Data.length < 1 ? (
         <>
           <SvgIcon svgName="graph" />
           <Styles.NoDataText>no data</Styles.NoDataText>
@@ -91,7 +96,7 @@ const ExerciseGraph = () => {
         <>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={dataQuery.data.Data}
+              data={[...dataQuery.data.Data]}
               margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
             >
               <Line
@@ -101,13 +106,13 @@ const ExerciseGraph = () => {
                 strokeWidth={2}
                 dot={true}
               />
-              <Line
+              {/* <Line
                 type="monotone"
                 dataKey="predictedOneRepMax"
                 stroke={theme.colors[400]}
                 strokeWidth={2}
                 dot={false}
-              />
+              /> */}
               <XAxis
                 dataKey="createdAt"
                 type="number"

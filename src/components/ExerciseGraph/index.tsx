@@ -23,7 +23,8 @@ const ExerciseGraph = () => {
 
   const router = useRouter();
   const utils = trpc.useContext();
-  const exerciseName = (router.query.exerciseName ?? [""])[0] as string;
+
+  const exerciseName = router.query.exerciseName as string;
 
   const dataQuery = trpc.exercise.get.useQuery(
     {
@@ -55,7 +56,7 @@ const ExerciseGraph = () => {
   return (
     <Styles.Container>
       <Styles.Header>
-        <Styles.ExerciseName>{router.query.exerciseName}</Styles.ExerciseName>
+        <Styles.ExerciseName>{exerciseName}</Styles.ExerciseName>
       </Styles.Header>
 
       {dataQuery.data.Data.length < 1 ? (

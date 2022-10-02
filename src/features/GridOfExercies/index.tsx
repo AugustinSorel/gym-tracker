@@ -1,3 +1,4 @@
+import NoDataPanel from "@/components/NoDataPanel";
 import { useRef } from "react";
 import { trpc } from "src/utils/trpc";
 import GridItem from "./GridItem";
@@ -12,9 +13,8 @@ const GridOfExercises = () => {
     return <GridSkeleton />;
   }
 
-  // TODO: Something better ?
   if (exercisesQuery.data.length < 1) {
-    return <p>No data</p>;
+    return <NoDataPanel />;
   }
 
   return (

@@ -52,7 +52,7 @@ const AddExerciseDataModal = (props: Props) => {
   });
 
   const submitHandler = () => {
-    const exerciseName = router.query.exerciseName?.at(0) ?? "";
+    const exerciseName = router.query.exerciseName as string;
     addExerciseData.mutate({ ...formData, exerciseName });
   };
 

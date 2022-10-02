@@ -13,10 +13,10 @@ import {
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";
 import { trpc } from "src/utils/trpc";
-import Button from "../Button";
-import CustomTooltip from "../CustomTooltip";
-import SvgIcon from "../SvgIcon";
-import * as Styles from "./index.styled";
+import Button from "@/components/Button";
+import CustomTooltip from "@/components/CustomTooltip";
+import SvgIcon from "@/components/SvgIcon";
+import * as Styles from "./ExerciseGraph.styled";
 
 const ExerciseGraph = () => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");

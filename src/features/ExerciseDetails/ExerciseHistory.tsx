@@ -1,4 +1,4 @@
-import * as Styles from "./index.styled";
+import * as Styles from "./ExerciseHistory.styled";
 
 const ExerciseHistory = () => {
   return (

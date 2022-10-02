@@ -1,5 +1,5 @@
 import SkeletonLoader from "src/styles/shared/SkeletonLoader.styled";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors[200]};

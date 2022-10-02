@@ -40,7 +40,7 @@ export const Anchor = styled.a<{ delay: number }>`
   animation: ${scaleUp}, ${fade} both;
   animation-duration: ${({ theme }) => theme.animation.durations[300]};
   animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
-  animation-delay: ${({ delay }) => delay}ms !important;
+  animation-delay: ${({ delay }) => delay}ms;
 
   transition-property: transform, background-color;
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};

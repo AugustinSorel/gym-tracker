@@ -72,13 +72,6 @@ const ExerciseGraph = () => {
               strokeWidth={2}
               dot={true}
             />
-            {/* <Line
-                type="monotone"
-                dataKey="predictedOneRepMax"
-                stroke={theme.colors[400]}
-                strokeWidth={2}
-                dot={false}
-              /> */}
             {dataQuery.data.Data.length > 0 && (
               <>
                 <XAxis

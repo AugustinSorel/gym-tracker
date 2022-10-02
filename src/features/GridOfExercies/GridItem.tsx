@@ -31,14 +31,6 @@ const GridItem = ({ exercise, delay }: Props) => {
                 dot={false}
                 isAnimationActive={false}
               />
-              <Line
-                type="monotone"
-                dataKey="predictedOneRepMax"
-                stroke={theme.colors[400]}
-                strokeWidth={2}
-                dot={false}
-                isAnimationActive={false}
-              />
               <Legend />
             </LineChart>
           </ResponsiveContainer>

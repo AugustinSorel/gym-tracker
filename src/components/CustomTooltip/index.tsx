@@ -4,6 +4,7 @@ import {
   NameType,
 } from "recharts/src/component/DefaultTooltipContent";
 import { getDateInFrenchFormat } from "src/utils/date";
+import { TwoDigitsNumber } from "src/utils/math";
 import * as Styles from "./index.styled";
 
 const CustomTooltip = ({
@@ -21,11 +22,14 @@ const CustomTooltip = ({
         date: <strong>{getDateInFrenchFormat(label)}</strong>
       </Styles.Text>
       <Styles.Text>
-        one rep max: <strong>{payload[0].payload.oneRepMax}</strong>
+        one rep max:{" "}
+        <strong>{TwoDigitsNumber(payload[0].payload.oneRepMax ?? 0)}</strong>
       </Styles.Text>
       <Styles.Text>
         predicted one rep max:{" "}
-        <strong>{payload[0].payload.predictedOneRepMax}</strong>
+        <strong>
+          {TwoDigitsNumber(payload[0].payload.predictedOneRepMax ?? 0)}
+        </strong>
       </Styles.Text>
     </Styles.Container>
   );

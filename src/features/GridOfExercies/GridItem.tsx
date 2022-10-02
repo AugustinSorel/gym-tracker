@@ -5,16 +5,11 @@ import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./GridItem.styled";
 
 type Props = {
-  exercise: InferProcedures["exercise"]["get"]["output"];
+  exercise: NonNullable<InferProcedures["exercise"]["get"]["output"]>;
   delay: number;
 };
 
-// TODO: Make a graph component ?
 const GridItem = ({ exercise, delay }: Props) => {
-  if (!exercise) {
-    return null;
-  }
-
   return (
     <Link href={`/exercise/${exercise.name}`} passHref>
       <Styles.Anchor delay={delay}>

@@ -17,7 +17,6 @@ export const SubTitle = styled.h2`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  display: flex;
 
   & > *:not(h1, h2, button) {
     margin-bottom: ${({ theme }) => theme.gaps[700]};

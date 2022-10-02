@@ -1,24 +1,6 @@
-import SkeletonLoader from "src/styles/shared/SkeletonLoader.styled";
 import styled, { keyframes } from "styled-components";
 
-export const Grid = styled.main`
-  gap: ${({ theme }) => theme.gaps[900]};
-  margin-top: ${({ theme }) => theme.gaps[900]};
-
-  display: grid;
-  place-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
-
-  @media ${({ theme }) => theme.breakpoints.mobile} {
-    grid-template-columns: repeat(auto-fit, 100%);
-  }
-`;
-
-export const GridSkeleton = styled(Grid)`
-  ${SkeletonLoader}
-`;
-
-export const Item = styled.div`
+export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors[200]};
   aspect-ratio: 1;
   cursor: pointer;
@@ -32,35 +14,6 @@ export const Item = styled.div`
   transition-property: transform, background-color;
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
-`;
-
-export const ItemSkeleton = styled(Item)``;
-
-export const ExerciseName = styled.h2`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes[600]};
-  white-space: nowrap;
-`;
-
-export const Header = styled.header`
-  background-color: ${({ theme }) => theme.colors[300]};
-  padding: ${({ theme }) => theme.gaps[200]};
-
-  transition-property: background-color;
-  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
-  transition-duration: ${({ theme }) => theme.animation.durations[300]};
-`;
-
-export const HeaderSkeleton = styled(Header)`
-  height: ${({ theme }) => theme.fontSizes[900]};
-`;
-
-export const Graph = styled.div`
-  flex: 1;
-  background-color: ${({ theme }) => theme.colors[400]};
-  margin: ${({ theme }) => theme.gaps[900]};
 `;
 
 const fade = keyframes`
@@ -87,7 +40,7 @@ export const Anchor = styled.a<{ delay: number }>`
   animation: ${scaleUp}, ${fade} both;
   animation-duration: ${({ theme }) => theme.animation.durations[300]};
   animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
-  animation-delay: ${({ delay }) => delay}ms;
+  animation-delay: ${({ delay }) => delay}ms !important;
 
   transition-property: transform, background-color;
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
@@ -113,4 +66,21 @@ export const Anchor = styled.a<{ delay: number }>`
   &:active {
     transform: scale(0.98);
   }
+`;
+
+export const Header = styled.header`
+  background-color: ${({ theme }) => theme.colors[300]};
+  padding: ${({ theme }) => theme.gaps[200]};
+
+  transition-property: background-color;
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+`;
+
+export const ExerciseName = styled.h2`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes[600]};
+  white-space: nowrap;
 `;

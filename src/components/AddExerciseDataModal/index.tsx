@@ -24,7 +24,6 @@ const AddExerciseDataModal = (props: Props) => {
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
-  //TODO: heuristic update
   const addExerciseData = trpc.data.new.useMutation({
     onSuccess: () => {
       props.closeHandler();
@@ -46,13 +45,13 @@ const AddExerciseDataModal = (props: Props) => {
       utils.exercise.get.invalidate();
     },
 
-    onMutate: async () => {
+    onMutate: () => {
       setFormErrors(defaultFormErrors);
     },
   });
 
   const submitHandler = () => {
-    const exerciseName = router.query.exerciseName?.at(0) ?? "";
+    const exerciseName = router.query.exerciseName as string;
     addExerciseData.mutate({ ...formData, exerciseName });
   };
 

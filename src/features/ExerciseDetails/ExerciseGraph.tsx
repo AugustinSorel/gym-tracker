@@ -4,7 +4,6 @@ import NoDataPanel from "@/components/NoDataPanel";
 import { TimeFrame, TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { Data } from "@prisma/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import {
   Legend,
   Line,
@@ -16,7 +15,7 @@ import {
 } from "recharts";
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";
-import { trpc } from "src/utils/trpc";
+import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./ExerciseGraph.styled";
 
 const Skeleton = () => {
@@ -68,43 +67,29 @@ const Graph = ({ data }: { data: Data[] }) => {
   );
 };
 
-const ExerciseGraph = () => {
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
+type Props = {
+  isLoading: boolean;
+  setSelectedTimeFrame: (timeFrame: TimeFrame) => void;
+  selectedTimeFrame: TimeFrame;
+  exercise?: InferProcedures["exercise"]["get"]["output"];
+};
 
+const ExerciseGraph = (props: Props) => {
+  const { isLoading, exercise, selectedTimeFrame, setSelectedTimeFrame } =
+    props;
   const router = useRouter();
-  const utils = trpc.useContext();
 
-  const exerciseName = router.query.exerciseName as string;
-
-  const dataQuery = trpc.exercise.get.useQuery(
-    {
-      exerciseName,
-      timeFrame: selectedTimeFrame,
-    },
-    {
-      placeholderData: () => {
-        if (selectedTimeFrame === "1M") {
-          return utils.exercise.all
-            .getData()
-            ?.find((d) => d.name === exerciseName);
-        }
-
-        return undefined;
-      },
-    }
-  );
-
-  if (dataQuery.isLoading || !dataQuery.data) {
+  if (isLoading || !exercise) {
     return <Skeleton />;
   }
 
   return (
     <Styles.Container>
       <Styles.Header>
-        <Styles.ExerciseName>{exerciseName}</Styles.ExerciseName>
+        <Styles.ExerciseName>{router.query.exerciseName}</Styles.ExerciseName>
       </Styles.Header>
 
-      <Graph data={dataQuery.data.Data} />
+      <Graph data={exercise.Data} />
 
       <Styles.Footer>
         {TIME_FRAME_ENUM.map((text) => (

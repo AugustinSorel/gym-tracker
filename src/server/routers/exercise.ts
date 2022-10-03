@@ -9,13 +9,13 @@ import { timeFrameDict } from "src/utils/date";
 const exerciseRouter = t.router({
   new: t.procedure
     .use(requireUser)
-    .input(exerciseSchemas.newExerciseName)
+    .input(exerciseSchemas.exerciseName)
     .mutation(async ({ input, ctx }) => {
       try {
         return await prisma.exercise.create({
           data: {
             name: input,
-            User: { connect: { id: ctx.user.id } },
+            user: { connect: { id: ctx.user.id } },
           },
         });
       } catch (error) {
@@ -34,7 +34,7 @@ const exerciseRouter = t.router({
     return await prisma.exercise.findMany({
       where: { userId: ctx.user.id },
       include: {
-        Data: {
+        data: {
           orderBy: { createdAt: "asc" },
           where: { createdAt: { gte: timeFrameDict["1M"] } },
         },
@@ -47,12 +47,12 @@ const exerciseRouter = t.router({
     .use(requireUser)
     .input(exerciseSchemas.getExercise)
     .query(async ({ input }) => {
-      const { exerciseName, timeFrame } = input;
+      const { exerciseId, timeFrame } = input;
 
       return await prisma.exercise.findUnique({
-        where: { name: exerciseName },
+        where: { id: exerciseId },
         include: {
-          Data: {
+          data: {
             orderBy: { createdAt: "asc" },
             where: { createdAt: { gte: timeFrameDict[timeFrame] } },
           },

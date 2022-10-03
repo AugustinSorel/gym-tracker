@@ -1,8 +1,8 @@
 import z from "zod";
-import { newExerciseName } from "./exerciseSchema";
+import { exerciseId } from "./exerciseSchema";
 
 export const addData = z.object({
-  exerciseName: newExerciseName,
+  exerciseId,
   numberOfReps: z
     .number({
       required_error: "number of reps are required",

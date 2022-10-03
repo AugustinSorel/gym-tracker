@@ -1,17 +1,14 @@
-import { TimeFrame } from "@/schemas/exerciseSchema";
+import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { getDateInFrenchFormat } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
-import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./ExerciseHistory.styled";
+import useGetSelectedExercise from "./useGetSelectedExercise";
 
-type Props = {
-  isLoading: boolean;
-  timeFrame: TimeFrame;
-  exercise?: InferProcedures["exercise"]["get"]["output"];
-};
+const ExerciseHistory = () => {
+  const { timeFrame } = useSelectedTimeFrame();
+  const selectedExercise = useGetSelectedExercise();
 
-const ExerciseHistory = ({ exercise, isLoading, timeFrame }: Props) => {
-  if (isLoading || !exercise) {
+  if (!selectedExercise) {
     return (
       <Styles.ListSkeleton>
         {[...Array(20)].map((_, i) => (
@@ -30,7 +27,7 @@ const ExerciseHistory = ({ exercise, isLoading, timeFrame }: Props) => {
         <Styles.Date>Date</Styles.Date>
       </Styles.ListItem>
 
-      {exercise.Data.reverse().map((data, i) => (
+      {selectedExercise.data.reverse().map((data, i) => (
         <Styles.ListItem key={timeFrame + data.id} delay={i * 50}>
           <Styles.OneRepMax>{TwoDigitsNumber(data.oneRepMax)}</Styles.OneRepMax>
           <Styles.NumberOfReps>

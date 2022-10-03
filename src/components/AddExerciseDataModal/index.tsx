@@ -51,8 +51,10 @@ const AddExerciseDataModal = (props: Props) => {
   });
 
   const submitHandler = () => {
-    const exerciseName = router.query.exerciseName as string;
-    addExerciseData.mutate({ ...formData, exerciseName });
+    addExerciseData.mutate({
+      ...formData,
+      exerciseId: router.query.exerciseId as string,
+    });
   };
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {

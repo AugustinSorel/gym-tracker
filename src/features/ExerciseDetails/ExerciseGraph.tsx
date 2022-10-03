@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import CustomTooltip from "@/components/CustomTooltip";
 import NoDataPanel from "@/components/NoDataPanel";
-import { TimeFrame, TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
+import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { Data } from "@prisma/client";
 import { useRouter } from "next/router";
 import {
@@ -13,10 +13,11 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";
-import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./ExerciseGraph.styled";
+import useGetSelectedExercise from "./useGetSelectedExercise";
 
 const Skeleton = () => {
   return (
@@ -67,29 +68,22 @@ const Graph = ({ data }: { data: Data[] }) => {
   );
 };
 
-type Props = {
-  isLoading: boolean;
-  setSelectedTimeFrame: (timeFrame: TimeFrame) => void;
-  selectedTimeFrame: TimeFrame;
-  exercise?: InferProcedures["exercise"]["get"]["output"];
-};
-
-const ExerciseGraph = (props: Props) => {
-  const { isLoading, exercise, selectedTimeFrame, setSelectedTimeFrame } =
-    props;
+const ExerciseGraph = () => {
   const router = useRouter();
+  const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
+  const selectedExercise = useGetSelectedExercise();
 
-  if (isLoading || !exercise) {
+  if (!selectedExercise) {
     return <Skeleton />;
   }
 
   return (
     <Styles.Container>
       <Styles.Header>
-        <Styles.ExerciseName>{router.query.exerciseName}</Styles.ExerciseName>
+        <Styles.ExerciseName>{selectedExercise.name}</Styles.ExerciseName>
       </Styles.Header>
 
-      <Graph data={exercise.Data} />
+      <Graph data={selectedExercise.data} />
 
       <Styles.Footer>
         {TIME_FRAME_ENUM.map((text) => (
@@ -97,9 +91,9 @@ const ExerciseGraph = (props: Props) => {
             key={text}
             role="default"
             text={text}
-            onClick={() => setSelectedTimeFrame(text)}
+            onClick={() => setTimeFrame(text)}
             style={
-              selectedTimeFrame === text
+              timeFrame === text
                 ? {
                     textDecoration: "underline",
                     textUnderlineOffset: "4px",

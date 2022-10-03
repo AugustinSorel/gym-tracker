@@ -11,7 +11,7 @@ type Props = {
 
 const GridItem = ({ exercise, delay }: Props) => {
   return (
-    <Link href={`/exercise/${exercise.name}`} passHref>
+    <Link href={`/exercise/${exercise.id}`} passHref>
       <Styles.Anchor delay={delay}>
         <Styles.Container>
           <Styles.Header>
@@ -20,7 +20,7 @@ const GridItem = ({ exercise, delay }: Props) => {
 
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={exercise.Data}
+              data={exercise.data}
               margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
             >
               <Line

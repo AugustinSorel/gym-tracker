@@ -58,22 +58,24 @@ model VerificationToken {
 
 model Exercise {
   id        String   @id @default(cuid())
-  name      String   @unique
-  User      User     @relation(fields: [userId], references: [id])
-  Data      Data[]
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  data      Data[]
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, name])
 }
 
 model Data {
   id           String   @id @default(cuid())
-  exerciseName String
+  exerciseId   String
   numberOfReps Float
   weight       Float
   oneRepMax    Float
-  exercise     Exercise @relation(fields: [exerciseName], references: [name])
+  exercise     Exercise @relation(fields: [exerciseId], references: [id])
   createdAt    DateTime
 
-  @@unique([exerciseName, createdAt])
+  @@unique([exerciseId, createdAt])
 }

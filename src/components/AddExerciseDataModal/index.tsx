@@ -1,11 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  ChangeEvent,
-  ComponentProps,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, ComponentProps, useState } from "react";
 import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
@@ -20,7 +14,6 @@ const defaultFormErrors = { numberOfReps: "", weight: "" };
 const AddExerciseDataModal = (props: Props) => {
   const router = useRouter();
   const utils = trpc.useContext();
-  const firstInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
@@ -45,6 +38,7 @@ const AddExerciseDataModal = (props: Props) => {
       utils.exercise.get.invalidate();
     },
 
+    // TODO: heuristic update baby
     onMutate: () => {
       setFormErrors(defaultFormErrors);
     },
@@ -64,10 +58,6 @@ const AddExerciseDataModal = (props: Props) => {
     }));
   };
 
-  useEffect(() => {
-    firstInputRef.current?.focus();
-  }, []);
-
   return (
     <Modal {...props}>
       <Form
@@ -77,7 +67,7 @@ const AddExerciseDataModal = (props: Props) => {
       >
         <Input
           type="number"
-          ref={firstInputRef}
+          autoFocus
           role="form"
           labelText="Number of reps"
           htmlFor="numberOfRepsInput"

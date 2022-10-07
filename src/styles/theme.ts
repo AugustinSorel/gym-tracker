@@ -5,6 +5,7 @@ const gapBase = 1;
 const colorBase = 50;
 const borderRadiusBase = 0.3;
 const borderSizeBase = 0.15;
+const maxWidth = 1500;
 
 const theme: DefaultTheme = {
   colors: {
@@ -64,6 +65,7 @@ const theme: DefaultTheme = {
     mobile: "screen and (max-width: 425px)",
     tablet: "screen and (max-width: 768px)",
     desktop: "screen and (max-width: 1024px)",
+    maxWidthOnly: `screen and (max-width: ${maxWidth}px)`,
   },
 
   animation: {
@@ -75,7 +77,7 @@ const theme: DefaultTheme = {
     timingFunction: "ease-in-out",
   },
 
-  maxWidth: "1500px",
+  maxWidth: `${maxWidth}px`,
 
   blur: "10px",
 };

@@ -6,9 +6,9 @@ type Store = {
   setTimeFrame: (timeFrame: TimeFrame) => void;
 };
 
-const useSelectedExerciseStore = create<Store>((set) => ({
+const useSelectedTimeFrameStore = create<Store>((set) => ({
   timeFrame: "1M",
   setTimeFrame: (timeFrame) => set({ timeFrame }),
 }));
 
-export default useSelectedExerciseStore;
+export default useSelectedTimeFrameStore;

@@ -30,12 +30,6 @@ const Skeleton = () => {
 };
 
 const Graph = ({ data }: { data: Data[] }) => {
-  const [graphData, setGraphData] = useState(data);
-
-  useEffect(() => {
-    setGraphData(data);
-  }, [data]);
-
   if (data.length < 1) {
     return <NoDataPanel />;
   }
@@ -43,7 +37,7 @@ const Graph = ({ data }: { data: Data[] }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
-        data={graphData}
+        data={data}
         margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
       >
         <Line
@@ -52,6 +46,7 @@ const Graph = ({ data }: { data: Data[] }) => {
           stroke={theme.colors.action}
           strokeWidth={2}
           dot={true}
+          isAnimationActive={false}
         />
         {data.length > 0 && (
           <>

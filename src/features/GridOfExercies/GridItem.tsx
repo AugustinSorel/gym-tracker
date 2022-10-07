@@ -12,8 +12,7 @@ type Props = {
 };
 
 const GridItem = ({ exercise, delay }: Props) => {
-  const [data] = useState(exercise.data);
-
+  const { data } = exercise;
   return (
     <Link href={`/exercise/${exercise.id}`} passHref>
       <Styles.Anchor delay={delay}>
@@ -33,6 +32,7 @@ const GridItem = ({ exercise, delay }: Props) => {
                 stroke={theme.colors.action}
                 strokeWidth={2}
                 dot={false}
+                isAnimationActive={false}
               />
               {data.length > 0 && (
                 <>

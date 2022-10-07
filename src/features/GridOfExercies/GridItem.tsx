@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
-import { Legend, Line, LineChart, ResponsiveContainer } from "recharts";
+import { Legend, Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
 import theme from "src/styles/theme";
+import { getDateInFrenchFormat } from "src/utils/date";
 import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./GridItem.styled";
 
@@ -12,6 +13,8 @@ type Props = {
 
 const GridItem = ({ exercise, delay }: Props) => {
   const [data] = useState(exercise.data);
+
+  console.log(data);
 
   return (
     <Link href={`/exercise/${exercise.id}`} passHref>
@@ -33,7 +36,22 @@ const GridItem = ({ exercise, delay }: Props) => {
                 strokeWidth={2}
                 dot={false}
               />
-              <Legend />
+              {data.length > 0 && (
+                <>
+                  <XAxis
+                    dataKey="createdAt"
+                    type="number"
+                    scale="time"
+                    tickFormatter={getDateInFrenchFormat}
+                    visibility={"hidden"}
+                    domain={[
+                      data[0].createdAt.getTime(),
+                      data[data.length - 1].createdAt.getTime(),
+                    ]}
+                  />
+                  <Legend />
+                </>
+              )}{" "}
             </LineChart>
           </ResponsiveContainer>
         </Styles.Container>

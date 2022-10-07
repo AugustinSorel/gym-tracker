@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import { Legend, Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
 import theme from "src/styles/theme";
 import { getDateInFrenchFormat } from "src/utils/date";

@@ -3,8 +3,6 @@ import CustomTooltip from "@/components/CustomTooltip";
 import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { Data } from "@prisma/client";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import {
   Legend,
   Line,
@@ -38,7 +36,7 @@ const Graph = ({ data }: { data: Data[] }) => {
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         data={data}
-        margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
+        margin={{ bottom: 10, left: -15, right: 20, top: 20 }}
       >
         <Line
           type="monotone"
@@ -71,7 +69,6 @@ const Graph = ({ data }: { data: Data[] }) => {
 };
 
 const ExerciseGraph = () => {
-  const router = useRouter();
   const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
   const selectedExercise = useGetSelectedExercise();
 

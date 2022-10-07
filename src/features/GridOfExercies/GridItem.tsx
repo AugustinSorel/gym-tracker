@@ -14,8 +14,6 @@ type Props = {
 const GridItem = ({ exercise, delay }: Props) => {
   const [data] = useState(exercise.data);
 
-  console.log(data);
-
   return (
     <Link href={`/exercise/${exercise.id}`} passHref>
       <Styles.Anchor delay={delay}>

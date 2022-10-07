@@ -4,7 +4,7 @@ import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { Data } from "@prisma/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Legend,
   Line,
@@ -30,7 +30,11 @@ const Skeleton = () => {
 };
 
 const Graph = ({ data }: { data: Data[] }) => {
-  const [graphData] = useState(data);
+  const [graphData, setGraphData] = useState(data);
+
+  useEffect(() => {
+    setGraphData(data);
+  }, [data]);
 
   if (data.length < 1) {
     return <NoDataPanel />;

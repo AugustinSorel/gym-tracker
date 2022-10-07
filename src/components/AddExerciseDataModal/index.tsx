@@ -38,7 +38,6 @@ const AddExerciseDataModal = (props: Props) => {
       utils.exercise.get.invalidate();
     },
 
-    // TODO: heuristic update baby
     onMutate: () => {
       setFormErrors(defaultFormErrors);
     },

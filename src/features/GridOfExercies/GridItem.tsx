@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 import { Legend, Line, LineChart, ResponsiveContainer } from "recharts";
 import theme from "src/styles/theme";
 import { InferProcedures } from "src/utils/trpc";
@@ -10,6 +11,8 @@ type Props = {
 };
 
 const GridItem = ({ exercise, delay }: Props) => {
+  const [data] = useState(exercise.data);
+
   return (
     <Link href={`/exercise/${exercise.id}`} passHref>
       <Styles.Anchor delay={delay}>
@@ -20,7 +23,7 @@ const GridItem = ({ exercise, delay }: Props) => {
 
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={exercise.data}
+              data={data}
               margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
             >
               <Line
@@ -29,7 +32,6 @@ const GridItem = ({ exercise, delay }: Props) => {
                 stroke={theme.colors.action}
                 strokeWidth={2}
                 dot={false}
-                isAnimationActive={false}
               />
               <Legend />
             </LineChart>

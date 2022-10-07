@@ -4,6 +4,7 @@ import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { Data } from "@prisma/client";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import {
   Legend,
   Line,
@@ -29,6 +30,8 @@ const Skeleton = () => {
 };
 
 const Graph = ({ data }: { data: Data[] }) => {
+  const [graphData] = useState(data);
+
   if (data.length < 1) {
     return <NoDataPanel />;
   }
@@ -36,7 +39,7 @@ const Graph = ({ data }: { data: Data[] }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
-        data={[...data]}
+        data={graphData}
         margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
       >
         <Line

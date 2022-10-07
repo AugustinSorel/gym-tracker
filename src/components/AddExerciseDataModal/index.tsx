@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, ComponentProps, useState } from "react";
+import useSelectedTimeFrameStore from "src/store/useSelectedTimeFrame";
 import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
@@ -14,6 +15,7 @@ const defaultFormErrors = { numberOfReps: "", weight: "" };
 const AddExerciseDataModal = (props: Props) => {
   const router = useRouter();
   const utils = trpc.useContext();
+  const { timeFrame } = useSelectedTimeFrameStore();
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
@@ -35,7 +37,10 @@ const AddExerciseDataModal = (props: Props) => {
     },
 
     onSettled: () => {
-      utils.exercise.get.invalidate();
+      utils.exercise.get.invalidate({
+        exerciseId: router.query.exerciseId as string,
+        timeFrame,
+      });
     },
 
     onMutate: () => {

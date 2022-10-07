@@ -20,23 +20,23 @@ const ExerciseHistory = () => {
 
   return (
     <Styles.List>
-      <Styles.ListItem delay={0}>
-        <Styles.OneRepMax>PR</Styles.OneRepMax>
-        <Styles.OneRepMax>Nº</Styles.OneRepMax>
-        <Styles.OneRepMax>Kg</Styles.OneRepMax>
-        <Styles.Date>Date</Styles.Date>
+      <Styles.ListItem>
+        <Styles.Text>PR</Styles.Text>
+        <Styles.Text>Est</Styles.Text>
+        <Styles.Text>Rep</Styles.Text>
+        <Styles.Text>Kg</Styles.Text>
+        <Styles.Text>Date</Styles.Text>
       </Styles.ListItem>
 
       {selectedExercise.data.reverse().map((data, i) => (
-        <Styles.ListItem key={timeFrame + data.id} delay={i * 50}>
-          <Styles.OneRepMax>{TwoDigitsNumber(data.oneRepMax)}</Styles.OneRepMax>
-          <Styles.NumberOfReps>
-            {TwoDigitsNumber(data.numberOfReps)}
-          </Styles.NumberOfReps>
-          <Styles.Weight>{TwoDigitsNumber(data.weight)}</Styles.Weight>
-          <Styles.Date>
+        <Styles.ListItem key={timeFrame + data.id} delay={(i + 1) * 50}>
+          <Styles.Text>{TwoDigitsNumber(data.oneRepMax)}</Styles.Text>
+          <Styles.Text>{TwoDigitsNumber(0)}</Styles.Text>
+          <Styles.Text>{TwoDigitsNumber(data.numberOfReps)}</Styles.Text>
+          <Styles.Text>{TwoDigitsNumber(data.weight)}</Styles.Text>
+          <Styles.Text>
             {getDateInFrenchFormat(data.createdAt.toLocaleDateString())}
-          </Styles.Date>
+          </Styles.Text>
         </Styles.ListItem>
       ))}
     </Styles.List>

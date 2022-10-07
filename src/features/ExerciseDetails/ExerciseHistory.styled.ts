@@ -1,8 +1,9 @@
 import scrollbar from "src/styles/shared/scrollbar.styled";
 import SkeletonLoader from "src/styles/shared/SkeletonLoader.styled";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const List = styled.ul`
+  border-radius: ${({ theme }) => theme.border.radius[500]};
   background-color: ${({ theme }) => theme.colors[200]};
   display: flex;
   flex-direction: column;
@@ -31,17 +32,18 @@ const listItemAnimation = keyframes`
   }
 `;
 
-export const ListItem = styled.li<{ delay: number }>`
+export const ListItem = styled.li<{ delay?: number }>`
   display: flex;
-  padding: ${({ theme }) => theme.gaps[500]};
+  padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
 
   &:first-child {
     position: sticky;
+    padding: ${({ theme }) => theme.gaps[200]};
     top: 0;
     backdrop-filter: blur(${({ theme }) => theme.blur});
   }
 
-  &:nth-child(even) {
+  &:nth-child(odd) {
     background-color: ${({ theme }) => theme.colors[300]};
   }
 
@@ -49,25 +51,24 @@ export const ListItem = styled.li<{ delay: number }>`
     flex: 1;
   }
 
-  animation-name: ${listItemAnimation};
-  animation-duration: ${({ theme }) => theme.animation.durations[300]};
-  animation-timing-function: ${({ theme }) => theme.animation.timingFunction};
-  animation-delay: ${({ delay }) => delay}ms;
-  animation-fill-mode: both;
+  ${({ delay }) =>
+    delay &&
+    css`
+      animation-name: ${listItemAnimation};
+      animation-duration: ${({ theme }) => theme.animation.durations[300]};
+      animation-timing-function: ${({ theme }) =>
+        theme.animation.timingFunction};
+      animation-delay: ${delay}ms;
+      animation-fill-mode: both;
+    `};
 `;
 
-export const ListItemSkeleton = styled.li`
-  padding: ${({ theme }) => theme.gaps[500]};
+export const ListItemSkeleton = styled(ListItem)`
+  padding: ${({ theme }) => theme.gaps[900]};
 
-  &:nth-child(even) {
-    background-color: ${({ theme }) => theme.colors[300]};
+  &:first-child {
+    padding: ${({ theme }) => theme.gaps[600]};
   }
 `;
 
-export const OneRepMax = styled.p``;
-
-export const Weight = styled.p``;
-
-export const NumberOfReps = styled.p``;
-
-export const Date = styled.p``;
+export const Text = styled.p``;

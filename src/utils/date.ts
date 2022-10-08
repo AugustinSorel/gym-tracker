@@ -21,17 +21,17 @@ export const sortByDateAsc = (x: Data, y: Data) => {
   return y.createdAt.getTime() - x.createdAt.getTime();
 };
 
-const addMonths = (date: Date, months: number) => {
+export const addMonths = (date: Date, months: number) => {
   date.setMonth(date.getMonth() + months);
   return date;
 };
 
-const addDays = (date: Date, days: number) => {
+export const addDays = (date: Date, days: number) => {
   date.setDate(date.getDate() + days);
   return date;
 };
 
-const addYears = (date: Date, years: number) => {
+export const addYears = (date: Date, years: number) => {
   date.setFullYear(date.getFullYear() + years);
   return date;
 };

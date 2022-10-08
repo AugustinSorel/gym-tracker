@@ -59,7 +59,7 @@ model VerificationToken {
 model Exercise {
   id        String   @id @default(cuid())
   name      String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   data      Data[]
   userId    String
   createdAt DateTime @default(now())
@@ -74,7 +74,7 @@ model Data {
   numberOfReps Float
   weight       Float
   oneRepMax    Float
-  exercise     Exercise @relation(fields: [exerciseId], references: [id])
+  exercise     Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   createdAt    DateTime
 
   @@unique([exerciseId, createdAt])

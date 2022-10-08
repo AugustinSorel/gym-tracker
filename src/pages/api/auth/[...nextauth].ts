@@ -3,9 +3,10 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import prisma from "src/utils/prisma";
-
+import { addDays } from "src/utils/date";
 import { sendVerificationRequest } from "src/utils/email";
+import { getOneRepMax } from "src/utils/math";
+import prisma from "src/utils/prisma";
 
 export const nextAuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -45,6 +46,41 @@ export const nextAuthOptions: NextAuthOptions = {
     signOut: "/sign-out",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  events: {
+    createUser: async ({ user }) => {
+      await prisma.exercise.create({
+        data: {
+          name: "Hello",
+          data: {
+            createMany: {
+              data: [
+                {
+                  createdAt: addDays(new Date(), -5),
+                  numberOfReps: 10,
+                  weight: 10,
+                  oneRepMax: getOneRepMax(10, 10),
+                },
+                {
+                  createdAt: addDays(new Date(), -4),
+                  numberOfReps: 20,
+                  weight: 20,
+                  oneRepMax: getOneRepMax(20, 20),
+                },
+                {
+                  createdAt: addDays(new Date(), -3),
+                  numberOfReps: 10,
+                  weight: 10,
+                  oneRepMax: getOneRepMax(10, 10),
+                },
+              ],
+            },
+          },
+          createdAt: addDays(new Date(), -7),
+          userId: user.id,
+        },
+      });
+    },
+  },
 };
 
 export default NextAuth(nextAuthOptions);

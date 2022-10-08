@@ -11,6 +11,11 @@ export const Container = styled.div`
   position: relative;
 `;
 
+export const GraphSection = styled.section`
+  height: 85%;
+  width: 100%;
+`;
+
 export const ContainerSkeleton = styled(Container)`
   ${SkeletonLoader}
 `;

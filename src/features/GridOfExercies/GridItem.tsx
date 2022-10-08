@@ -1,9 +1,11 @@
+import { ResponsiveLine } from "@nivo/line";
 import Link from "next/link";
-import { Legend, Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
 import theme from "src/styles/theme";
-import { getDateInFrenchFormat } from "src/utils/date";
+import serializeGraphData from "src/utils/graph";
 import { InferProcedures } from "src/utils/trpc";
 import * as Styles from "./GridItem.styled";
+
+//FIXME: removed unused dependencies
 
 type Props = {
   exercise: NonNullable<InferProcedures["exercise"]["get"]["output"]>;
@@ -11,7 +13,6 @@ type Props = {
 };
 
 const GridItem = ({ exercise, delay }: Props) => {
-  const { data } = exercise;
   return (
     <Link href={`/exercise/${exercise.id}`} passHref>
       <Styles.Anchor delay={delay}>
@@ -20,37 +21,24 @@ const GridItem = ({ exercise, delay }: Props) => {
             <Styles.ExerciseName>{exercise.name}</Styles.ExerciseName>
           </Styles.Header>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={data}
-              margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
-            >
-              <Line
-                type="monotone"
-                dataKey="oneRepMax"
-                stroke={theme.colors.action}
-                strokeWidth={2}
-                dot={false}
-                isAnimationActive={false}
+          {exercise.data.length > 0 && (
+            <div>
+              <ResponsiveLine
+                data={serializeGraphData(exercise.data)}
+                margin={{ bottom: 10, left: 10, right: 10, top: 10 }}
+                xScale={{ type: "time", format: "%Y-%m-%d" }}
+                xFormat="time:%Y-%m-%d"
+                yScale={{ type: "linear", min: "auto", max: "auto" }}
+                axisBottom={{ tickSize: 0, format: "" }}
+                axisLeft={{ renderTick: () => <></> }}
+                enableGridX={false}
+                enableGridY={false}
+                enablePoints={exercise.data.length === 1}
+                colors={theme.colors.action}
+                curve="catmullRom"
               />
-              {data.length > 0 && (
-                <>
-                  <XAxis
-                    dataKey="createdAt"
-                    type="number"
-                    scale="time"
-                    tickFormatter={getDateInFrenchFormat}
-                    visibility={"hidden"}
-                    domain={[
-                      data[0].createdAt.getTime(),
-                      data[data.length - 1].createdAt.getTime(),
-                    ]}
-                  />
-                  <Legend />
-                </>
-              )}{" "}
-            </LineChart>
-          </ResponsiveContainer>
+            </div>
+          )}
         </Styles.Container>
       </Styles.Anchor>
     </Link>

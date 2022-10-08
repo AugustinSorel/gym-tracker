@@ -14,6 +14,11 @@ export const Container = styled.div`
   transition-property: transform, background-color;
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
+
+  & > div {
+    height: 87%;
+    width: 100%;
+  }
 `;
 
 const fade = keyframes`

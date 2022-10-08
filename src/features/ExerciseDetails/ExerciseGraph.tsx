@@ -2,19 +2,12 @@ import Button from "@/components/Button";
 import CustomTooltip from "@/components/CustomTooltip";
 import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
+import { ResponsiveLine } from "@nivo/line";
 import { Data } from "@prisma/client";
-import {
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { useEffect, useState } from "react";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import theme from "src/styles/theme";
-import { getDateInFrenchFormat } from "src/utils/date";
+import serializeGraphData from "src/utils/graph";
 import * as Styles from "./ExerciseGraph.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
 
@@ -28,43 +21,48 @@ const Skeleton = () => {
 };
 
 const Graph = ({ data }: { data: Data[] }) => {
+  const [localData, setLocalData] = useState(data);
+
+  useEffect(() => {
+    setLocalData(data);
+  }, [data]);
+
   if (data.length < 1) {
     return <NoDataPanel />;
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        data={data}
-        margin={{ bottom: 10, left: -15, right: 20, top: 20 }}
-      >
-        <Line
-          type="monotone"
-          dataKey="oneRepMax"
-          stroke={theme.colors.action}
-          strokeWidth={2}
-          dot={true}
-          isAnimationActive={false}
-        />
-        {data.length > 0 && (
-          <>
-            <XAxis
-              dataKey="createdAt"
-              type="number"
-              scale="time"
-              tickFormatter={getDateInFrenchFormat}
-              domain={[
-                data[0].createdAt.getTime(),
-                data[data.length - 1].createdAt.getTime(),
-              ]}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <YAxis />
-            <Legend />
-          </>
-        )}
-      </LineChart>
-    </ResponsiveContainer>
+    <Styles.GraphSection>
+      <ResponsiveLine
+        data={serializeGraphData(localData)}
+        margin={{ top: 30, right: 120, bottom: 50, left: 50 }}
+        xScale={{ type: "time", format: "%Y-%m-%d" }}
+        xFormat="time:%Y-%m-%d"
+        axisBottom={{ format: "%d %b %y" }}
+        colors={theme.colors.action}
+        useMesh={true}
+        enableGridX={false}
+        enableGridY={false}
+        curve="catmullRom"
+        tooltip={CustomTooltip}
+        theme={{
+          crosshair: { line: { stroke: theme.colors[500], strokeOpacity: 1 } },
+          textColor: theme.colors[500],
+          axis: { ticks: { line: { stroke: theme.colors[500] } } },
+        }}
+        legends={[
+          {
+            anchor: "bottom-right",
+            direction: "column",
+            translateX: 100,
+            itemWidth: 80,
+            itemHeight: 20,
+            symbolSize: 10,
+            symbolShape: "circle",
+          },
+        ]}
+      />
+    </Styles.GraphSection>
   );
 };
 

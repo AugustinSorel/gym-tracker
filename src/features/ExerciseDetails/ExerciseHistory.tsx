@@ -21,11 +21,13 @@ const ExerciseHistory = () => {
   return (
     <Styles.List>
       <Styles.ListItem>
-        <Styles.Text>PR</Styles.Text>
-        <Styles.Text>Pre</Styles.Text>
-        <Styles.Text>Rep</Styles.Text>
-        <Styles.Text>Kg</Styles.Text>
-        <Styles.Text>Date</Styles.Text>
+        <Styles.Text title="your one rep max calculated">pr</Styles.Text>
+        <Styles.Text title="your predicted one rep max calculated">
+          pre
+        </Styles.Text>
+        <Styles.Text title="number of repetition">rep</Styles.Text>
+        <Styles.Text title="weight lifted">kg</Styles.Text>
+        <Styles.Text>date</Styles.Text>
       </Styles.ListItem>
 
       {selectedExercise.data.sort(sortByDateAsc).map((data, i) => (

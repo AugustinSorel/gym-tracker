@@ -43,6 +43,7 @@ const Graph = ({ data }: { data: Data[] }) => {
         useMesh={true}
         enableGridX={false}
         enableGridY={false}
+        axisLeft={{ format: (value) => `${value} kg` }}
         curve="catmullRom"
         tooltip={CustomTooltip}
         theme={{

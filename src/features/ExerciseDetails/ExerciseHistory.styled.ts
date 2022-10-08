@@ -37,6 +37,7 @@ export const ListItem = styled.li<{ delay?: number }>`
   padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
 
   &:first-child {
+    font-size: ${({ theme }) => theme.fontSizes[600]};
     position: sticky;
     padding: ${({ theme }) => theme.gaps[200]};
     top: 0;

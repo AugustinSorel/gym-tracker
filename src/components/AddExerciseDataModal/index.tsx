@@ -86,7 +86,7 @@ const AddExerciseDataModal = (props: Props) => {
         <Input
           type="number"
           role="form"
-          labelText="weight lifted"
+          labelText="weight lifted (kg)"
           htmlFor="weightLiftedInput"
           placeholder="Enter your weight lifted"
           autoCapitalize="none"

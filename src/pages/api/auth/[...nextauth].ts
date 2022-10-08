@@ -3,7 +3,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { addDays } from "src/utils/date";
+import { addDays, addMonths } from "src/utils/date";
 import { sendVerificationRequest } from "src/utils/email";
 import { getOneRepMax } from "src/utils/math";
 import prisma from "src/utils/prisma";
@@ -55,19 +55,37 @@ export const nextAuthOptions: NextAuthOptions = {
             createMany: {
               data: [
                 {
-                  createdAt: addDays(new Date(), -5),
+                  createdAt: addMonths(new Date(), -12),
+                  numberOfReps: 2,
+                  weight: 2,
+                  oneRepMax: getOneRepMax(2, 2),
+                },
+                {
+                  createdAt: addMonths(new Date(), -8),
+                  numberOfReps: 3,
+                  weight: 3,
+                  oneRepMax: getOneRepMax(3, 3),
+                },
+                {
+                  createdAt: addMonths(new Date(), -4),
+                  numberOfReps: 5,
+                  weight: 5,
+                  oneRepMax: getOneRepMax(5, 5),
+                },
+                {
+                  createdAt: addDays(new Date(), -9),
                   numberOfReps: 10,
                   weight: 10,
                   oneRepMax: getOneRepMax(10, 10),
                 },
                 {
-                  createdAt: addDays(new Date(), -4),
-                  numberOfReps: 20,
-                  weight: 20,
-                  oneRepMax: getOneRepMax(20, 20),
+                  createdAt: addDays(new Date(), -5),
+                  numberOfReps: 13,
+                  weight: 13,
+                  oneRepMax: getOneRepMax(13, 13),
                 },
                 {
-                  createdAt: addDays(new Date(), -3),
+                  createdAt: addDays(new Date(), -1),
                   numberOfReps: 10,
                   weight: 10,
                   oneRepMax: getOneRepMax(10, 10),
@@ -75,7 +93,57 @@ export const nextAuthOptions: NextAuthOptions = {
               ],
             },
           },
-          createdAt: addDays(new Date(), -7),
+          createdAt: addDays(new Date(), -10),
+          userId: user.id,
+        },
+      });
+
+      await prisma.exercise.create({
+        data: {
+          name: "World",
+          data: {
+            createMany: {
+              data: [
+                {
+                  createdAt: addMonths(new Date(), -12),
+                  numberOfReps: 2,
+                  weight: 2,
+                  oneRepMax: getOneRepMax(2, 2),
+                },
+                {
+                  createdAt: addMonths(new Date(), -8),
+                  numberOfReps: 3,
+                  weight: 3,
+                  oneRepMax: getOneRepMax(3, 3),
+                },
+                {
+                  createdAt: addMonths(new Date(), -4),
+                  numberOfReps: 5,
+                  weight: 5,
+                  oneRepMax: getOneRepMax(5, 5),
+                },
+                {
+                  createdAt: addDays(new Date(), -9),
+                  numberOfReps: 13,
+                  weight: 13,
+                  oneRepMax: getOneRepMax(13, 13),
+                },
+                {
+                  createdAt: addDays(new Date(), -5),
+                  numberOfReps: 10,
+                  weight: 10,
+                  oneRepMax: getOneRepMax(10, 10),
+                },
+                {
+                  createdAt: addDays(new Date(), -1),
+                  numberOfReps: 13,
+                  weight: 13,
+                  oneRepMax: getOneRepMax(13, 13),
+                },
+              ],
+            },
+          },
+          createdAt: addDays(new Date(), -10),
           userId: user.id,
         },
       });

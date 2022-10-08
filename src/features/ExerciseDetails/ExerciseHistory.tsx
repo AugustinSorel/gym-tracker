@@ -1,5 +1,5 @@
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
-import { getDateInFrenchFormat } from "src/utils/date";
+import { getDateInFrenchFormat, sortByDateAsc } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
 import * as Styles from "./ExerciseHistory.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
@@ -22,13 +22,13 @@ const ExerciseHistory = () => {
     <Styles.List>
       <Styles.ListItem>
         <Styles.Text>PR</Styles.Text>
-        <Styles.Text>Est</Styles.Text>
+        <Styles.Text>Pre</Styles.Text>
         <Styles.Text>Rep</Styles.Text>
         <Styles.Text>Kg</Styles.Text>
         <Styles.Text>Date</Styles.Text>
       </Styles.ListItem>
 
-      {selectedExercise.data.reverse().map((data, i) => (
+      {selectedExercise.data.sort(sortByDateAsc).map((data, i) => (
         <Styles.ListItem key={timeFrame + data.id} delay={(i + 1) * 50}>
           <Styles.Text>{TwoDigitsNumber(data.oneRepMax)}</Styles.Text>
           <Styles.Text>{TwoDigitsNumber(0)}</Styles.Text>

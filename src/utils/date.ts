@@ -1,4 +1,5 @@
 import { TimeFrame } from "@/schemas/exerciseSchema";
+import { Data } from "@prisma/client";
 
 export const getCurrentDate = () => {
   return new Date(
@@ -14,6 +15,10 @@ export const getDateInFrenchFormat = (date: string) => {
     month: "2-digit",
     year: "2-digit",
   });
+};
+
+export const sortByDateAsc = (x: Data, y: Data) => {
+  return y.createdAt.getTime() - x.createdAt.getTime();
 };
 
 const addMonths = (date: Date, months: number) => {

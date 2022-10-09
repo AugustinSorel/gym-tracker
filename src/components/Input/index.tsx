@@ -21,7 +21,12 @@ const EditableInput = (props: Props.EditableInput) => {
 
   const onBlurHandler = () => {
     setIsEditingMode(false);
-    onBlurEvent(inputValue);
+
+    try {
+      onBlurEvent(inputValue);
+    } catch (error) {
+      setInputValue(value);
+    }
   };
 
   if (isEditingMode) {

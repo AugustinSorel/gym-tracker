@@ -37,7 +37,7 @@ const Graph = ({ data }: { data: Data[] }) => {
     <Styles.GraphSection>
       <ResponsiveLine
         data={serializeGraphData(localData)}
-        margin={{ top: 10, right: 10, bottom: 20, left: 50 }}
+        margin={{ top: 10, right: 10, bottom: 40, left: 50 }}
         xScale={{ type: "time", format: "%Y-%m-%d" }}
         xFormat="time:%Y-%m-%d"
         axisBottom={{ format: "%d %b %y" }}

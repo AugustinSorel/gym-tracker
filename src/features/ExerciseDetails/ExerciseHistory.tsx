@@ -1,8 +1,9 @@
 import Input from "@/components/Input";
+import { updateData as updateDataSchema } from "@/schemas/dataSchema";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { getDateInFrenchFormat, sortByDateAsc } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
-import { trpc } from "src/utils/trpc";
+import { InferProcedures, trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseHistory.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
 
@@ -16,6 +17,18 @@ const ExerciseHistory = () => {
       utils.exercise.get.invalidate();
     },
   });
+
+  const updateHandler = (
+    updatedData: InferProcedures["data"]["update"]["input"]
+  ) => {
+    const { success } = updateDataSchema.safeParse(updatedData);
+
+    if (!success) {
+      throw new Error("invalid data");
+    }
+
+    updateDataMutation.mutate(updatedData);
+  };
 
   if (!selectedExercise) {
     return (
@@ -36,7 +49,7 @@ const ExerciseHistory = () => {
         </Styles.Text>
         <Styles.Text title="number of repetition">rep</Styles.Text>
         <Styles.Text title="weight lifted">kg</Styles.Text>
-        <Styles.Text>date</Styles.Text>
+        <Styles.Text title="unique date as dd/mm/yy">date</Styles.Text>
       </Styles.ListItem>
 
       {selectedExercise.data.sort(sortByDateAsc).map((data, i) => (
@@ -48,7 +61,7 @@ const ExerciseHistory = () => {
             type="number"
             value={TwoDigitsNumber(data.numberOfReps).toString()}
             onBlurEvent={(newRep) =>
-              updateDataMutation.mutate({
+              updateHandler({
                 id: data.id,
                 numberOfReps: parseInt(newRep),
                 weight: data.weight,
@@ -60,7 +73,7 @@ const ExerciseHistory = () => {
             type="number"
             value={TwoDigitsNumber(data.weight).toString()}
             onBlurEvent={(newWeight) => {
-              updateDataMutation.mutate({
+              updateHandler({
                 id: data.id,
                 numberOfReps: data.numberOfReps,
                 weight: parseInt(newWeight),

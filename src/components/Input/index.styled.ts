@@ -70,3 +70,14 @@ export const ErrorText = styled.p`
     content: "- ";
   }
 `;
+
+export const EditableText = styled.p`
+  cursor: pointer;
+`;
+
+export const EditableInput = styled(Input)`
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background-color: ${({ theme }) => theme.colors[400]};
+`;

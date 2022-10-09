@@ -19,7 +19,7 @@ const Button = (props: Props.Button) => {
   return <DefaultButton {...props} />;
 };
 
-const NewExerciseButton = (props: Props.NewExerciseButton) => {
+const NewExerciseButton = ({ role, ...props }: Props.NewExerciseButton) => {
   return <Styles.NewExerciseButton {...props}>+ </Styles.NewExerciseButton>;
 };
 

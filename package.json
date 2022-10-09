@@ -19,11 +19,11 @@
     "@trpc/react": "^10.0.0-proxy-beta.15",
     "@trpc/server": "^10.0.0-proxy-beta.15",
     "next": "12.3.1",
-    "next-auth": "^4.12.1",
-    "nodemailer": "^6.7.8",
+    "next-auth": "^4.13.0",
+    "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.5",
+    "styled-components": "^5.3.6",
     "superjson": "^1.10.0",
     "zod": "^3.19.1",
     "zustand": "^4.1.1"
@@ -37,7 +37,7 @@
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@types/styled-components": "^5.1.26",
-    "eslint": "8.24.0",
+    "eslint": "^8.24.0",
     "eslint-config-next": "12.3.1",
     "prisma": "^4.4.0",
     "typescript": "4.8.3"

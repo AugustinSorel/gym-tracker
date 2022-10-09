@@ -1,4 +1,5 @@
-import { HTMLAttributes } from "react";
+import { ComponentProps, HTMLAttributes } from "react";
+import SvgIcon from "../SvgIcon";
 
 export type CallToAction = {
   role: "callToAction";
@@ -19,6 +20,10 @@ type DefaultProps = {
   type?: "button" | "submit" | "reset";
 };
 
+export type SvgButton = {
+  role: "svg";
+} & ComponentProps<typeof SvgIcon>;
+
 export type Button = HTMLAttributes<HTMLButtonElement> &
   DefaultProps &
-  (CallToAction | DefaultButton | NewExerciseButton);
+  (CallToAction | DefaultButton | NewExerciseButton | SvgButton);

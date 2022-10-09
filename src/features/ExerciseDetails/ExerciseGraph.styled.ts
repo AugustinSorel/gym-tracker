@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors[200]};
   border-radius: ${({ theme }) => theme.border.radius[500]};
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

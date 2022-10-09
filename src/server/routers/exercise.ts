@@ -59,6 +59,15 @@ const exerciseRouter = t.router({
         },
       });
     }),
+
+  delete: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.exerciseId)
+    .mutation(async ({ input }) => {
+      return await prisma.exercise.delete({
+        where: { id: input },
+      });
+    }),
 });
 
 export default exerciseRouter;

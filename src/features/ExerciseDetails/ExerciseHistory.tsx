@@ -1,12 +1,21 @@
+import Input from "@/components/Input";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { getDateInFrenchFormat, sortByDateAsc } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
+import { trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseHistory.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
 
 const ExerciseHistory = () => {
   const { timeFrame } = useSelectedTimeFrame();
   const selectedExercise = useGetSelectedExercise();
+  const utils = trpc.useContext();
+
+  const updateDataMutation = trpc.data.update.useMutation({
+    onSettled: () => {
+      utils.exercise.get.invalidate();
+    },
+  });
 
   if (!selectedExercise) {
     return (
@@ -34,8 +43,30 @@ const ExerciseHistory = () => {
         <Styles.ListItem key={timeFrame + data.id} delay={(i + 1) * 50}>
           <Styles.Text>{TwoDigitsNumber(data.oneRepMax)}</Styles.Text>
           <Styles.Text>{TwoDigitsNumber(0)}</Styles.Text>
-          <Styles.Text>{TwoDigitsNumber(data.numberOfReps)}</Styles.Text>
-          <Styles.Text>{TwoDigitsNumber(data.weight)}</Styles.Text>
+          <Input
+            role="editable"
+            type="number"
+            value={TwoDigitsNumber(data.numberOfReps).toString()}
+            onBlurEvent={(newRep) =>
+              updateDataMutation.mutate({
+                id: data.id,
+                numberOfReps: parseInt(newRep),
+                weight: data.weight,
+              })
+            }
+          />
+          <Input
+            role="editable"
+            type="number"
+            value={TwoDigitsNumber(data.weight).toString()}
+            onBlurEvent={(newWeight) => {
+              updateDataMutation.mutate({
+                id: data.id,
+                numberOfReps: data.numberOfReps,
+                weight: parseInt(newWeight),
+              });
+            }}
+          />
           <Styles.Text>
             {getDateInFrenchFormat(data.createdAt.toLocaleDateString())}
           </Styles.Text>

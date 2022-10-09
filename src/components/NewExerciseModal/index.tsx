@@ -49,6 +49,7 @@ const NewExerciseModal = (props: Props) => {
         submitHandler={submitHandler}
       >
         <Input
+          autoFocus
           role="form"
           labelText="exercise name"
           htmlFor="nameInput"
@@ -58,7 +59,6 @@ const NewExerciseModal = (props: Props) => {
           value={exerciseName}
           name="email"
           onChange={(e) => setExerciseName(e.target.value)}
-          ref={(e) => e?.focus()}
         />
 
         <Button

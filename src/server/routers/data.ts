@@ -10,18 +10,18 @@ const dataRouter = t.router({
     .use(requireUser)
     .input(dataSchema.addData)
     .mutation(async ({ input }) => {
-      const { numberOfReps, weight, exerciseName } = input;
+      const { numberOfReps, weight, exerciseId } = input;
 
       const oneRepMax = getOneRepMax(numberOfReps, weight);
       const createdAt = getCurrentDate();
 
       return await prisma.data.upsert({
-        where: { exerciseName_createdAt: { createdAt, exerciseName } },
+        where: { exerciseId_createdAt: { exerciseId, createdAt } },
         create: {
           numberOfReps,
           weight,
           oneRepMax,
-          exercise: { connect: { name: exerciseName } },
+          exerciseId,
           createdAt,
         },
 

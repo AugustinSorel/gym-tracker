@@ -1,11 +1,6 @@
 import { useRouter } from "next/router";
-import {
-  ChangeEvent,
-  ComponentProps,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, ComponentProps, useState } from "react";
+import useSelectedTimeFrameStore from "src/store/useSelectedTimeFrame";
 import { trpc } from "src/utils/trpc";
 import Button from "../Button";
 import Form from "../Form";
@@ -20,7 +15,7 @@ const defaultFormErrors = { numberOfReps: "", weight: "" };
 const AddExerciseDataModal = (props: Props) => {
   const router = useRouter();
   const utils = trpc.useContext();
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  const { timeFrame } = useSelectedTimeFrameStore();
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
@@ -42,7 +37,10 @@ const AddExerciseDataModal = (props: Props) => {
     },
 
     onSettled: () => {
-      utils.exercise.get.invalidate();
+      utils.exercise.get.invalidate({
+        exerciseId: router.query.exerciseId as string,
+        timeFrame,
+      });
     },
 
     onMutate: () => {
@@ -51,8 +49,10 @@ const AddExerciseDataModal = (props: Props) => {
   });
 
   const submitHandler = () => {
-    const exerciseName = router.query.exerciseName as string;
-    addExerciseData.mutate({ ...formData, exerciseName });
+    addExerciseData.mutate({
+      ...formData,
+      exerciseId: router.query.exerciseId as string,
+    });
   };
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,10 +61,6 @@ const AddExerciseDataModal = (props: Props) => {
       [e.target.name]: e.target.valueAsNumber || "",
     }));
   };
-
-  useEffect(() => {
-    firstInputRef.current?.focus();
-  }, []);
 
   return (
     <Modal {...props}>
@@ -75,7 +71,7 @@ const AddExerciseDataModal = (props: Props) => {
       >
         <Input
           type="number"
-          ref={firstInputRef}
+          autoFocus
           role="form"
           labelText="Number of reps"
           htmlFor="numberOfRepsInput"
@@ -90,7 +86,7 @@ const AddExerciseDataModal = (props: Props) => {
         <Input
           type="number"
           role="form"
-          labelText="weight lifted"
+          labelText="weight lifted (kg)"
           htmlFor="weightLiftedInput"
           placeholder="Enter your weight lifted"
           autoCapitalize="none"

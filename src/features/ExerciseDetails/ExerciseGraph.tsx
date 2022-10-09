@@ -1,23 +1,15 @@
 import Button from "@/components/Button";
 import CustomTooltip from "@/components/CustomTooltip";
 import NoDataPanel from "@/components/NoDataPanel";
-import { TimeFrame, TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
+import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
+import { ResponsiveLine } from "@nivo/line";
 import { Data } from "@prisma/client";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import {
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { useEffect, useState } from "react";
+import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import theme from "src/styles/theme";
-import { getDateInFrenchFormat } from "src/utils/date";
-import { trpc } from "src/utils/trpc";
+import serializeGraphData from "src/utils/graph";
 import * as Styles from "./ExerciseGraph.styled";
+import useGetSelectedExercise from "./useGetSelectedExercise";
 
 const Skeleton = () => {
   return (
@@ -29,82 +21,67 @@ const Skeleton = () => {
 };
 
 const Graph = ({ data }: { data: Data[] }) => {
+  const [localData, setLocalData] = useState(data);
+
+  useEffect(() => {
+    setLocalData(data);
+  }, [data]);
+
   if (data.length < 1) {
     return <NoDataPanel />;
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        data={[...data]}
-        margin={{ bottom: 10, left: -25, right: 20, top: 20 }}
-      >
-        <Line
-          type="monotone"
-          dataKey="oneRepMax"
-          stroke={theme.colors.action}
-          strokeWidth={2}
-          dot={true}
-        />
-        {data.length > 0 && (
-          <>
-            <XAxis
-              dataKey="createdAt"
-              type="number"
-              scale="time"
-              tickFormatter={getDateInFrenchFormat}
-              domain={[
-                data[0].createdAt.getTime(),
-                data[data.length - 1].createdAt.getTime(),
-              ]}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <YAxis />
-            <Legend />
-          </>
-        )}
-      </LineChart>
-    </ResponsiveContainer>
+    <Styles.GraphSection>
+      <ResponsiveLine
+        data={serializeGraphData(localData)}
+        margin={{ top: 10, right: 10, bottom: 20, left: 50 }}
+        xScale={{ type: "time", format: "%Y-%m-%d" }}
+        xFormat="time:%Y-%m-%d"
+        axisBottom={{ format: "%d %b %y" }}
+        colors={theme.colors.action}
+        useMesh={true}
+        enableGridX={false}
+        enableGridY={false}
+        axisLeft={{ format: (value) => `${value} kg` }}
+        curve="catmullRom"
+        tooltip={CustomTooltip}
+        theme={{
+          crosshair: { line: { stroke: theme.colors[500], strokeOpacity: 1 } },
+          textColor: theme.colors[500],
+          axis: { ticks: { line: { stroke: theme.colors[500] } } },
+        }}
+        legends={[
+          {
+            anchor: "bottom",
+            direction: "column",
+            translateY: -10,
+            itemWidth: 80,
+            itemHeight: 20,
+            symbolSize: 10,
+            symbolShape: "circle",
+          },
+        ]}
+      />
+    </Styles.GraphSection>
   );
 };
 
 const ExerciseGraph = () => {
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrame>("1M");
+  const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
+  const selectedExercise = useGetSelectedExercise();
 
-  const router = useRouter();
-  const utils = trpc.useContext();
-
-  const exerciseName = router.query.exerciseName as string;
-
-  const dataQuery = trpc.exercise.get.useQuery(
-    {
-      exerciseName,
-      timeFrame: selectedTimeFrame,
-    },
-    {
-      placeholderData: () => {
-        if (selectedTimeFrame === "1M") {
-          return utils.exercise.all
-            .getData()
-            ?.find((d) => d.name === exerciseName);
-        }
-
-        return undefined;
-      },
-    }
-  );
-
-  if (dataQuery.isLoading || !dataQuery.data) {
+  if (!selectedExercise) {
     return <Skeleton />;
   }
 
   return (
     <Styles.Container>
       <Styles.Header>
-        <Styles.ExerciseName>{exerciseName}</Styles.ExerciseName>
+        <Styles.ExerciseName>{selectedExercise.name}</Styles.ExerciseName>
       </Styles.Header>
 
-      <Graph data={dataQuery.data.Data} />
+      <Graph data={selectedExercise.data} />
 
       <Styles.Footer>
         {TIME_FRAME_ENUM.map((text) => (
@@ -112,9 +89,9 @@ const ExerciseGraph = () => {
             key={text}
             role="default"
             text={text}
-            onClick={() => setSelectedTimeFrame(text)}
+            onClick={() => setTimeFrame(text)}
             style={
-              selectedTimeFrame === text
+              timeFrame === text
                 ? {
                     textDecoration: "underline",
                     textUnderlineOffset: "4px",

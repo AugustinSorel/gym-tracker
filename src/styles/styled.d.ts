@@ -38,6 +38,7 @@ declare module "styled-components" {
       mobile: string;
       tablet: string;
       desktop: string;
+      maxWidthOnly: string;
     };
 
     animation: {

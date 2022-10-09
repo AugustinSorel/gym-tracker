@@ -3,10 +3,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors[200]};
+  border-radius: ${({ theme }) => theme.border.radius[500]};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+`;
+
+export const GraphSection = styled.section`
+  height: 85%;
+  width: 100%;
 `;
 
 export const ContainerSkeleton = styled(Container)`

@@ -28,6 +28,22 @@ const dataRouter = t.router({
         update: { numberOfReps, weight, oneRepMax },
       });
     }),
+
+  update: t.procedure
+    .use(requireUser)
+    .input(dataSchema.updateData)
+    .mutation(async ({ input }) => {
+      const { id, numberOfReps, weight } = input;
+      return await prisma.data.update({
+        data: {
+          weight,
+          numberOfReps,
+          oneRepMax: getOneRepMax(numberOfReps, weight),
+        },
+
+        where: { id },
+      });
+    }),
 });
 
 export default dataRouter;

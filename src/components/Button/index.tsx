@@ -1,4 +1,5 @@
 import Loader from "../Loader";
+import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";
 import * as Props from "./props";
 
@@ -11,11 +12,23 @@ const Button = (props: Props.Button) => {
     return <NewExerciseButton {...props} />;
   }
 
+  if (props.role === "svg") {
+    return <SvgButton {...props} />;
+  }
+
   return <DefaultButton {...props} />;
 };
 
-const NewExerciseButton = (props: Props.NewExerciseButton) => {
+const NewExerciseButton = ({ role, ...props }: Props.NewExerciseButton) => {
   return <Styles.NewExerciseButton {...props}>+ </Styles.NewExerciseButton>;
+};
+
+const SvgButton = ({ svgName, ...props }: Props.SvgButton) => {
+  return (
+    <Styles.SvgButtonContainer {...props}>
+      <SvgIcon svgName={svgName} />
+    </Styles.SvgButtonContainer>
+  );
 };
 
 const CallToActionButton = (props: Props.CallToAction) => {

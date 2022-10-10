@@ -33,7 +33,8 @@ const listItemAnimation = keyframes`
 `;
 
 export const ListItem = styled.li<{ delay?: number }>`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
 
   &:first-child {
@@ -46,10 +47,6 @@ export const ListItem = styled.li<{ delay?: number }>`
 
   &:nth-child(odd) {
     background-color: ${({ theme }) => theme.colors[300]};
-  }
-
-  & > * {
-    flex: 1;
   }
 
   ${({ delay }) =>

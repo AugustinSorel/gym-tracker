@@ -125,3 +125,23 @@ export const NewExerciseButton = styled(Button)`
     transform: scale(0.95);
   }
 `;
+
+export const SvgButtonContainer = styled(Button)`
+  border-radius: ${({ theme }) => theme.border.radius[500]};
+  display: flex;
+  padding: ${({ theme }) => theme.gaps[100]};
+
+  transition-property: transform, background-color;
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+
+  &:focus-visible,
+  &:hover {
+    background-color: ${({ theme }) => theme.colors[200]};
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+`;

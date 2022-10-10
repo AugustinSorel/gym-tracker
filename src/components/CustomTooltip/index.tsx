@@ -10,11 +10,8 @@ const CustomTooltip = ({ point }: PointTooltipProps) => {
         date: <strong>{getDateInFrenchFormat(point.data.x.toString())}</strong>
       </Styles.Text>
       <Styles.Text>
-        one rep max: <strong>{TwoDigitsNumber(point.data.y as number)}</strong>
-      </Styles.Text>
-      <Styles.Text>
-        predicted one rep max:{" "}
-        <strong>{TwoDigitsNumber(point.data.y as number)}</strong>
+        one rep max:{" "}
+        <strong>{TwoDigitsNumber(point.data.y as number)} kg</strong>
       </Styles.Text>
     </Styles.Container>
   );

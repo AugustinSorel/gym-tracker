@@ -4,10 +4,12 @@ import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
 import { ResponsiveLine } from "@nivo/line";
 import { Data } from "@prisma/client";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import theme from "src/styles/theme";
 import serializeGraphData from "src/utils/graph";
+import { trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseGraph.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
 
@@ -35,7 +37,7 @@ const Graph = ({ data }: { data: Data[] }) => {
     <Styles.GraphSection>
       <ResponsiveLine
         data={serializeGraphData(localData)}
-        margin={{ top: 10, right: 10, bottom: 20, left: 50 }}
+        margin={{ top: 10, right: 10, bottom: 40, left: 50 }}
         xScale={{ type: "time", format: "%Y-%m-%d" }}
         xFormat="time:%Y-%m-%d"
         axisBottom={{ format: "%d %b %y" }}
@@ -70,6 +72,27 @@ const Graph = ({ data }: { data: Data[] }) => {
 const ExerciseGraph = () => {
   const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
   const selectedExercise = useGetSelectedExercise();
+  const utils = trpc.useContext();
+  const router = useRouter();
+
+  const deleteMutation = trpc.exercise.delete.useMutation({
+    onSettled: () => {
+      utils.exercise.all.invalidate();
+      router.push("/");
+    },
+
+    onMutate: async () => {
+      await utils.exercise.all.cancel();
+
+      utils.exercise.all.setData((prev) => {
+        return [
+          ...(prev ?? []).filter(
+            (e) => e.id !== (router.query.exerciseId as string)
+          ),
+        ];
+      });
+    },
+  });
 
   if (!selectedExercise) {
     return <Skeleton />;
@@ -79,6 +102,11 @@ const ExerciseGraph = () => {
     <Styles.Container>
       <Styles.Header>
         <Styles.ExerciseName>{selectedExercise.name}</Styles.ExerciseName>
+        <Button
+          role="svg"
+          svgName="close"
+          onClick={() => deleteMutation.mutate(selectedExercise.id)}
+        />
       </Styles.Header>
 
       <Graph data={selectedExercise.data} />

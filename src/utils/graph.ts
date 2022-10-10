@@ -1,7 +1,8 @@
 import { Serie } from "@nivo/line";
 import { Data } from "@prisma/client";
+import { InferProcedures } from "./trpc";
 
-const serializeGraphData = (data: Data[]): Serie[] => {
+export const serializeLineGraphData = (data: Data[]): Serie[] => {
   return [
     {
       id: "oneRepMax",
@@ -10,4 +11,13 @@ const serializeGraphData = (data: Data[]): Serie[] => {
   ];
 };
 
-export default serializeGraphData;
+export const serializeRadarGraphData = (
+  exercises: NonNullable<InferProcedures["exercise"]["all"]["output"]>
+): Record<string, unknown>[] => {
+  return exercises.map((ex) => {
+    return {
+      count: ex.data.length,
+      name: ex.name,
+    };
+  });
+};

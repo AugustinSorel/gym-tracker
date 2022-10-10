@@ -19,7 +19,7 @@ const EditableInput = (props: Props.EditableInput) => {
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
-  const onBlurHandler = () => {
+  const submitHandler = () => {
     setIsEditingMode(false);
 
     try {
@@ -34,8 +34,9 @@ const EditableInput = (props: Props.EditableInput) => {
       <Styles.EditableInput
         ref={(e) => e?.focus()}
         value={inputValue}
+        onKeyDown={(e) => e.key === "Enter" && submitHandler()}
         onChange={(e) => setInputValue(e.target.value)}
-        onBlur={onBlurHandler}
+        onBlur={submitHandler}
         {...rest}
       />
     );

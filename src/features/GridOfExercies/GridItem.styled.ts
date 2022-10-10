@@ -1,26 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-export const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors[200]};
-  aspect-ratio: 1;
-  cursor: pointer;
-  outline: none;
-  border-radius: ${({ theme }) => theme.border.radius[300]};
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-
-  transition-property: transform, background-color;
-  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
-  transition-duration: ${({ theme }) => theme.animation.durations[300]};
-
-  & > div {
-    height: 87%;
-    width: 100%;
-  }
-`;
-
 const fade = keyframes`
   from {
     opacity: 0;
@@ -37,10 +16,16 @@ const scaleUp = keyframes`
   }
 `;
 
-export const Anchor = styled.a<{ delay: number }>`
-  color: inherit;
-  text-decoration: none;
+export const Container = styled.div<{ delay: number }>`
+  background-color: ${({ theme }) => theme.colors[200]};
+  aspect-ratio: 1;
+  cursor: pointer;
   outline: none;
+  border-radius: ${({ theme }) => theme.border.radius[300]};
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 
   animation: ${scaleUp}, ${fade} both;
   animation-duration: ${({ theme }) => theme.animation.durations[300]};
@@ -51,17 +36,11 @@ export const Anchor = styled.a<{ delay: number }>`
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
 
-  & * {
-    cursor: pointer;
-  }
-
   &:focus-visible,
   &:hover {
     transform: scale(1.02);
 
-    & > div {
-      background-color: ${({ theme }) => theme.colors[300]};
-    }
+    background-color: ${({ theme }) => theme.colors[300]};
 
     header {
       background-color: ${({ theme }) => theme.colors[400]};

@@ -12,3 +12,9 @@ export const Grid = styled.main`
     grid-template-columns: repeat(auto-fit, 100%);
   }
 `;
+
+export const Anchor = styled.a`
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+`;

@@ -4,7 +4,7 @@ const GridSkeleton = () => {
   return (
     <Styles.GridSkeleton>
       {[...Array(10)].map((_, i) => (
-        <Styles.ContainerSkeleton key={i}>
+        <Styles.ContainerSkeleton key={i} delay={0}>
           <Styles.HeaderSkeleton />
         </Styles.ContainerSkeleton>
       ))}

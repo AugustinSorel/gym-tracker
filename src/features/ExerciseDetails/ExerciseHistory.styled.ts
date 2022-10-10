@@ -34,7 +34,7 @@ const listItemAnimation = keyframes`
 
 export const ListItem = styled.li<{ delay?: number }>`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
 
   &:first-child {

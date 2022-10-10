@@ -43,10 +43,7 @@ const ExerciseHistory = () => {
   return (
     <Styles.List>
       <Styles.ListItem>
-        <Styles.Text title="your one rep max calculated">pr</Styles.Text>
-        <Styles.Text title="your predicted one rep max calculated">
-          pre
-        </Styles.Text>
+        <Styles.Text title="your one rep max calculated in kg">pr</Styles.Text>
         <Styles.Text title="number of repetition">rep</Styles.Text>
         <Styles.Text title="weight lifted">kg</Styles.Text>
         <Styles.Text title="unique date as dd/mm/yy">date</Styles.Text>
@@ -54,8 +51,7 @@ const ExerciseHistory = () => {
 
       {selectedExercise.data.sort(sortByDateAsc).map((data, i) => (
         <Styles.ListItem key={timeFrame + data.id} delay={(i + 1) * 50}>
-          <Styles.Text>{TwoDigitsNumber(data.oneRepMax)}</Styles.Text>
-          <Styles.Text>{TwoDigitsNumber(0)}</Styles.Text>
+          <Styles.Text>{TwoDigitsNumber(data.oneRepMax)} kg</Styles.Text>
           <Input
             role="editable"
             type="number"

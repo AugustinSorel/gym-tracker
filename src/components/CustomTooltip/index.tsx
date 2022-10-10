@@ -12,10 +12,6 @@ const CustomTooltip = ({ point }: PointTooltipProps) => {
       <Styles.Text>
         one rep max: <strong>{TwoDigitsNumber(point.data.y as number)}</strong>
       </Styles.Text>
-      <Styles.Text>
-        predicted one rep max:{" "}
-        <strong>{TwoDigitsNumber(point.data.y as number)}</strong>
-      </Styles.Text>
     </Styles.Container>
   );
 };

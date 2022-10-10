@@ -105,6 +105,7 @@ const ExerciseGraph = () => {
         <Button
           role="svg"
           svgName="close"
+          aria-label={`delete${selectedExercise.name}`}
           onClick={() => deleteMutation.mutate(selectedExercise.id)}
         />
       </Styles.Header>

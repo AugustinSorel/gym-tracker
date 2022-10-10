@@ -23,7 +23,7 @@ const NewExerciseButton = ({ role, ...props }: Props.NewExerciseButton) => {
   return <Styles.NewExerciseButton {...props}>+ </Styles.NewExerciseButton>;
 };
 
-const SvgButton = ({ svgName, ...props }: Props.SvgButton) => {
+const SvgButton = ({ svgName, role, ...props }: Props.SvgButton) => {
   return (
     <Styles.SvgButtonContainer {...props}>
       <SvgIcon svgName={svgName} />

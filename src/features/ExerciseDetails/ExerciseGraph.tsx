@@ -1,73 +1,11 @@
 import Button from "@/components/Button";
-import CustomTooltip from "@/components/CustomTooltip";
-import NoDataPanel from "@/components/NoDataPanel";
 import { TIME_FRAME_ENUM } from "@/schemas/exerciseSchema";
-import { ResponsiveLine } from "@nivo/line";
-import { Data } from "@prisma/client";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
-import theme from "src/styles/theme";
-import serializeGraphData from "src/utils/graph";
 import { trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseGraph.styled";
+import LineGraph from "./LineGraph";
 import useGetSelectedExercise from "./useGetSelectedExercise";
-
-const Skeleton = () => {
-  return (
-    <Styles.ContainerSkeleton>
-      <Styles.HeaderSkeleton />
-      <Styles.FooterSkeleton />
-    </Styles.ContainerSkeleton>
-  );
-};
-
-const Graph = ({ data }: { data: Data[] }) => {
-  const [localData, setLocalData] = useState(data);
-
-  useEffect(() => {
-    setLocalData(data);
-  }, [data]);
-
-  if (data.length < 1) {
-    return <NoDataPanel />;
-  }
-
-  return (
-    <Styles.GraphSection>
-      <ResponsiveLine
-        data={serializeGraphData(localData)}
-        margin={{ top: 10, right: 10, bottom: 40, left: 50 }}
-        xScale={{ type: "time", format: "%Y-%m-%d" }}
-        xFormat="time:%Y-%m-%d"
-        axisBottom={{ format: "%d %b %y" }}
-        colors={theme.colors.action}
-        useMesh={true}
-        enableGridX={false}
-        enableGridY={false}
-        axisLeft={{ format: (value) => `${value} kg` }}
-        curve="catmullRom"
-        tooltip={CustomTooltip}
-        theme={{
-          crosshair: { line: { stroke: theme.colors[500], strokeOpacity: 1 } },
-          textColor: theme.colors[500],
-          axis: { ticks: { line: { stroke: theme.colors[500] } } },
-        }}
-        legends={[
-          {
-            anchor: "bottom",
-            direction: "column",
-            translateY: -10,
-            itemWidth: 80,
-            itemHeight: 20,
-            symbolSize: 10,
-            symbolShape: "circle",
-          },
-        ]}
-      />
-    </Styles.GraphSection>
-  );
-};
 
 const ExerciseGraph = () => {
   const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
@@ -95,7 +33,12 @@ const ExerciseGraph = () => {
   });
 
   if (!selectedExercise) {
-    return <Skeleton />;
+    return (
+      <Styles.ContainerSkeleton>
+        <Styles.HeaderSkeleton />
+        <Styles.FooterSkeleton />
+      </Styles.ContainerSkeleton>
+    );
   }
 
   return (
@@ -110,7 +53,9 @@ const ExerciseGraph = () => {
         />
       </Styles.Header>
 
-      <Graph data={selectedExercise.data} />
+      <Styles.GraphSection>
+        <LineGraph data={selectedExercise.data} />
+      </Styles.GraphSection>
 
       <Styles.Footer>
         {TIME_FRAME_ENUM.map((text) => (

@@ -12,6 +12,9 @@ export const Container = styled.div`
 export const GraphSection = styled.section`
   height: 85%;
   width: 100%;
+  @media ${({ theme }) => theme.breakpoints.desktop} {
+    overflow: hidden;
+  }
 `;
 
 export const ContainerSkeleton = styled(Container)`

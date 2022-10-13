@@ -1,7 +1,7 @@
 import Document, {
   DocumentContext,
-  Html,
   Head,
+  Html,
   Main,
   NextScript,
 } from "next/document";
@@ -37,6 +37,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
+
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icon.png" />
+          <meta name="theme-color" content="#0D0D0D" />
         </Head>
         <body>
           <Main />

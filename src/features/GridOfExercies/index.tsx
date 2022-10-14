@@ -10,6 +10,7 @@ import {
   getFirstDateInMonth,
   getLastDayInMonth,
 } from "src/utils/date";
+import { serializedHeatMapData } from "src/utils/graph";
 import { trpc } from "src/utils/trpc";
 import GridItem from "./GridItem";
 import GridSkeleton from "./GridSkeleton";
@@ -67,26 +68,14 @@ const GridOfExercises = () => {
   );
 };
 
-const serializedData = (data: Data[]): CalendarDatum[] => {
-  const map = new Map<string, CalendarDatum>();
-
-  for (const item of data) {
-    const day = getDateInJSFormat(item.createdAt);
-
-    map.set(day, { day, value: (map.get(day)?.value ?? 0) + 1 });
-  }
-
-  return Array.from(map.values());
-};
-
 const CalendarGraph = ({
   data,
 }: {
-  data: Parameters<typeof serializedData>[0];
+  data: Parameters<typeof serializedHeatMapData>[0];
 }) => {
   return (
     <ResponsiveTimeRange
-      data={serializedData(data)}
+      data={serializedHeatMapData(data)}
       from={getDateInJSFormat(getFirstDateInMonth())}
       to={getDateInJSFormat(getLastDayInMonth())}
       isInteractive={false}

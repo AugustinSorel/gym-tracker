@@ -79,7 +79,11 @@ const serializedData = (data: Data[]): CalendarDatum[] => {
   return Array.from(map.values());
 };
 
-const CalendarGraph = ({ data }: { data: Data[] }) => {
+const CalendarGraph = ({
+  data,
+}: {
+  data: Parameters<typeof serializedData>[0];
+}) => {
   return (
     <ResponsiveTimeRange
       data={serializedData(data)}

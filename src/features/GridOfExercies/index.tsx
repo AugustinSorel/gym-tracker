@@ -1,19 +1,11 @@
 import NoDataPanel from "@/components/NoDataPanel";
-import { CalendarDatum, ResponsiveTimeRange } from "@nivo/calendar";
-import { Data } from "@prisma/client";
 import Link from "next/link";
 import { useRef } from "react";
-import theme from "src/styles/theme";
-import {
-  getCurrentMonthDate,
-  getDateInJSFormat,
-  getFirstDateInMonth,
-  getLastDayInMonth,
-} from "src/utils/date";
-import { serializedHeatMapData } from "src/utils/graph";
+import { getCurrentMonthDate } from "src/utils/date";
 import { trpc } from "src/utils/trpc";
 import GridItem from "./GridItem";
 import GridSkeleton from "./GridSkeleton";
+import HeatMapGraph from "./HeatMapGraph";
 import * as Styles from "./index.styled";
 import LineGraph from "./LineGraph";
 import RadarGraph from "./RadarGraph";
@@ -58,38 +50,13 @@ const GridOfExercises = () => {
             delay={(exercisesQuery.data.length + 1) * delay}
             title={`heatmap - ${getCurrentMonthDate()}`}
           >
-            <CalendarGraph
+            <HeatMapGraph
               data={exercisesQuery.data.map((d) => d.data).flat()}
             />
           </GridItem>
         </>
       )}
     </Styles.Grid>
-  );
-};
-
-const CalendarGraph = ({
-  data,
-}: {
-  data: Parameters<typeof serializedHeatMapData>[0];
-}) => {
-  return (
-    <ResponsiveTimeRange
-      data={serializedHeatMapData(data)}
-      from={getDateInJSFormat(getFirstDateInMonth())}
-      to={getDateInJSFormat(getLastDayInMonth())}
-      isInteractive={false}
-      emptyColor={"transparent"}
-      dayBorderColor={theme.colors[500]}
-      theme={{ textColor: theme.colors[500] }}
-      colors={[
-        "hsl(200, 100%, 50%, 25%)",
-        "hsl(200, 100%, 50%, 50%)",
-        "hsl(200, 100%, 50%, 75%)",
-        theme.colors.action,
-      ]}
-      margin={{ top: 30, right: 0, bottom: 60, left: 20 }}
-    />
   );
 };
 

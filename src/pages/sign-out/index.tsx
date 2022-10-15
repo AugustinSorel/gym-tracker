@@ -1,7 +1,7 @@
 import Head from "next/head";
-import AuthLayout from "src/layouts/AuthLayout";
+import CircleScreenLayout from "src/layouts/CircleScreenLayout";
 import { NextPageWithLayout } from "../_app";
-import * as Styles from "src/layouts/AuthLayout/index.styled";
+import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
 import SvgIcon from "@/components/SvgIcon";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
@@ -44,7 +44,7 @@ const SignOutPage: NextPageWithLayout = () => {
 
 SignOutPage.getLayout = (page) => (
   <UnauthorizedOnlyRoute>
-    <AuthLayout>{page}</AuthLayout>
+    <CircleScreenLayout>{page}</CircleScreenLayout>
   </UnauthorizedOnlyRoute>
 );
 

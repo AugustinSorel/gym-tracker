@@ -5,8 +5,7 @@ type Props = {
   children: ReactElement;
 };
 
-// FIXME: Rename this to circle layout
-const AuthLayout = ({ children }: Props) => {
+const CircleScreenLayout = ({ children }: Props) => {
   return (
     <Styles.Container>
       <Styles.Main>{children}</Styles.Main>
@@ -16,4 +15,4 @@ const AuthLayout = ({ children }: Props) => {
   );
 };
 
-export default AuthLayout;
+export default CircleScreenLayout;

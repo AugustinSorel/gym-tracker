@@ -2,8 +2,8 @@ import Button from "@/components/Button";
 import SvgIcon from "@/components/SvgIcon";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import AuthLayout from "src/layouts/AuthLayout";
-import * as Styles from "src/layouts/AuthLayout/index.styled";
+import CircleScreenLayout from "src/layouts/CircleScreenLayout";
+import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
 import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
 import { NextPageWithLayout } from "../_app";
 
@@ -41,7 +41,7 @@ const VerifyRequestPage: NextPageWithLayout = () => {
 
 VerifyRequestPage.getLayout = (page) => (
   <UnauthorizedOnlyRoute>
-    <AuthLayout>{page}</AuthLayout>
+    <CircleScreenLayout>{page}</CircleScreenLayout>
   </UnauthorizedOnlyRoute>
 );
 

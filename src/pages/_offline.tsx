@@ -33,7 +33,7 @@ const OfflinePage: NextPageWithLayout = () => {
         <SvgIcon svgName="warning" />
       </Styles.SvgContainer>
 
-      <Button role="callToAction" text="Go Home" onClick={goBack} />
+      <Button role="callToAction" text="Try again" onClick={goBack} />
     </>
   );
 };

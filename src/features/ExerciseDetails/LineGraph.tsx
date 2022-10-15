@@ -33,7 +33,7 @@ const LineGraph = ({ data }: Props) => {
       enableGridX={false}
       enableGridY={false}
       axisLeft={{ format: (value) => `${value} kg` }}
-      curve="catmullRom"
+      curve="monotoneX"
       tooltip={CustomTooltip}
       theme={{
         crosshair: { line: { stroke: theme.colors[500], strokeOpacity: 1 } },

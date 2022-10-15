@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-const PriveRouteLayout = ({ children }: Props) => {
+const AuthorizedOnlyRoute = ({ children }: Props) => {
   const router = useRouter();
 
   const { status } = useSession({
@@ -21,4 +21,4 @@ const PriveRouteLayout = ({ children }: Props) => {
   return <>{children}</>;
 };
 
-export default PriveRouteLayout;
+export default AuthorizedOnlyRoute;

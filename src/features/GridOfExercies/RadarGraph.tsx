@@ -1,10 +1,9 @@
-import { InferProcedures } from "src/utils/trpc";
-import { serializeRadarGraphData } from "src/utils/graph";
 import { ResponsiveRadar } from "@nivo/radar";
 import theme from "src/styles/theme";
+import { serializeRadarGraphData } from "src/utils/graph";
 
 type Props = {
-  exercises: NonNullable<InferProcedures["exercise"]["all"]["output"]>;
+  exercises: Parameters<typeof serializeRadarGraphData>[0];
 };
 
 const RadarGraph = ({ exercises }: Props) => {

@@ -6,9 +6,10 @@ import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import * as Styles from "src/components/UserForm/index.styled";
-import AuthLayout from "src/layouts/AuthLayout";
+import CircleScreenLayout from "src/layouts/CircleScreenLayout";
+import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
 import { AUTH_ERRORS } from "src/utils/auth";
 import { ZodError } from "zod";
 import { NextPageWithLayout } from "../_app";
@@ -107,6 +108,10 @@ const SignInPage: NextPageWithLayout = () => {
   );
 };
 
-SignInPage.getLayout = (page) => <AuthLayout>{page}</AuthLayout>;
+SignInPage.getLayout = (page) => (
+  <UnauthorizedOnlyRoute>
+    <CircleScreenLayout>{page}</CircleScreenLayout>
+  </UnauthorizedOnlyRoute>
+);
 
 export default SignInPage;

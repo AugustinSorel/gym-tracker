@@ -4,10 +4,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import CircleScreenLayout from "src/layouts/CircleScreenLayout";
 import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
-import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "./_app";
 
-const VerifyRequestPage: NextPageWithLayout = () => {
+const OfflinePage: NextPageWithLayout = () => {
   const router = useRouter();
 
   const goBack = () => {
@@ -25,24 +24,22 @@ const VerifyRequestPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Styles.Title>Check your email</Styles.Title>
+      <Styles.Title>No internet connection</Styles.Title>
       <Styles.SubTitle>
-        Activate your account via email you received
+        Activate your internet connection to proceed
       </Styles.SubTitle>
 
       <Styles.SvgContainer>
-        <SvgIcon svgName="email" />
+        <SvgIcon svgName="warning" />
       </Styles.SvgContainer>
 
-      <Button role="callToAction" text="Go back" onClick={goBack} />
+      <Button role="callToAction" text="Try again" onClick={goBack} />
     </>
   );
 };
 
-VerifyRequestPage.getLayout = (page) => (
-  <UnauthorizedOnlyRoute>
-    <CircleScreenLayout>{page}</CircleScreenLayout>
-  </UnauthorizedOnlyRoute>
+OfflinePage.getLayout = (page) => (
+  <CircleScreenLayout>{page}</CircleScreenLayout>
 );
 
-export default VerifyRequestPage;
+export default OfflinePage;

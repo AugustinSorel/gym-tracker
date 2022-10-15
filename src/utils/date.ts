@@ -17,6 +17,10 @@ export const getDateInFrenchFormat = (date: string) => {
   });
 };
 
+export const getDateInJSFormat = (date: Date) => {
+  return new Date(date).toLocaleDateString("en-CA");
+};
+
 export const sortByDateAsc = (x: Data, y: Data) => {
   return y.createdAt.getTime() - x.createdAt.getTime();
 };
@@ -34,6 +38,20 @@ export const addDays = (date: Date, days: number) => {
 export const addYears = (date: Date, years: number) => {
   date.setFullYear(date.getFullYear() + years);
   return date;
+};
+
+export const getFirstDateInMonth = () => {
+  const date = new Date();
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+};
+
+export const getLastDayInMonth = () => {
+  const date = new Date();
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+};
+
+export const getCurrentMonthDate = () => {
+  return new Date().toLocaleString("default", { month: "long" });
 };
 
 export const timeFrameDict: {

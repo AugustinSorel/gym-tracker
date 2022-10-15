@@ -1,9 +1,11 @@
 import NoDataPanel from "@/components/NoDataPanel";
 import Link from "next/link";
 import { useRef } from "react";
+import { getCurrentMonthDate } from "src/utils/date";
 import { trpc } from "src/utils/trpc";
 import GridItem from "./GridItem";
 import GridSkeleton from "./GridSkeleton";
+import HeatMapGraph from "./HeatMapGraph";
 import * as Styles from "./index.styled";
 import LineGraph from "./LineGraph";
 import RadarGraph from "./RadarGraph";
@@ -36,12 +38,23 @@ const GridOfExercises = () => {
       })}
 
       {exercisesQuery.data.length > 0 && (
-        <GridItem
-          delay={exercisesQuery.data.length * delay}
-          title="exercises count"
-        >
-          <RadarGraph exercises={exercisesQuery.data} />
-        </GridItem>
+        <>
+          <GridItem
+            delay={exercisesQuery.data.length * delay}
+            title="exercises count"
+          >
+            <RadarGraph exercises={exercisesQuery.data} />
+          </GridItem>
+
+          <GridItem
+            delay={(exercisesQuery.data.length + 1) * delay}
+            title={`heatmap - ${getCurrentMonthDate()}`}
+          >
+            <HeatMapGraph
+              data={exercisesQuery.data.map((d) => d.data).flat()}
+            />
+          </GridItem>
+        </>
       )}
     </Styles.Grid>
   );

@@ -6,6 +6,7 @@ import SvgIcon from "@/components/SvgIcon";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
+import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
 
 const SignOutPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -41,6 +42,10 @@ const SignOutPage: NextPageWithLayout = () => {
   );
 };
 
-SignOutPage.getLayout = (page) => <AuthLayout>{page}</AuthLayout>;
+SignOutPage.getLayout = (page) => (
+  <UnauthorizedOnlyRoute>
+    <AuthLayout>{page}</AuthLayout>
+  </UnauthorizedOnlyRoute>
+);
 
 export default SignOutPage;

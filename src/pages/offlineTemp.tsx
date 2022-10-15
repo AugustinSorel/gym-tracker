@@ -1,17 +1,13 @@
 import Button from "@/components/Button";
 import SvgIcon from "@/components/SvgIcon";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import AuthLayout from "src/layouts/AuthLayout";
 import * as Styles from "src/layouts/AuthLayout/index.styled";
-import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "./_app";
 
-const VerifyRequestPage: NextPageWithLayout = () => {
-  const router = useRouter();
-
+const OfflinePage: NextPageWithLayout = () => {
   const goBack = () => {
-    router.push("/");
+    return null;
   };
 
   return (
@@ -25,9 +21,9 @@ const VerifyRequestPage: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Styles.Title>Check your email</Styles.Title>
+      <Styles.Title>No internet connection</Styles.Title>
       <Styles.SubTitle>
-        Activate your account via email you received
+        Activate your internet connection to proceed
       </Styles.SubTitle>
 
       <Styles.SvgContainer>
@@ -39,10 +35,6 @@ const VerifyRequestPage: NextPageWithLayout = () => {
   );
 };
 
-VerifyRequestPage.getLayout = (page) => (
-  <UnauthorizedOnlyRoute>
-    <AuthLayout>{page}</AuthLayout>
-  </UnauthorizedOnlyRoute>
-);
+OfflinePage.getLayout = (page) => <AuthLayout>{page}</AuthLayout>;
 
-export default VerifyRequestPage;
+export default OfflinePage;

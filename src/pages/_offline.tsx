@@ -1,13 +1,16 @@
 import Button from "@/components/Button";
 import SvgIcon from "@/components/SvgIcon";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import CircleScreenLayout from "src/layouts/CircleScreenLayout";
 import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
 import { NextPageWithLayout } from "./_app";
 
 const OfflinePage: NextPageWithLayout = () => {
+  const router = useRouter();
+
   const goBack = () => {
-    return null;
+    router.push("/");
   };
 
   return (
@@ -27,10 +30,10 @@ const OfflinePage: NextPageWithLayout = () => {
       </Styles.SubTitle>
 
       <Styles.SvgContainer>
-        <SvgIcon svgName="email" />
+        <SvgIcon svgName="warning" />
       </Styles.SvgContainer>
 
-      <Button role="callToAction" text="Go back" onClick={goBack} />
+      <Button role="callToAction" text="Go Home" onClick={goBack} />
     </>
   );
 };

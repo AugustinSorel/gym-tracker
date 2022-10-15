@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import ExerciseDetails from "src/features/ExerciseDetails";
 import HeaderLayout from "src/layouts/HeaderLayout";
 import MaxWidthLayout from "src/layouts/MaxWidthLayout";
-import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
+import AuthorizedOnlyRoute from "src/layouts/AuthorizedOnlyRoute";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { trpc } from "src/utils/trpc";
 import { NextPageWithLayout } from "../_app";
@@ -58,12 +58,12 @@ const ExercisePage: NextPageWithLayout = () => {
 
 ExercisePage.getLayout = (page) => {
   return (
-    <PriveRouteLayout>
+    <AuthorizedOnlyRoute>
       <MaxWidthLayout>
         <HeaderLayout />
         {page}
       </MaxWidthLayout>
-    </PriveRouteLayout>
+    </AuthorizedOnlyRoute>
   );
 };
 

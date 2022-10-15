@@ -5,7 +5,7 @@ import Head from "next/head";
 import GridOfExercises from "src/features/GridOfExercies";
 import HeaderLayout from "src/layouts/HeaderLayout";
 import MaxWidthLayout from "src/layouts/MaxWidthLayout";
-import PriveRouteLayout from "src/layouts/PrivateRouteLayout";
+import AuthorizedOnlyRoute from "src/layouts/AuthorizedOnlyRoute";
 import { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
@@ -38,12 +38,12 @@ const Home: NextPageWithLayout = () => {
 
 Home.getLayout = (page) => {
   return (
-    <PriveRouteLayout>
+    <AuthorizedOnlyRoute>
       <MaxWidthLayout>
         <HeaderLayout />
         {page}
       </MaxWidthLayout>
-    </PriveRouteLayout>
+    </AuthorizedOnlyRoute>
   );
 };
 

@@ -1,7 +1,7 @@
 # Gym Tracker PWA
 
 ## Links
-* [Youtube]() - Testing video.
+* [Youtube](https://youtu.be/P_cgUsddDiA) - Testing video.
 * [Live Testing](https://gym-tracker-taupe.vercel.app/) - Live Testing Website.
 
 ## Made with:

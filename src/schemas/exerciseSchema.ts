@@ -17,4 +17,9 @@ export const getExercise = z.object({
   timeFrame,
 });
 
+export const updateName = z.object({
+  exerciseId,
+  exerciseName,
+});
+
 export type TimeFrame = z.infer<typeof timeFrame>;

@@ -26,7 +26,7 @@ const LineGraph = ({ exercise }: Props) => {
         enableGridY={false}
         enablePoints={exercise.data.length === 1}
         colors={theme.colors.action}
-        curve="catmullRom"
+        curve="monotoneX"
       />
     </div>
   );

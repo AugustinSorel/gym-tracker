@@ -73,11 +73,11 @@ export const ErrorText = styled.p`
 
 export const EditableText = styled.p`
   cursor: pointer;
+  user-select: none;
 `;
 
 export const EditableInput = styled(Input)`
   width: 100%;
-  height: 100%;
   padding: 0;
   background-color: ${({ theme }) => theme.colors[400]};
 `;

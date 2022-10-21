@@ -68,6 +68,17 @@ const exerciseRouter = t.router({
         where: { id: input },
       });
     }),
+
+  updateName: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.updateName)
+    .mutation(async ({ input }) => {
+      const { exerciseId, exerciseName } = input;
+      return await prisma.exercise.update({
+        data: { name: exerciseName },
+        where: { id: exerciseId },
+      });
+    }),
 });
 
 export default exerciseRouter;

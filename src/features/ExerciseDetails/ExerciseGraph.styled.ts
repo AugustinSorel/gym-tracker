@@ -29,6 +29,14 @@ export const Header = styled.header`
   padding: ${({ theme }) => theme.gaps[200]};
   border-top-left-radius: ${({ theme }) => theme.border.radius[500]};
   border-top-right-radius: ${({ theme }) => theme.border.radius[500]};
+
+  button {
+    margin-left: auto;
+  }
+
+  input {
+    max-width: 20%;
+  }
 `;
 
 export const HeaderSkeleton = styled(Header)`
@@ -47,13 +55,4 @@ export const Footer = styled.footer`
 
 export const FooterSkeleton = styled(Footer)`
   height: 45px;
-`;
-
-export const ExerciseName = styled.h2`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes[600]};
-  white-space: nowrap;
-  flex: 1;
 `;

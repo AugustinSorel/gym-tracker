@@ -61,17 +61,23 @@ export const ListItem = styled.li<{ delay?: number }>`
       animation-fill-mode: both;
     `};
 
-  button {
-    opacity: 0;
-    transition-property: opacity;
-    transition-timing-function: ${({ theme }) =>
-      theme.animation.timingFunction};
-    transition-duration: ${({ theme }) => theme.animation.durations[300]};
-  }
-
-  &:hover {
+  @media screen and (min-width: 1000px) {
     button {
-      opacity: 1;
+      opacity: 0;
+      transition-property: opacity;
+      transition-timing-function: ${({ theme }) =>
+        theme.animation.timingFunction};
+      transition-duration: ${({ theme }) => theme.animation.durations[300]};
+    }
+
+    &:hover {
+      button {
+        opacity: 1;
+      }
+    }
+
+    button {
+      background-color: red;
     }
   }
 `;

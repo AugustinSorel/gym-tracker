@@ -129,6 +129,8 @@ export const NewExerciseButton = styled(Button)`
 export const SvgButtonContainer = styled(Button)`
   border-radius: ${({ theme }) => theme.border.radius[500]};
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: ${({ theme }) => theme.gaps[100]};
 
   transition-property: transform, background-color;

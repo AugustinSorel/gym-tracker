@@ -29,7 +29,14 @@ const GridOfExercises = () => {
         return (
           <Link key={exercise.id} href={`/exercise/${exercise.id}`} passHref>
             <Styles.Anchor tabIndex={-1}>
-              <GridItem title={exercise.name} delay={i * delay}>
+              <GridItem
+                title={exercise.name}
+                delay={i * delay}
+                togglePinInput={{
+                  exerciseId: exercise.id,
+                  isPinned: exercise.isPinned,
+                }}
+              >
                 <LineGraph exercise={exercise} />
               </GridItem>
             </Styles.Anchor>

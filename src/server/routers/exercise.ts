@@ -79,6 +79,18 @@ const exerciseRouter = t.router({
         where: { id: exerciseId },
       });
     }),
+
+  togglePin: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.togglePin)
+    .mutation(async ({ input }) => {
+      const { exerciseId, isPinned } = input;
+
+      return await prisma.exercise.update({
+        where: { id: exerciseId },
+        data: { isPinned },
+      });
+    }),
 });
 
 export default exerciseRouter;

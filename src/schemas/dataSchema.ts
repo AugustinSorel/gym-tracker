@@ -1,7 +1,7 @@
 import z from "zod";
 import { exerciseId } from "./exerciseSchema";
 
-const id = z
+export const id = z
   .string({ required_error: "new exercise name is required" })
   .cuid({ message: "exercise id must be in the cuid format" });
 

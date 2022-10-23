@@ -39,6 +39,7 @@ declare module "styled-components" {
       tablet: string;
       desktop: string;
       minWidthOnly: string;
+      maxWidthOnly: string;
     };
 
     animation: {

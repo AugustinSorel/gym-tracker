@@ -66,6 +66,7 @@ const theme: DefaultTheme = {
     tablet: "screen and (max-width: 768px)",
     desktop: "screen and (max-width: 1024px)",
     minWidthOnly: `screen and (max-width: ${maxWidth}px)`,
+    maxWidthOnly: `screen and (min-width: ${maxWidth}px)`,
   },
 
   animation: {

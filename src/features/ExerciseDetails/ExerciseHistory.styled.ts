@@ -61,7 +61,7 @@ export const ListItem = styled.li<{ delay?: number }>`
       animation-fill-mode: both;
     `};
 
-  @media screen and (min-width: 1000px) {
+  @media ${({ theme }) => theme.breakpoints.maxWidthOnly} {
     button {
       opacity: 0;
       transition-property: opacity;
@@ -74,10 +74,6 @@ export const ListItem = styled.li<{ delay?: number }>`
       button {
         opacity: 1;
       }
-    }
-
-    button {
-      background-color: red;
     }
   }
 `;

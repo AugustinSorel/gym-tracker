@@ -139,7 +139,7 @@ export const SvgButtonContainer = styled(Button)`
 
   &:focus-visible,
   &:hover {
-    background-color: ${({ theme }) => theme.colors[200]};
+    background-color: ${({ theme }) => theme.colors[400]};
     transform: scale(1.1);
   }
 

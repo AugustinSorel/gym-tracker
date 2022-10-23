@@ -34,8 +34,9 @@ const listItemAnimation = keyframes`
 
 export const ListItem = styled.li<{ delay?: number }>`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr) 32px;
   padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
+  fill: currentColor;
 
   &:first-child {
     font-size: ${({ theme }) => theme.fontSizes[600]};
@@ -59,6 +60,22 @@ export const ListItem = styled.li<{ delay?: number }>`
       animation-delay: ${delay}ms;
       animation-fill-mode: both;
     `};
+
+  @media ${({ theme }) => theme.breakpoints.maxWidthOnly} {
+    button {
+      opacity: 0;
+      transition-property: opacity;
+      transition-timing-function: ${({ theme }) =>
+        theme.animation.timingFunction};
+      transition-duration: ${({ theme }) => theme.animation.durations[300]};
+    }
+
+    &:hover {
+      button {
+        opacity: 1;
+      }
+    }
+  }
 `;
 
 export const ListItemSkeleton = styled(ListItem)`

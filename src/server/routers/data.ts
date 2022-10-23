@@ -44,6 +44,13 @@ const dataRouter = t.router({
         where: { id },
       });
     }),
+
+  delete: t.procedure
+    .use(requireUser)
+    .input(dataSchema.id)
+    .mutation(async ({ input }) => {
+      return await prisma.data.delete({ where: { id: input } });
+    }),
 });
 
 export default dataRouter;

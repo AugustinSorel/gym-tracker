@@ -1,5 +1,7 @@
 import Button from "@/components/Button";
+import DeleteExerciseModal from "@/components/DeleteExerciseModal";
 import Input from "@/components/Input";
+import useModal from "@/components/Modal/useModal";
 import { TIME_FRAME_ENUM, updateName } from "@/schemas/exerciseSchema";
 import { useRouter } from "next/router";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
@@ -10,28 +12,10 @@ import useGetSelectedExercise from "./useGetSelectedExercise";
 
 const ExerciseGraph = () => {
   const { setTimeFrame, timeFrame } = useSelectedTimeFrame();
+  const deleteModal = useModal();
   const selectedExercise = useGetSelectedExercise();
   const utils = trpc.useContext();
   const router = useRouter();
-
-  const deleteMutation = trpc.exercise.delete.useMutation({
-    onSettled: () => {
-      utils.exercise.all.invalidate();
-      router.push("/");
-    },
-
-    onMutate: async () => {
-      await utils.exercise.all.cancel();
-
-      utils.exercise.all.setData((prev) => {
-        return [
-          ...(prev ?? []).filter(
-            (e) => e.id !== (router.query.exerciseId as string)
-          ),
-        ];
-      });
-    },
-  });
 
   const updateMutation = trpc.exercise.updateName.useMutation({
     onSettled: () => {
@@ -79,49 +63,57 @@ const ExerciseGraph = () => {
   }
 
   return (
-    <Styles.Container>
-      <Styles.Header>
-        <Input
-          role="editable"
-          value={selectedExercise.name}
-          onBlurEvent={(exerciseName) =>
-            updateHandler({
-              exerciseId: router.query.exerciseId as string,
-              exerciseName,
-            })
-          }
+    <>
+      {deleteModal.isOpen && (
+        <DeleteExerciseModal
+          closeHandler={deleteModal.close}
+          startExitAnimation={deleteModal.startExitAnimation}
         />
-        <Button
-          role="svg"
-          svgName="close"
-          aria-label={`delete${selectedExercise.name}`}
-          onClick={() => deleteMutation.mutate(selectedExercise.id)}
-        />
-      </Styles.Header>
-
-      <Styles.GraphSection>
-        <LineGraph data={selectedExercise.data} />
-      </Styles.GraphSection>
-
-      <Styles.Footer>
-        {TIME_FRAME_ENUM.map((text) => (
-          <Button
-            key={text}
-            role="default"
-            text={text}
-            onClick={() => setTimeFrame(text)}
-            style={
-              timeFrame === text
-                ? {
-                    textDecoration: "underline",
-                    textUnderlineOffset: "4px",
-                  }
-                : {}
+      )}
+      <Styles.Container>
+        <Styles.Header>
+          <Input
+            role="editable"
+            value={selectedExercise.name}
+            onBlurEvent={(exerciseName) =>
+              updateHandler({
+                exerciseId: router.query.exerciseId as string,
+                exerciseName,
+              })
             }
           />
-        ))}
-      </Styles.Footer>
-    </Styles.Container>
+          <Button
+            role="svg"
+            svgName="close"
+            aria-label={`delete${selectedExercise.name}`}
+            onClick={deleteModal.open}
+          />
+        </Styles.Header>
+
+        <Styles.GraphSection>
+          <LineGraph data={selectedExercise.data} />
+        </Styles.GraphSection>
+
+        <Styles.Footer>
+          {TIME_FRAME_ENUM.map((text) => (
+            <Button
+              key={text}
+              role="default"
+              text={text}
+              onClick={() => setTimeFrame(text)}
+              style={
+                timeFrame === text
+                  ? {
+                      textDecoration: "underline",
+                      textUnderlineOffset: "4px",
+                    }
+                  : {}
+              }
+            />
+          ))}
+        </Styles.Footer>
+      </Styles.Container>
+    </>
   );
 };
 

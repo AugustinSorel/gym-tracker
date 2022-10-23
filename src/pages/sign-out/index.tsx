@@ -1,12 +1,11 @@
-import Head from "next/head";
-import CircleScreenLayout from "src/layouts/CircleScreenLayout";
-import { NextPageWithLayout } from "../_app";
-import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
-import SvgIcon from "@/components/SvgIcon";
 import Button from "@/components/Button";
-import { useRouter } from "next/router";
+import SvgIcon from "@/components/SvgIcon";
 import { signOut } from "next-auth/react";
-import UnauthorizedOnlyRoute from "src/layouts/UnauthorizedOnlyRoute";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import CircleScreenLayout from "src/layouts/CircleScreenLayout";
+import * as Styles from "src/layouts/CircleScreenLayout/index.styled";
+import { NextPageWithLayout } from "../_app";
 
 const SignOutPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -43,9 +42,7 @@ const SignOutPage: NextPageWithLayout = () => {
 };
 
 SignOutPage.getLayout = (page) => (
-  <UnauthorizedOnlyRoute>
-    <CircleScreenLayout>{page}</CircleScreenLayout>
-  </UnauthorizedOnlyRoute>
+  <CircleScreenLayout>{page}</CircleScreenLayout>
 );
 
 export default SignOutPage;

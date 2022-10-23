@@ -1,5 +1,7 @@
+import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { updateData as updateDataSchema } from "@/schemas/dataSchema";
+import { useRouter } from "next/router";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { getDateInFrenchFormat, sortByDateAsc } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
@@ -11,10 +13,40 @@ const ExerciseHistory = () => {
   const { timeFrame } = useSelectedTimeFrame();
   const selectedExercise = useGetSelectedExercise();
   const utils = trpc.useContext();
+  const router = useRouter();
 
   const updateDataMutation = trpc.data.update.useMutation({
     onSettled: () => {
       utils.exercise.get.invalidate();
+    },
+  });
+
+  const deleteDataMutation = trpc.data.delete.useMutation({
+    onSettled: () => {
+      utils.exercise.get.invalidate();
+    },
+
+    onMutate: async (dataId) => {
+      await utils.exercise.get.cancel();
+
+      const selector = {
+        exerciseId: router.query.exerciseId as string,
+        timeFrame,
+      };
+
+      const selectedExercise = utils.exercise.get.getData(selector);
+
+      if (!selectedExercise) {
+        return;
+      }
+
+      utils.exercise.get.setData(
+        () => ({
+          ...selectedExercise,
+          data: selectedExercise.data.filter((d) => d.id !== dataId),
+        }),
+        selector
+      );
     },
   });
 
@@ -79,6 +111,12 @@ const ExerciseHistory = () => {
           <Styles.Text>
             {getDateInFrenchFormat(data.createdAt.toLocaleDateString())}
           </Styles.Text>
+
+          <Button
+            role="svg"
+            svgName="close"
+            onClick={() => deleteDataMutation.mutate(data.id)}
+          />
         </Styles.ListItem>
       ))}
     </Styles.List>

@@ -74,6 +74,10 @@ export const Header = styled.header<{ isTaskPinned?: boolean }>`
     transition-duration: ${({ theme }) => theme.animation.durations[300]};
     transition-timing-function: ${({ theme }) =>
       theme.animation.timingFunction};
+
+    @media ${({ theme }) => theme.breakpoints.tablet} {
+      opacity: 1;
+    }
   }
 `;
 

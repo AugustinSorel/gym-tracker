@@ -39,7 +39,7 @@ const exerciseRouter = t.router({
           where: { createdAt: { gte: timeFrameDict["1M"] } },
         },
       },
-      orderBy: { createdAt: "asc" },
+      orderBy: [{ isPinned: "desc" }, { createdAt: "asc" }],
     });
   }),
 
@@ -77,6 +77,18 @@ const exerciseRouter = t.router({
       return await prisma.exercise.update({
         data: { name: exerciseName },
         where: { id: exerciseId },
+      });
+    }),
+
+  togglePin: t.procedure
+    .use(requireUser)
+    .input(exerciseSchemas.togglePin)
+    .mutation(async ({ input }) => {
+      const { exerciseId, isPinned } = input;
+
+      return await prisma.exercise.update({
+        where: { id: exerciseId },
+        data: { isPinned },
       });
     }),
 });

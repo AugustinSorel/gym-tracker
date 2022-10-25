@@ -60,6 +60,7 @@ model Exercise {
   id        String   @id @default(cuid())
   name      String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPinned  Boolean  @default(false)
   data      Data[]
   userId    String
   createdAt DateTime @default(now())

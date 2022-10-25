@@ -45,6 +45,10 @@ export const Container = styled.div<{ delay: number }>`
     header {
       background-color: ${({ theme }) => theme.colors[400]};
     }
+
+    button {
+      opacity: 1;
+    }
   }
 
   &:active {
@@ -52,13 +56,25 @@ export const Container = styled.div<{ delay: number }>`
   }
 `;
 
-export const Header = styled.header`
+export const Header = styled.header<{ isTaskPinned?: boolean }>`
   background-color: ${({ theme }) => theme.colors[300]};
   padding: ${({ theme }) => theme.gaps[200]};
+
+  display: flex;
+  align-items: center;
 
   transition-property: background-color;
   transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
   transition-duration: ${({ theme }) => theme.animation.durations[300]};
+
+  button {
+    opacity: ${({ isTaskPinned }) => (isTaskPinned ? 1 : 0)};
+    fill: currentColor;
+    transition-property: opacity;
+    transition-duration: ${({ theme }) => theme.animation.durations[300]};
+    transition-timing-function: ${({ theme }) =>
+      theme.animation.timingFunction};
+  }
 `;
 
 export const ExerciseName = styled.h2`
@@ -67,4 +83,5 @@ export const ExerciseName = styled.h2`
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes[600]};
   white-space: nowrap;
+  flex: 1;
 `;

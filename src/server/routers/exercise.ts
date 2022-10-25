@@ -39,7 +39,7 @@ const exerciseRouter = t.router({
           where: { createdAt: { gte: timeFrameDict["1M"] } },
         },
       },
-      orderBy: { createdAt: "asc" },
+      orderBy: [{ isPinned: "desc" }, { createdAt: "asc" }],
     });
   }),
 

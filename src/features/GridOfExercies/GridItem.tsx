@@ -43,7 +43,7 @@ const GridItem = (props: Props) => {
         {togglePinInput && (
           <Button
             role="svg"
-            svgName="pin"
+            svgName={togglePinInput.isPinned ? "pinFilled" : "pin"}
             onClick={(e) => {
               e.preventDefault();
               togglePinMutation.mutate({

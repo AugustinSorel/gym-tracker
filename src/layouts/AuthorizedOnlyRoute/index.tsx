@@ -11,7 +11,7 @@ const AuthorizedOnlyRoute = ({ children }: Props) => {
 
   const { status } = useSession({
     required: true,
-    onUnauthenticated: () => router.push("/sign-in"),
+    onUnauthenticated: () => router.push("/"),
   });
 
   if (status === "loading") {

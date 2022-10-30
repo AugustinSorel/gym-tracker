@@ -15,7 +15,7 @@ const UnauthorizedOnlyRoute = ({ children }: Props) => {
   }
 
   if (status === "authenticated") {
-    router.push("/");
+    router.push("/dashboard");
     return null;
   }
 

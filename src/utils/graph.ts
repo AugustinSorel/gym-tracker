@@ -16,12 +16,14 @@ export const serializeLineGraphData = (data: Data[]): Serie[] => {
 export const serializeRadarGraphData = (
   exercises: NonNullable<RouterOutput["exercise"]["all"]>
 ): Record<string, unknown>[] => {
-  return exercises.map((exercise) => {
-    return {
-      count: exercise.data.length,
-      name: exercise.name,
-    };
-  });
+  return exercises
+    .map((exercise) => {
+      return {
+        count: exercise.data.length,
+        name: exercise.name,
+      };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const serializedHeatMapData = (data: Data[]): CalendarDatum[] => {

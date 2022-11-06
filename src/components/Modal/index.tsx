@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import SvgIcon from "../SvgIcon";
 import * as Styles from "./index.styled";

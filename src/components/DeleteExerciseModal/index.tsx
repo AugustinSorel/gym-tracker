@@ -25,7 +25,7 @@ const DeleteExerciseModal = (props: Props) => {
     onMutate: async () => {
       await utils.exercise.all.cancel();
 
-      utils.exercise.all.setData((prev) => {
+      utils.exercise.all.setData(undefined, (prev) => {
         return [...(prev ?? []).filter((e) => e.id !== exerciseId)];
       });
     },

@@ -1,6 +1,6 @@
 import { httpBatchLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
-import { GetInferenceHelpers } from "@trpc/server";
+import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { AppRouter } from "src/server/routers/_app";
 import superjson from "superjson";
 
@@ -13,4 +13,5 @@ export const trpc = createTRPCNext<AppRouter>({
   },
 });
 
-export type InferProcedures = GetInferenceHelpers<AppRouter>;
+export type RouterInput = inferRouterInputs<AppRouter>;
+export type RouterOutput = inferRouterOutputs<AppRouter>;

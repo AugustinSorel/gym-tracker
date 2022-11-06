@@ -6,7 +6,7 @@ type Props = {
 };
 
 const MaxWidthLayout = ({ children }: Props) => {
-  return <Stlyes.MaxWidthContaer>{children}</Stlyes.MaxWidthContaer>;
+  return <Stlyes.MaxWidthContainer>{children}</Stlyes.MaxWidthContainer>;
 };
 
 export default MaxWidthLayout;

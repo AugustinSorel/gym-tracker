@@ -1,13 +1,13 @@
 import Button from "@/components/Button";
 import { ReactNode } from "react";
-import { InferProcedures, trpc } from "src/utils/trpc";
+import { RouterInput, trpc } from "src/utils/trpc";
 import * as Styles from "./GridItem.styled";
 
 type Props = {
   children: ReactNode;
   title: string;
   delay: number;
-  togglePinInput?: InferProcedures["exercise"]["togglePin"]["input"];
+  togglePinInput?: RouterInput["exercise"]["togglePin"];
 };
 
 const GridItem = (props: Props) => {
@@ -29,6 +29,7 @@ const GridItem = (props: Props) => {
       }
 
       utils.exercise.all.setData(
+        undefined,
         allExercises.map((exercise) =>
           exercise.id === exerciseId ? { ...exercise, isPinned } : exercise
         )

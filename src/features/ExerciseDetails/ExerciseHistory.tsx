@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
 import { getDateInFrenchFormat, sortByDateAsc } from "src/utils/date";
 import { TwoDigitsNumber } from "src/utils/math";
-import { InferProcedures, trpc } from "src/utils/trpc";
+import { RouterInput, trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseHistory.styled";
 import useGetSelectedExercise from "./useGetSelectedExercise";
 
@@ -40,19 +40,14 @@ const ExerciseHistory = () => {
         return;
       }
 
-      utils.exercise.get.setData(
-        () => ({
-          ...selectedExercise,
-          data: selectedExercise.data.filter((d) => d.id !== dataId),
-        }),
-        selector
-      );
+      utils.exercise.get.setData(selector, () => ({
+        ...selectedExercise,
+        data: selectedExercise.data.filter((d) => d.id !== dataId),
+      }));
     },
   });
 
-  const updateHandler = (
-    updatedData: InferProcedures["data"]["update"]["input"]
-  ) => {
+  const updateHandler = (updatedData: RouterInput["data"]["update"]) => {
     const { success } = updateDataSchema.safeParse(updatedData);
 
     if (!success) {

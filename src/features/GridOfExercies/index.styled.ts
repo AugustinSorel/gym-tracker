@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Grid = styled.main`
@@ -13,7 +14,7 @@ export const Grid = styled.main`
   }
 `;
 
-export const Anchor = styled.a`
+export const Anchor = styled(Link)`
   color: inherit;
   text-decoration: none;
   outline: none;

@@ -7,7 +7,7 @@ const HeaderLayout = () => {
   const { data: session } = useSession();
 
   const signOutHandler = () => {
-    signOut({ redirect: true, callbackUrl: "/sign-in" });
+    signOut({ redirect: true, callbackUrl: "/" });
   };
 
   return (

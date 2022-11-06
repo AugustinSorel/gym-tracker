@@ -82,6 +82,19 @@ export const Anchor = styled(Link)`
   text-decoration: none;
   position: relative;
   text-align: center;
+  transition-property: scale;
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    scale: 1.02;
+  }
+
+  &:active {
+    scale: 0.98;
+  }
 
   &:first-child {
     background: -webkit-linear-gradient(

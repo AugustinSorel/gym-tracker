@@ -1,4 +1,3 @@
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextPage } from "next";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -22,14 +21,11 @@ const MyApp = ({
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <>
-      <SessionProvider session={session}>
-        <StyledComponentsLayout>
-          {getLayout(<Component {...pageProps} />)}
-        </StyledComponentsLayout>
-      </SessionProvider>
-      <ReactQueryDevtools />
-    </>
+    <SessionProvider session={session}>
+      <StyledComponentsLayout>
+        {getLayout(<Component {...pageProps} />)}
+      </StyledComponentsLayout>
+    </SessionProvider>
   );
 };
 

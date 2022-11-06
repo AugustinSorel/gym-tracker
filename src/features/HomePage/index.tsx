@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Card from "./Card";
 import * as Styles from "./index.styled";
 
@@ -35,23 +34,22 @@ const HomePage = () => {
       </Styles.List>
 
       <Styles.LinksContainer>
-        <Link href={"/sign-in"} passHref>
-          <Styles.Anchor>
-            <Styles.AnchorText>get started</Styles.AnchorText>
-          </Styles.Anchor>
-        </Link>
+        <Styles.Anchor href={"/sign-in"}>
+          <Styles.AnchorText>get started</Styles.AnchorText>
+        </Styles.Anchor>
 
-        <Link href={"https://github.com/AugustinSorel/gym-tracker"} passHref>
-          <Styles.Anchor target={"_blank"}>
-            <Image
-              src={"/GitHubIcon.png"}
-              alt="google icon"
-              height={"20px"}
-              width={"20px"}
-            />
-            <Styles.AnchorText>github</Styles.AnchorText>
-          </Styles.Anchor>
-        </Link>
+        <Styles.Anchor
+          target={"_blank"}
+          href={"https://github.com/AugustinSorel/gym-tracker"}
+        >
+          <Image
+            src={"/GitHubIcon.png"}
+            alt="google icon"
+            height={20}
+            width={20}
+          />
+          <Styles.AnchorText>github</Styles.AnchorText>
+        </Styles.Anchor>
       </Styles.LinksContainer>
     </Styles.Container>
   );

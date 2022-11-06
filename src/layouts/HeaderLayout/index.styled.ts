@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Header = styled.header`
@@ -36,7 +37,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const Anchor = styled.a`
+export const Anchor = styled(Link)`
   color: inherit;
   text-decoration: none;
 `;

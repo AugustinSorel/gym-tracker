@@ -5,7 +5,7 @@ import useModal from "@/components/Modal/useModal";
 import { TIME_FRAME_ENUM, updateName } from "@/schemas/exerciseSchema";
 import { useRouter } from "next/router";
 import useSelectedTimeFrame from "src/store/useSelectedTimeFrame";
-import { InferProcedures, trpc } from "src/utils/trpc";
+import { RouterInput, trpc } from "src/utils/trpc";
 import * as Styles from "./ExerciseGraph.styled";
 import LineGraph from "./LineGraph";
 import useGetSelectedExercise from "./useGetSelectedExercise";
@@ -35,14 +35,14 @@ const ExerciseGraph = () => {
       }
 
       utils.exercise.get.setData(
-        { ...currentExercise, name: exerciseName },
-        { exerciseId, timeFrame }
+        { exerciseId, timeFrame },
+        { ...currentExercise, name: exerciseName }
       );
     },
   });
 
   const updateHandler = (
-    updatedData: InferProcedures["exercise"]["updateName"]["input"]
+    updatedData: RouterInput["exercise"]["updateName"]
   ) => {
     const { success } = updateName.safeParse(updatedData);
 

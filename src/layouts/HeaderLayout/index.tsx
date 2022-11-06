@@ -13,9 +13,7 @@ const HeaderLayout = () => {
   return (
     <Styles.Header>
       <Styles.Title>
-        <Link href={"/"} passHref>
-          <Styles.Anchor>gym tracker</Styles.Anchor>
-        </Link>
+        <Styles.Anchor href={"/"}>gym tracker</Styles.Anchor>
       </Styles.Title>
       <Button role="default" text="sign-out" onClick={signOutHandler} />
       {session?.user?.image && <Styles.Avatar src={session.user.image} />}

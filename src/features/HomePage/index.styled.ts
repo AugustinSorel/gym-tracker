@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MaxWidthContainer } from "src/layouts/MaxWidthLayout/index.styled";
+import Link from "next/link";
 
 export const Container = styled(MaxWidthContainer)`
   max-width: 1200px;
@@ -64,7 +65,7 @@ export const LinksContainer = styled.div`
   }
 `;
 
-export const Anchor = styled.a`
+export const Anchor = styled(Link)`
   color: ${({ theme }) => theme.colors[100]};
   padding: ${({ theme }) => theme.gaps[500]};
   text-transform: capitalize;

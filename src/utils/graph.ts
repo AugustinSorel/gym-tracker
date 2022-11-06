@@ -2,7 +2,7 @@ import { CalendarDatum } from "@nivo/calendar";
 import { Serie } from "@nivo/line";
 import { Data } from "@prisma/client";
 import { getDateInJSFormat } from "./date";
-import { InferProcedures } from "./trpc";
+import { RouterOutput } from "./trpc";
 
 export const serializeLineGraphData = (data: Data[]): Serie[] => {
   return [
@@ -14,7 +14,7 @@ export const serializeLineGraphData = (data: Data[]): Serie[] => {
 };
 
 export const serializeRadarGraphData = (
-  exercises: NonNullable<InferProcedures["exercise"]["all"]["output"]>
+  exercises: NonNullable<RouterOutput["exercise"]["all"]>
 ): Record<string, unknown>[] => {
   return exercises.map((exercise) => {
     return {

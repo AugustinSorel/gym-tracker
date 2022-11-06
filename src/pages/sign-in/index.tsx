@@ -82,8 +82,8 @@ const SignInPage: NextPageWithLayout = () => {
           <Image
             src={"/GoogleIcon.png"}
             alt="google icon"
-            height={"20px"}
-            width={"20px"}
+            height={20}
+            width={20}
           />
           <Styles.Text>Continue with Google</Styles.Text>
         </Styles.GoogleButton>
@@ -92,8 +92,8 @@ const SignInPage: NextPageWithLayout = () => {
           <Image
             src={"/GitHubIcon.png"}
             alt="google icon"
-            height={"20px"}
-            width={"20px"}
+            height={20}
+            width={20}
           />
           <Styles.Text>Continue with Github</Styles.Text>
         </Styles.GitHubButton>

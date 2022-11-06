@@ -1,10 +1,10 @@
 import { ResponsiveLine } from "@nivo/line";
 import theme from "src/styles/theme";
 import { serializeLineGraphData } from "src/utils/graph";
-import { InferProcedures } from "src/utils/trpc";
+import { RouterOutput } from "src/utils/trpc";
 
 type Props = {
-  exercise: NonNullable<InferProcedures["exercise"]["get"]["output"]>;
+  exercise: NonNullable<RouterOutput["exercise"]["get"]>;
 };
 
 const LineGraph = ({ exercise }: Props) => {

@@ -4,7 +4,11 @@ import Link from "next/link";
 
 export const Container = styled(MaxWidthContainer)`
   max-width: 1200px;
-  margin-top: max(${({ theme }) => theme.gaps[900]}, 10%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: max(${({ theme }) => theme.gaps[900]}, 10%);
+  padding-bottom: max(${({ theme }) => theme.gaps[900]}, 10%);
 `;
 
 export const Title = styled.h1`
@@ -50,7 +54,7 @@ export const List = styled.ul`
 
   @media ${({ theme }) => theme.breakpoints.tablet} {
     flex-direction: column;
-    margin-top: 1rem;
+    margin: auto 0;
     gap: 1rem;
   }
 `;
@@ -78,6 +82,19 @@ export const Anchor = styled(Link)`
   text-decoration: none;
   position: relative;
   text-align: center;
+  transition-property: scale;
+  transition-duration: ${({ theme }) => theme.animation.durations[300]};
+  transition-timing-function: ${({ theme }) => theme.animation.timingFunction};
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    scale: 1.02;
+  }
+
+  &:active {
+    scale: 0.98;
+  }
 
   &:first-child {
     background: -webkit-linear-gradient(

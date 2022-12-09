@@ -38,16 +38,18 @@ export const ListItem = styled.li<{ delay?: number }>`
   padding: ${({ theme }) => theme.gaps[500]} ${({ theme }) => theme.gaps[200]};
   fill: currentColor;
 
+  &:nth-child(odd) {
+    background-color: ${({ theme }) => theme.colors[300]};
+  }
+
   &:first-child {
+    z-index: 100;
+    background-color: transparent;
     font-size: ${({ theme }) => theme.fontSizes[600]};
     position: sticky;
     padding: ${({ theme }) => theme.gaps[200]};
     top: 0;
     backdrop-filter: blur(${({ theme }) => theme.blur});
-  }
-
-  &:nth-child(odd) {
-    background-color: ${({ theme }) => theme.colors[300]};
   }
 
   ${({ delay }) =>

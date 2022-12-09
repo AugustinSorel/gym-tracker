@@ -43,7 +43,7 @@ export const ListItem = styled.li<{ delay?: number }>`
   }
 
   &:first-child {
-    z-index: 100;
+    z-index: 1;
     background-color: transparent;
     font-size: ${({ theme }) => theme.fontSizes[600]};
     position: sticky;

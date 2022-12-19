@@ -101,6 +101,7 @@ export const NewExerciseButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSizes[900]};
   font-weight: 500;
   backdrop-filter: blur(${({ theme }) => theme.blur});
+  z-index: 100;
 
   color: ${({ theme }) => theme.colors[500]};
   border: ${({ theme }) => theme.border.sizes[700]} solid;

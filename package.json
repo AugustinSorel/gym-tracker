@@ -14,7 +14,7 @@
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
     "@nivo/radar": "^0.80.0",
-    "@prisma/client": "^4.5.0",
+    "@prisma/client": "^4.11.0",
     "@tanstack/react-query": "^4.20.4",
     "@trpc/client": "^10.5.0",
     "@trpc/next": "^10.5.0",
